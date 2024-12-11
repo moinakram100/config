@@ -1,0 +1,52 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="docType1"
+        noDataText="Loading .."
+        title="Select Location"
+        search="onValueHelpDialogSearchde"
+        liveChange="onValueHelpDialogSearchde"
+        confirm="ondelivery"
+        cancel="ondelivery"
+       items="{
+            path : '/xGMSxLocPoint_Map',
+            parameters : {
+                $$operationMode : 'Server',
+                $filter : 'isDeliveryPoint	 eq \'YES\''
+              
+            }
+        }"
+         initialFocus="SearchField"
+        >
+        <StandardListItem id="_IDGenStdardListItem11"
+            title="{Locid}"
+            description="{Tsyst}"  
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>
+
+
+
+
+<!-- <core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="docType1"
+        noDataText="No Products Found"
+        title="Select Location"
+        search="onValueHelpDialogSearchde"
+        confirm="ondelivery"
+        cancel="ondelivery"
+        items="{/xGMSxLocPoint}">
+        <StandardListItem id="_IDGenStdardListItem11"
+            title="{Locid}"
+            description="{Tsyst}"  
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition> -->

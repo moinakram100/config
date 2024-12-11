@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="_IDGenDialog123" title="Create Rule" class="sapUiSmallMargin">
+        <VBox id="_IDGenVBox1432" class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="_IDGenLabel1432"  text="Rule Name :" />
+            <Input id="_IDGenInput1432"  value="{addAllocationRuleModel>/ruleName}" liveChange="inputHandler" placeholder="Enter Rule name" />
+            <Label id="_IDGenLabel2432" text="Rule Description :" />
+            <Input id="_IDGenInput2432" value="{addAllocationRuleModel>/ruleDesc}" liveChange="inputHandler" placeholder="Enter Rule name description" />
+            
+        </VBox>
+        <footer>
+        	<OverflowToolbar id="_IDGenOverflowToolbar" >	
+                <ToolbarSpacer id="_IDGenToolbarSpacer"/>		
+				<Button id="_IDGenButton1321" type="Accept" text="Save" press="onsaveNewRule">
+				</Button>
+                <Button id="_IDGenButton2321" type="Reject" text="Cancel" press="oncancelNewRule">
+				</Button>
+			</OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>   

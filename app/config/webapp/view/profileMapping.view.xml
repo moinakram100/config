@@ -1,0 +1,84 @@
+<mvc:View controllerName="com.ingenx.config.controller.profileMapping"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" showHeader="false">
+       
+        <content>
+            <Table items="{path: '/DocumentNoProfileMapping',parameters: {$count: true}}" noDataText="No Mapping exists" id="tablemapping" selectionChange="onSelect" mode="None" sticky="ColumnHeaders,HeaderToolbar">
+            <headerToolbar>
+                <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+                    <Title
+                        id="pageHeader"
+                        text="Service Profile Mapping"
+                        textAlign="Center">
+                    </Title>
+                    <ToolbarSpacer />
+                    <Button id="addMappingBtn" text="Create" width="100px" press="onAddMap" type="Emphasized" visible="true"/>
+                    <Button id="deleteMappingBtn" text="Delete" width="100px" press="onDeleteMap" type="Emphasized" visible="true"/>
+                    <Button id="deleteMapConfirmBtn" text="Confirm" width="100px" press="onConfirmMapDeletion" type="Emphasized" visible="false"/>
+                    <Button id="cancelMapDeleteBtn" text="Cancel" width="100px" press="onCancelMapDeletion" type="Emphasized" visible="false"/>
+                </OverflowToolbar>
+            </headerToolbar>
+                <columns>
+                    <Column id="deleteMapLabel" width="6rem" visible="false">
+                        <header>
+                            <CheckBox id="selectAllMap" select="onSelectAllMap"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDGenCol" visible="false">
+                        <header>
+                            <Label id="_IDGenLl1" wrapping="true" design="Bold" text="ID" />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColu">
+                        <header>
+                            <Label id="_IDGenLl12" wrapping="true" design="Bold" text="Document Type" />
+                        </header>
+                    </Column>
+                    <!-- <Column id="_IDGenColumn2" >
+                        <header>
+                            <Label id="_IDGenLabel7" wrapping="true" design="Bold" text="Document Description" />
+                        </header>
+                    </Column> -->
+ 
+                    <Column id="_IDGenColum" >
+                        <header>
+                            <Label id="_IDGenLabe" wrapping="true" design="Bold" text="Service Profile" />
+                        </header>
+                    </Column>
+ 
+                    <Column id="_IDGenColum33" >
+                        <header>
+                            <Label id="_IDGenLabe334" wrapping="true" design="Bold" text="Service Profile Description" />
+                        </header>
+                    </Column>
+ 
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" press="onSelectServiceProfile" id="item0">
+                        <cells>
+                            <CheckBox id="deleteCheckBox" select="onDeleteMapArray"/>
+                            <Text id="id" text="{ID}" />
+                            <Text id="id2" text="{DocumentNo}" />
+                            <!-- <Text id="id1" text="{DocumentDesc}" /> -->
+                            <Text id="id3" text="{serviceProfileName}" />
+                            <Text id="id4" text="{serviceProfileDesc}" />
+                           
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage8" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+ 
+            </Table>
+        </content>
+        <!-- <footer>
+            <OverflowToolbar id="otbFooter">    
+                <ToolbarSpacer/>        
+                <Button type="Accept" text="Submit" press="onsaveNewProfile">
+                </Button>
+            </OverflowToolbar>
+        </footer> -->
+    </Page>
+</mvc:View>

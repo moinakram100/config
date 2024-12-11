@@ -1,0 +1,255 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.profileParameter"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        showHeader="false"
+    >
+        <content>
+            <Table
+                items="{/serviceProfileParametersItems}"
+                id="profileParameterTable"
+                selectionChange="onSelect"
+                mode="None"
+                sticky="ColumnHeaders,HeaderToolbar"
+            >
+                <headerToolbar>
+                    <OverflowToolbar
+                        id="_IDGenOverflowToolbar9"
+                        height="50px"
+                    >
+                        <content>
+                            <Title
+                                text="{profileModel>/ProfileName} [{profileModel>/ProfileDesc}]"
+                            />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column
+                        id="selectLabelCol"
+                        width="6rem"
+                    >
+                        <header>
+                            <Label
+                                id="selectLabel"
+                                text="Select"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="colID"
+                        width="7rem"
+                    >
+                        <header>
+                            <Label
+                                id="labelID"
+                                wrapping="true"
+                                text="ID"
+                            />
+                        </header>
+                    </Column>
+
+                    <Column
+                        id="_IDGenColumn2"
+                        width="7rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel7"
+                                wrapping="true"
+                                text="Service Parameter"
+                            />
+                        </header>
+                    </Column>
+
+                    <!-- <Column id="colParentID" width="7rem">
+                        <header>
+                            <Label id="labelParentID" wrapping="true" text="Parent ID" />
+                        </header>
+                    </Column> -->
+
+                    <Column
+                        id="_IDGenColun3"
+                        width="7rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLab7"
+                                wrapping="true"
+                                text="Contract Relevant"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn3"
+                        width="7rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel8"
+                                wrapping="true"
+                                text="Value Parameter"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn4"
+                        width="7rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel9"
+                                wrapping="true"
+                                text="Threshold Relevance"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn5"
+                        width="8rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel10"
+                                wrapping="true"
+                                text="Threshold Reference"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn6"
+                        width="8rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel11"
+                                wrapping="true"
+                                text="Nomination Relevant"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn7"
+                        width="8rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel12"
+                                wrapping="true"
+                                text="Balancing Relevant"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn8"
+                        width="8rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel13"
+                                wrapping="true"
+                                text="Allocation Relevant"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn9"
+                        width="6rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel14"
+                                wrapping="true"
+                                text="Billing Relevant"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn10"
+                        width="6rem"
+                    >
+                        <header>
+                            <Label
+                                id="_IDGenLabel15"
+                                wrapping="true"
+                                text="Penalty Relevant"
+                            />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        type="Active"
+                        id="item0"
+                    >
+                        <cells>
+                            <CheckBox
+                                id="checkedParameter"
+                                selected="{checkedParameter}"
+                            />
+                            <Text
+                                id="id2"
+                                text="{ID}"
+                            />
+                            <Text
+                                id="id1"
+                                text="{serviceParameter}"
+                            />
+                            <!-- <Input id="id3" value="{ParentId}" width="30px"/> -->
+                            <CheckBox
+                                id="ContractRelevant"
+                                selected="{ContractRelevant}"
+                            />
+                            <CheckBox
+                                id="Value_Parameter"
+                                selected="{Value_Parameter}"
+                            />
+                            <CheckBox
+                                id="Threshold_Relevant"
+                                selected="{Threshold_Relevance}"
+                            />
+                            <CheckBox
+                                id="Referrence_Relevant"
+                                selected="{Referrence_Relevant}"
+                            />
+                            <CheckBox
+                                id="Nomination_Relevant"
+                                selected="{Nomination_Relevant}"
+                            />
+                            <CheckBox
+                                id="Balancing_Relevant"
+                                selected="{Balancing_Relevant}"
+                            />
+                            <CheckBox
+                                id="Allocation_Relevant"
+                                select="onSelectAllocRel"
+                                selected="{Allocation_Relevant}"
+                            />
+                            <CheckBox
+                                id="Billing_Relevant"
+                                selected="{Billing_Relevant}"
+                            />
+                            <CheckBox
+                                id="Price_Relevant"
+                                selected="{Price_Relevant}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <noData>
+                    <IllustratedMessage
+                        id="_IDGenIllustratedMessage9"
+                        enableVerticalResponsiveness="true"
+                        title="No Data Found"
+                        description="There are no items in this Table"
+                    />
+                </noData>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

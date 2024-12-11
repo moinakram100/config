@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Create Penalty ID" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label  text="New ID:" design="Bold"/>
+            <Input  value="{addEzidModel>/EzId}" liveChange="IdInputHandler" placeholder="Length should be less than Seven"/>
+            <Label text="ID Description :" design="Bold"/>
+            <Input value="{addEzidModel>/EzIdDesc}" liveChange="descriptionHandler"/>
+            
+        </VBox>
+        <footer>
+        	<OverflowToolbar >	
+                <ToolbarSpacer/>		
+				<Button type="Accept" text="Save" press="onSaveNewId">
+				</Button>
+                <Button type="Reject" text="Cancel" press="oncancelNewId">
+				</Button>
+			</OverflowToolbar>
+            <!-- <Button id="_IDGenButton3" text="Create" press="onCreateField" />
+            <Button id="_IDGenButton4" text="Cancel" press="onCancelCreateField" /> -->
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>   

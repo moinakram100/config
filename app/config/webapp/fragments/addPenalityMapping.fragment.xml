@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Create Mapping with Penalty" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label  text="Service Profile :" design="Bold" />
+            <Input  value="{addPenaltyModel>/profileName}" showValueHelp="true" valueHelpRequest="onServiceProfile" valueHelpOnly="true"/>
+            <Label  text="Service Parameter :" design="Bold" />
+            <Input  value="{addPenaltyModel>/paneltyParmeter}" showValueHelp="true" valueHelpRequest="onServiceParam" valueHelpOnly="true"/>
+            <Label  text="Penalty ID :" design="Bold" />
+            <Input  value="{addPenaltyModel>/ezReportId}" showValueHelp="true" valueHelpRequest="onEzId" valueHelpOnly="true"/>
+        </VBox>
+        <footer>
+            <OverflowToolbar >  
+                <ToolbarSpacer/>        
+                <Button type="Accept" text="Save" press="onsavePenaltyMapping">
+                </Button>
+                <Button type="Reject" text="Cancel" press="oncancelPenaltyMapping">
+                </Button>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>  

@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="transConfigDoc"
+        noDataText="No Document Found"
+        title="Select Document Type"
+        search="onValueHelpDialogSearchTC"
+        confirm="onValueHelpDialogCloseTC"
+        cancel="onValueHelpDialogCancelTC"
+        items="{docTCTypes>/}" multiSelect="true">
+        <StandardListItem id="_IDGenStandardListItemTC"
+            title="{docTCTypes>DocumentNo}"  
+            description="{docTCTypes>Description}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

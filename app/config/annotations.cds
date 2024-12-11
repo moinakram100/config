@@ -1,0 +1,1 @@
+using configServices as service from '../../srv/configService';

@@ -1,0 +1,62 @@
+<mvc:View controllerName="com.ingenx.config.controller.allocation"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <OverflowToolbar id="_IDGenOverflowToolbar9"  height="50px">
+        <Title
+            id="pageHeader"
+            text="Allocation Rule Definition"
+            textAlign="Center">
+        </Title>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+        <Button id="addAllocRuleBtn" text="Create" width="100px" press="onCreateAlloc" type="Emphasized" visible="true"/>
+        <Button id="delAllocBtn" text="Delete" width="100px" press="onDeleteAlloc" type="Emphasized" visible="true"/>
+        <Button id="deleteAllocConfirmBtn" text="Confirm" width="100px" press="onConfirmAllocDeletion" type="Emphasized" visible="false"/>
+        <Button id="cancelAllocDeleteBtn" text="Cancel" width="100px" press="onCancelAllocDeletion" type="Emphasized" visible="false"/>
+    </OverflowToolbar>
+     <Page id="page" showHeader="false">
+        <content>
+   
+            <Table items="{path: '/AllocationProfile'}" id="tableAllocRule" selectionChange="onSelect" mode="None"  >
+                <columns>
+                    <Column id="deleteAllocLabel" width="0rem" visible="false">
+                        <header>
+                            <CheckBox id="selectAllAllocRule" select="onSelectAllAllocRule"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColu" width="2rem">
+                        <header>
+                            <Label id="_IDGenLl12" wrapping="true" design="Bold" text="ID" />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn2" width="7rem">
+                        <header>
+                            <Label id="_IDGenLabel7" wrapping="true" design="Bold" text="Allocation Rule" />
+                        </header>
+                    </Column>
+ 
+                    <Column id="_IDGenColum" width="5rem">
+                        <header>
+                            <Label id="_IDGenLabe" wrapping="true" design="Bold" text="Allocation Rule Description" />
+                        </header>
+                    </Column>
+ 
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" id="item0" press="onSelectAllocationRule" >
+                        <cells>
+                            <CheckBox id="deleteAllocCheckBox" select="onDelAllocRuleArray"/>
+                            <Text id="id2" text="{ID}" />
+                            <Text id="id1" text="{allocationProfileName}" />
+                            <Text id="id3" text="{allocationProfileDesc}" />                          
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                 <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage1" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+ 
+        </content>
+       
+    </Page>
+</mvc:View>

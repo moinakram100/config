@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Create New Field" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label  text="Field Name:" design="Bold"/>
+            <Input  value="{addFieldModel>/fieldName}"  liveChange="onLiveChange" />
+            <Label text="Field Description :" design="Bold"/>
+            <Input value="{addFieldModel>/fieldDesc}" />
+            <Label text="Field Type:" design="Bold"/>
+            <Input value="{addFieldModel>/fieldType}" showValueHelp="true" valueHelpRequest="onFieldType" valueHelpOnly ='true' />
+           
+        </VBox>
+        <footer>
+            <OverflowToolbar >  
+                <ToolbarSpacer/>        
+                <Button type="Accept" text="Save" press="onSaveNewField">
+                </Button>
+                <Button type="Reject" text="Cancel" press="oncancelNewField">
+                </Button>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="allocationTecBal"
+        noDataText="No Technical Balancing Found"
+        title="Select Technical Balancing"
+        search="tecBalDialogSearch"
+        confirm="tecBalValueHelpClose"
+        cancel="tecBalValueHelpCancel"
+        items="{/AllocationProfile}">
+        <StandardListItem
+            title="{allocationProfileName}"     
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>
+

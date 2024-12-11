@@ -1,0 +1,162 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.createProfile"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        showHeader="false"
+    >
+        <content>
+            <Table
+                items="{path: '/ServiceProfileMaster',parameters: {$count: true,$$updateGroupId : 'peopleGroup'}}"
+                id="createProTable"
+                selectionChange="onSelect"
+
+                mode="None"
+                sticky="ColumnHeaders,HeaderToolbar"
+            >
+                <headerToolbar>
+                    <OverflowToolbar
+                        id="_IDGenOverflowToolbar9"
+                        height="50px"
+                    >
+                        <Title
+                            id="pageHeader"
+                            text="Service Profile Definition"
+                            textAlign="Center"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            id="newServiceProfile"
+                            width="100px"
+                            text="Create"
+                            press="onCreatePro"
+                            type="Emphasized"
+                            visible="true"
+                        />
+                        <Button
+                            id="copyOfServiceProfile"
+                            width="100px"
+                            text="Copy From"
+                            press="onCopyForm"
+                            type="Emphasized"
+                            visible="true"
+                        />
+                        <Button
+                            id="deleteProfileBtn"
+                            text="Delete"
+                            width="100px"
+                            press="onDeleteProfile"
+                            type="Emphasized"
+                            visible="true"
+                        />
+                        <Button
+                            id="deleteProConfirmBtn"
+                            text="Confirm"
+                            width="100px"
+                            press="onConfirmProDeletion"
+                            type="Emphasized"
+                            visible="false"
+                        />
+                        <Button
+                            id="cancelProDeleteBtn"
+                            text="Cancel"
+                            width="100px"
+                            press="onCancelProDeletion"
+                            type="Emphasized"
+                            visible="false"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        id="deleteProfileLabel"
+                        width="6rem"
+                        visible="false"
+                    >
+                        <header>
+                            <CheckBox
+                                id="selectAllProfile"
+                                select="onSelectAllProfile"
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColu">
+                        <header>
+                            <Label
+                                id="_IDGenLl12"
+                                wrapping="true"
+                                design="Bold"
+                                text="ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <header>
+                            <Label
+                                id="_IDGenLabel7"
+                                wrapping="true"
+                                design="Bold"
+                                text="Service Profile"
+                            />
+                        </header>
+                    </Column>
+
+                    <Column id="_IDGenColum">
+                        <header>
+                            <Label
+                                id="_IDGenLabe"
+                                wrapping="true"
+                                design="Bold"
+                                text="Service Profile Description"
+                            />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press="onSelectServiceProfile"
+                        id="item0"
+                    >
+                        <cells>
+                            <CheckBox
+                                id="deleteProfileCheckBox"
+                                select="onDeleteArrayProfile"
+                            />
+                            <Text
+                                id="id2"
+                                text="{ID}"
+                            />
+                            <Text
+                                id="id1"
+                                text="{serviceProfileName}"
+                            />
+                            <Text
+                                id="id3"
+                                text="{serviceProfileDesc}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <noData>
+                    <IllustratedMessage
+                        id="_IDGenIllustratedMessage5"
+                        enableVerticalResponsiveness="true"
+                        title="No Data Found"
+                        description="There are no items in this Table"
+                    />
+                </noData>
+            </Table>
+        </content>
+        <!-- <footer>
+            <OverflowToolbar id="otbFooter">    
+                <ToolbarSpacer/>        
+                <Button type="Accept" text="Submit" press="onsaveNewProfile">
+                </Button>
+            </OverflowToolbar>
+        </footer> -->
+    </Page>
+</mvc:View>

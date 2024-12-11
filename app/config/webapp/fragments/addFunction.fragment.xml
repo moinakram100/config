@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core">
+    <TableSelectDialog
+        id="sortT1AscOptions"
+        class="sapUiContentPadding"
+        contentWidth="50%"
+        contentHeight="60%"
+        title="Additional Function"
+        liveChange="CurSearch"
+        items="{/AddiFunction}"
+        cancel="handleValueHelpClose"
+        confirm="handleValueHelpClose"
+        search="CurSearch"
+        noDataText="No Data Found"
+        >
+       
+                <columns>
+                    <Column >
+                        <Text text="Function"></Text>
+                    </Column>
+ 
+                    <Column >
+                        <Text text="Function Description"></Text>
+                    </Column>
+                   
+                </columns>
+ 
+                <items>
+                    <ColumnListItem >
+                        <Text text="{Function}"></Text>
+                        <Text text="{FunctionDesc}"></Text>
+                    </ColumnListItem>
+                </items>
+           
+        </TableSelectDialog>
+</core:FragmentDefinition>

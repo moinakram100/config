@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="allocationMapLoc"
+        noDataText="No Location Found"
+        title="Select Location"
+        search="allocMapDialogSearch"
+        confirm="allocMapValueHelpClose"
+        cancel="allocMapValueHelpCancel"
+        items="{uniqueLocations>/}">
+        <StandardListItem
+            title="{uniqueLocations>}"    
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>
+

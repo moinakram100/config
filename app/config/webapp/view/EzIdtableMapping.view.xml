@@ -1,0 +1,108 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.EzIdtableMapping"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns="sap.m"
+>
+   
+    <Page
+        id="_IDGenPage1"
+        showHeader="false"
+    >
+        <content>
+        <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+        <Title
+            id="pageHeader"
+            text="Associated Tables"
+            textAlign="Center">
+        </Title>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+        <Button id="_IDGenButton1" text="Add New" press="onAddNew" width="100px" type="Emphasized" icon="sap-icon://add"/>
+       
+        </OverflowToolbar>
+            <Table id="_IDGenTable1" items="{path:'/TableMappings', sorter:{path:'SubProcessId'}}" >
+                <columns>
+                    <Column
+                        id="_IDGenColumn3"
+                        mergeDuplicates="true"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText5"
+                                text="S.No"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn1"
+                        mergeDuplicates="true"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText1"
+                                text="Penalty ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="subProcessIdColumn"
+                        mergeDuplicates="true"
+                    >
+                        <header>
+                            <Text
+                                id="SubIdtext"
+                                text="Sub Process ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn2"
+                        mergeDuplicates="true"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText2"
+                                text="Tables"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn4"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText7"
+                                text="Table Description"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn5"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText9"
+                                text="Action"
+                            />
+                        </header>
+                    </Column>
+                </columns>
+                <ColumnListItem id="_IDGenColumnListItem1" type="Navigation" press="onNavTable">
+                    <Text id="_IDGenText3" text="{Snum}"/>
+                    <Text id="_IDGenText4" text="{EzID}"/>
+                    <Text id="_IDGenText10" text="{SubProcessId}" />
+                    <Text id="_IDGenText6" text="{Table}"/>
+                    <Text id="_IDGenText8" text="{TableDesc}"/>
+                    <Button id="_IDGenButton2" icon="sap-icon://delete" press="onDelete"></Button>
+                </ColumnListItem>
+                <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage12" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+        </content>
+    </Page>
+     
+</mvc:View>

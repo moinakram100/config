@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="frag2"
+        noDataText="No Parameter Found"
+        title="Select Service Parameter"
+        search="onValueHelpDialogSearch1"
+        confirm="onValueHelpDialogClose1"
+        cancel="onValueHelpDialogCancel1"
+        items="{filteredNodeVal>/}"
+        >
+        <StandardListItem id="frag"
+            title="{filteredNodeVal>serviceParameter}"
+            description="{filteredNodeVal>serviceParameterDesc}"    
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

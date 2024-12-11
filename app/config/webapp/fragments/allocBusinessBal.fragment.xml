@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="allocationBusBal"
+        noDataText="No Business Balancing Found"
+        title="Select Business Balancing"
+        search="businessBalDialogSearch"
+        confirm="businessBalValueHelpClose"
+        cancel="businessBalValueHelpCancel"
+        items="{/AllocationProfile}">
+        <StandardListItem
+            title="{allocationProfileName}"     
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>
+

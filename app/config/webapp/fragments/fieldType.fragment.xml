@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="Fieldtypefrag"
+        noDataText="No Data Found"
+        title="Select Data Type"
+        search="onValueHelpSearchFieldType"
+        confirm="onValueHelpCloseFieldType"
+        cancel="onValueHelpCancelFieldType"
+        items="{/xGMSxFieldType}">
+        <StandardListItem id="_IDGenStandardListFieldtype"
+            title="{FiledName}"    
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

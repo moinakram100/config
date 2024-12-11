@@ -1,0 +1,161 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.cgcConfig"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+>
+    <!-- Main Toolbar -->
+    <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+        <Title id="pageHeader" text="Contract Field Definition" textAlign="Center" />
+        <ToolbarSpacer />
+        <Button id="createFieldID" text="Create" width="100px" press="onAddDynamic" type="Emphasized" />
+        <Button id="deleteFieldID" text="Delete" width="100px" press="onDeleteDynamic" type="Emphasized" />
+        <Button id="deleteFieldConfirmBtn" text="Confirm" width="100px" press="onConfirmFieldDeletion" type="Emphasized" visible="false" />
+        <Button id="cancelFieldDeleteBtn" text="Cancel" width="100px" press="onCancelFieldDeletion" type="Emphasized" visible="false" />
+    </OverflowToolbar>
+
+    <!-- Contract and Document Type Selection -->
+    <OverflowToolbar id="_IDGenOverflowToolbar1" height="50px">
+        <content>
+            <HBox class="sapUiSmallMarginTop">
+                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Label text="Contract Type :" class="configTypeLabel" />
+                    <Select id="contractType_Id" forceSelection="false" change="onContractTypeSelect" class="sapUiSmallMarginBegin">
+                        <core:Item key="salesContract" text="Sales Contract" />
+                        <core:Item key="purchaseContract" text="Purchase Contract" />
+                    </Select>
+                </HBox>
+                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Label text="Document Type :" class="configTypeLabel" />
+                    <Select id="documentType_Id" forceSelection="false" items="{docHITypes>/DocumentTypes}" change="onDocumentTypeSelect" class="sapUiSmallMarginBegin">
+                        <core:Item key="{docHITypes>DocumentNo}" text="{docHITypes>DocumentNo}" />
+                    </Select>
+                </HBox>
+            </HBox>
+        </content>
+    </OverflowToolbar>
+
+    <!-- Main Page -->
+    <Page id="page" showHeader="false">
+        <ScrollContainer height="auto" vertical="true">
+            <content>
+                <!-- Static Table -->
+                <Table items="{staticModel>/}" id="staticTable" visible="false" growing="true">
+                    <infoToolbar>
+                        <OverflowToolbar height="50px">
+                            <content>
+                                <Title text="Static Fields"></Title>
+                            </content>
+                        </OverflowToolbar>
+                    </infoToolbar>
+                    <items>
+                        <ColumnListItem type="Active" id="staticItem">
+                            <cells>
+                                <Text id="staticID1" text="{staticModel>ID}" />
+                                <Text id="staticID2" text="{staticModel>service_parameter}" />
+                                <Input id="_IDStaticInput1" value="{staticModel>label}" liveChange="onStaticLabelUpdate" width="250px"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                    <columns>
+                        <Column id="_IDStaticColumn1">
+                            <header>
+                                <Label id="_IDStaticLabel6" text="ID" />
+                            </header>
+                        </Column>
+                        <Column id="_IDStaticColumn2">
+                            <header>
+                                <Label id="_IDStaticLabel7" text="Service Parameter" />
+                            </header>
+                        </Column>
+                        <Column id="_IDStaticColun3">
+                            <header>
+                                <Label id="_IDStaticLab7" text="Label" />
+                            </header>
+                        </Column>
+                        </columns>
+                    <noData>
+                        <IllustratedMessage id="_IDStaticIllustratedMessage3" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
+                    </noData>
+                </Table>
+
+                <!-- Dynamic Table -->
+                <VBox class="vboxmargin" >
+                <Table items="{dynamicModel>/}" id="dynamicTable" visible="false" growing="true">
+                    <infoToolbar>
+                        <OverflowToolbar height="50px">
+                            <content>
+                                <Title text="Dynamic Fields"></Title>
+                            </content>
+                        </OverflowToolbar>
+                    </infoToolbar>
+                    <items>
+                        <ColumnListItem type="Active" id="dynamicItem">
+                            <cells>
+                                <CheckBox id="deleteDynamicCheckBox" select="onDeleteDynamicFieldArray" enabled="{path: 'dataModel>flag', formatter: '.checkMandatory'}" />
+                                <Text id="idDynamic" text="{dynamicModel>ID}" visible="false"/>
+                                <Text id="idDynamic2" text="{dynamicModel>service_parameter}" />
+                                <Input id="dynamicIDGenInput" value="{dynamicModel>label}" liveChange="onDynamicLabelUpdate" />
+                                <CheckBox id="_IDDynamicCheckBox2" selected="{dynamicModel>mandatory}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onMandatoryCheckboxChange" />
+                                <CheckBox id="dynamicModelCheckBox" selected="{dynamicModel>visible}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onVisibleCheckboxChange" />
+                                <Select id="comboDynamic"
+                                        selectedKey="{dynamicModel>parameterRelevancy}"
+                                        enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}"
+                                        change="onMandatoryChange">
+                                    <items>
+                                        <core:Item id="dynamicCore1" key="Select" text="Select" />
+                                        <core:Item id="dynamicCore2" key="Org Details" text="Org Details" />
+                                        <core:Item id="dynamicCore3" key="Capacity Details" text="Capacity Details" />
+                                    </items>
+                                </Select>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                    <columns>
+                        <Column id="deleteDynamicField" width="4rem" visible="false">
+                            <header>
+                                <CheckBox id="selectAllDynamicFields" select="onSelectAllDynamicField" />
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColumn1" visible="false">
+                            <header>
+                                <Label id="_IDDynamicLabelID" text="ID"/>
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColumn2">
+                            <header>
+                                <Label id="_IDDynamicLabel7" text="Service Parameter" />
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColun3">
+                            <header>
+                                <Label id="_IDDynamicLab7" text="Label" />
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColun4">
+                            <header>
+                                <Label id="_IDDynamicLab8" text="Mandatory" />
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColumn3">
+                            <header>
+                                <Label id="_IDDynamicLabel8" text="Display" />
+                            </header>
+                        </Column>
+                        <Column id="_IDDynamicColumn4">
+                            <header>
+                                <Label id="_IDDynamicLabel9" text="Parameter relevancy" />
+                            </header>
+                        </Column>
+                    </columns>
+                    <noData>
+                        <IllustratedMessage id="_IDDynamicIllustratedMessage3" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
+                    </noData>
+                </Table>
+                </VBox>
+            </content>
+        </ScrollContainer>
+    </Page>
+</mvc:View>

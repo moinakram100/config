@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+ 
+    <SelectDialog
+        id=""
+        noDataText="No Items Found"
+        title="Select Penalty ID"
+        search="onValueHelpSearchEz"
+        confirm="onValueHelpCloseEz"
+        cancel="onValueHelpCloseEz"
+        items="{/EzIdTable}">
+        <StandardListItem
+            title="{EzID}"
+            description="{EzIdDescription}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

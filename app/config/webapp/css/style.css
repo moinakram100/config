@@ -1,0 +1,45 @@
+/* Enter your custom styles here */
+
+.btn{
+    display: flex;
+    flex-direction: row;
+}
+
+/* PATH AND FUEL */
+
+.pathFuelAddHeading {
+    display: flex;
+    justify-content: center;
+}
+
+.tileLayout {
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    margin: 10px;
+}
+ 
+.tileLayout:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+ 
+.toolHeaderShadow {
+    box-shadow: 4px 8px 16px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+ 
+.toolHeaderShadow:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* CONFIG ITEM LABEL */
+
+.configTypeLabel{
+    margin: 7px;
+ }
+.vboxmargin{
+    margin-bottom: 8%;
+  }
+
+.vboxparam{
+    margin-bottom: 3%;
+}

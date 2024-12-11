@@ -1,0 +1,304 @@
+<mvc:View
+    height="100%"
+    controllerName="com.ingenx.config.controller.penaltyOperations"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns="sap.m"
+    xmlns:custom="com.ingenx.config.controls">
+ 
+     <Page id="_IDGenPage1" showHeader="false" floatingFooter="true">
+        <content>
+        <OverflowToolbar id="_IDGenOverflowToolbar1" height="40px" >
+                    <Title id="_IDGenTitle1"  text="Penalty ID Operations" textAlign="Center"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        <ComboBox change="onChange" selectionChange="onChange" id="oComboBox" items="{/EzIdTable}">
+                            <core:Item id="_IDGenItem1" text="{EzID}" key="{EzID}" />
+                        </ComboBox>
+                    </OverflowToolbar>
+        <ScrollContainer width="100%" horizontal="true" vertical="false" >
+            <Table id="FieldsTable" items="{path: 'selectedFModel>/', sorter:{path:'SubProcessId'}}" growing="true" sticky="ColumnHeaders,HeaderToolbar" busy="{viewModel>/busyIndicator}" fixedLayout="false" width="140rem">
+               
+                <columns>
+                    <Column
+                        id="_IDGenColumn3"
+                         mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText5"
+                                text="S.No"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn1"
+                        mergeDuplicates="true"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText1"
+                                text="Penalty ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn2"
+                        mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText2"
+                                text="Table"
+                            />
+                        </header>
+                    </Column>
+ 
+                     <Column
+                        id="_IDGenColumn23"
+                        mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText24"
+                                text="Sub Proces ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn5"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText9"
+                                text="Field"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn6"
+                        width="100px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText10"
+                                text="Field ID"
+                               
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn21"
+                        width="150px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText23"
+                                text="Repeat Field"
+                               
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn9"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText15"
+                                text="Filter"
+                            />
+                        </header>
+                    </Column>
+ 
+                     <Column
+                        id="_IDGenColumn7"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText13"
+                                text="Display"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn8"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText14"
+                                text="Mandatory"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn13"
+                       width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText16"
+                                text="Operation"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn14"
+                        width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText17"
+                                text="Table"
+                            />
+                        </header>
+                    </Column>
+ 
+                   
+                    <Column
+                        id="_IDGenColumn15"
+                        width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText18"
+                                text="Table Field"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn16"
+                        width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText19"
+                                text="Additional Functions"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn17"
+                        width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText20"
+                                text="Formula/Add Function"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn18"
+                        width="180px"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText21"
+                                text="Default Value"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn19"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText22"
+                                text="Colour Builder"
+                            />
+                        </header>
+                    </Column>
+ 
+                </columns>
+                <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                    <Text id="_IDGenText3" text="{selectedFModel>Snum}"/>
+                    <Text id="_IDGenText4" text="{selectedFModel>EzID}"/>
+                    <Text id="_IDGenText6" text="{selectedFModel>Table}"/>
+                    <Text text="{selectedFModel>SubProcessId}"/>
+                    <Text id="_IDGenText8" text="{selectedFModel>Field}"/>
+                    <Input id="inp" value="{path: 'selectedFModel>FieldID', type : 'sap.ui.model.type.String'}" change="onFieldIDChange" liveChange = "onLiveChange" />
+                    <Input showValueHelp="true" valueHelpRequest="onRepeatField"/>
+                    <CheckBox id="Filter" selected="{path:'selectedFModel>filterfield'}" select="OnChangeCheckFilter" />
+                    <CheckBox id="display" selected="{path:'selectedFModel>display'}" select="OnChangeCheckDisplay" />
+                    <CheckBox id="mandatory" selected="{path:'selectedFModel>mandatory'}" select="OnChangeCheckMandatory"  />
+                    <ComboBox value="{selectedFModel>Operation}"  change = "onChangeOperation" showSecondaryValues= "true" >
+                        <core:ListItem id="_IDGenListItem1"
+                            key="GE"
+                            text="GE"
+                            additionalText ="Greater than equal to"
+                        />
+                        <core:ListItem id="_IDGenListItem2"
+                            key="LE"
+                            text="LE"
+                            additionalText ="Less than equal to"
+                        />
+                        <core:ListItem id="_IDGenListItem3"
+                            key="EQ"
+                            text="EQ"
+                            additionalText ="Equal to"
+                        />
+                        <core:ListItem id="_IDGenListItem4"
+                            key="NE"
+                            text="NE"
+                            additionalText ="Not equal to"
+                        />
+                        <core:ListItem id="_IDGenListItem5"
+                            key="CO"
+                            text="CO"
+                             additionalText ="Contains only"
+                        />
+                        <core:ListItem id="_IDGenListItem6"
+                            key="CN"
+                            text="CN"
+                             additionalText ="Contains not only"
+                        />
+                        <core:ListItem id="_IDGenListItem7"
+                            key="BT"
+                            text="BT"
+                             additionalText ="Between"
+                        />
+                        <core:ListItem id="_IDGenListItem8"
+                            key="NB"
+                            text="NB"
+                             additionalText ="Not between"
+                        />
+                    </ComboBox>
+                    <ComboBox id="_IDGenComboBoxmap" items="{selectedTable>/}" value="{selectedFModel>MappedTable}" change="onMappedTableValChange">
+                        <core:Item id="_IDGenItem2" key="{selectedTable>Table}" text="{selectedTable>Table}"/>
+                    </ComboBox>
+                    <ComboBox id="_IDGenComboBox2"  value="{selectedFModel>MappedField}" change="onMappedFieldValChange" ></ComboBox>
+                    <Input id="addfunc" value="{selectedFModel>AddiFunction}" showValueHelp="true" valueHelpRequest="onAdditionalFunct" valueHelpOnly="true"/>
+                    <Input id="_IDGenInput1" value="{selectedFModel>Formula}" change="onFormulaValChange"></Input>
+                    <Input id="inp2" value="{selectedFModel>DefaultVal}" change="onDefaultValChange" />
+                    <Button type="Emphasized"  icon="sap-icon://paint-bucket"/>
+                   
+                </ColumnListItem>
+                <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage14" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+            </ScrollContainer>
+        </content>
+            <footer>
+                <OverflowToolbar id="_IDGenOverflowToolbar2">
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                        <Button id="_IDGenButton1" text="Save" type="Emphasized" press="onSave"/>
+                </OverflowToolbar>
+            </footer>
+    </Page>
+</mvc:View>
+ 

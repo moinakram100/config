@@ -1,0 +1,197 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        titleAlignment="Center"
+        type="Standard"
+        id="detailsDialog"
+        title="Config Data"
+        contentWidth="400px"
+        contentHeight="auto"
+        class="details_tab"
+        afterClose="onDialogClose"
+    >
+        <IconTabBar
+            id="idIconTabBar"
+            select=".onFilterSelect"
+            class="sapUiResponsiveContentPadding"
+            expandable="false"
+        >
+            <items>
+                <IconTabFilter
+                    id="_IDGenIconTabFilter2"
+                    icon="sap-icon://detail-more"
+                    iconColor="Positive"
+                    text="Standard"
+                    key="Ok"
+                >
+                    <Label text="Parameter Name :" />
+                    <Select
+                        id="fieldTypeComboBox2"
+                        width="100%"
+                        selectedKey="{addServiceParameterModel>/selectedStandardType}"
+                        items="{addServiceParameterModel>/fieldstandard}"
+                        change="onComboBoxChange2"
+                    >
+                        <items>
+                            <core:Item
+                                key="{addServiceParameterModel>key}"
+                                text="{addServiceParameterModel>text}"
+                            />
+                        </items>
+                    </Select>
+                    <Label text="Parameter Label:" />
+                    <Input
+                        value="{addServiceParameterModel>/parameterLabel}"
+                        placeholder="Enter field Label"
+                    />
+                    <Label
+                        id="_IDGenLabel161"
+                        text="Field Type :"
+                    />
+                    <Select
+                        id="fieldTypeComboBox"
+                        width="100%"
+                        selectedKey="{addServiceParameterModel>/selectedFieldType}"
+                        items="{addServiceParameterModel>/fieldTypeList}"
+                        change="onComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                key="{addServiceParameterModel>key}"
+                                text="{addServiceParameterModel>text}"
+                            />
+                        </items>
+                    </Select>
+                    <Input
+                        placeholder="Enter Length"
+                        value="{addServiceParameterModel>/fieldLength}"
+                        type="Number"
+                        visible="{=${addServiceParameterModel>/selectedFieldType} === 'String' ? true : false}"
+                    />
+                    <VBox
+                        id="listInputsVBoxStandardcgc"
+                        visible="{=${addServiceParameterModel>/selectedFieldType} === 'List' ? true : false}"
+                        class="createParameterFrag"
+                    >
+                        <VBox items="{path: 'addServiceParameterModel>/listValues'}">
+                            <items>
+                                <Input
+                                    placeholder="Enter Value"
+                                    value="{addServiceParameterModel>value}"
+                                    width="200px"
+                                />
+                            </items>
+                        </VBox>
+                        <Button
+                            icon="sap-icon://add"
+                            press="onAddListItemStandatd"
+                        />
+                    </VBox>
+ 
+                    <HBox>
+                        <Button
+                            id="fragCGC1"
+                            type="Accept"
+                            width="100px"
+                            text="Save"
+                            press="onSaveStandard"
+                            class="sapUiTinyMargin"
+                        />
+                        <Button
+                            id="fragCGC2"
+                            type="Reject"
+                            width="100px"
+                            text="Cancel"
+                            press="oncancelNewParameter"
+                            class="sapUiTinyMargin"
+                        />
+                    </HBox>
+                </IconTabFilter>
+ 
+                <IconTabFilter
+                    id="_IDGenIconTabFilter2"
+                    icon="sap-icon://detail-more"
+                    iconColor="Positive"
+                    text="Custom"
+                    key="Ok"
+                >
+                    <Label text="Parameter Name :" />
+                    <Input
+                        value="{addServiceParameterModelCustom>/parameterName}"
+                        placeholder="Enter Parameter name"
+                    />
+                    <Label text="Parameter Label:" />
+                    <Input
+                        value="{addServiceParameterModelCustom>/parameterLabel}"
+                        placeholder="Enter field Label"
+                    />
+                    <Label
+                        id="_IDGenLabel181"
+                        text="Field Type :"
+                    />
+                    <Select
+                        id="fieldTypeComboBox1"
+                        width="100%"
+                        selectedKey="{addServiceParameterModelCustom>/selectedFieldType}"
+                        items="{addServiceParameterModelCustom>/fieldTypeList}"
+                        change="onComboBoxChange"
+                    >
+                        <items>
+                            <core:Item
+                                key="{addServiceParameterModelCustom>key}"
+                                text="{addServiceParameterModelCustom>text}"
+                            />
+                        </items>
+                    </Select>
+                    <Input
+                        placeholder="Enter Length"
+                        value="{addServiceParameterModelCustom>/fieldLength}"
+                        type="Number"
+                        visible="{=${addServiceParameterModelCustom>/selectedFieldType} === 'String' ? true : false}"
+                    />
+ 
+                     <VBox
+                        id="listInputsVBoxCustomcgc"
+                        visible="{=${addServiceParameterModelCustom>/selectedFieldType} === 'List' ? true : false}"
+                        class="createParameterFrag"
+                    >
+                        <VBox items="{path: 'addServiceParameterModelCustom>/listValues'}">
+                            <items>
+                                <Input
+                                    placeholder="Enter Value"
+                                    value="{addServiceParameterModelCustom>value}"
+                                    width="200px"
+                                />
+                            </items>
+                        </VBox>
+                        <Button
+                            icon="sap-icon://add"
+                            press="onAddListItemCustom"
+                        />
+                    </VBox>
+ 
+                    <Button
+                        id="_IDGenButton3"
+                        type="Accept"
+                        width="100px"
+                        text="Save"
+                        press="onSaveCustom"
+                        class="sapUiTinyMargin"
+                    />
+                    <Button
+                        id="_IDGenButton4"
+                        type="Reject"
+                        width="100px"
+                        text="Cancel"
+                        press="oncancelNewParameter"
+                        class="sapUiTinyMargin"
+                    />
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+    </Dialog>
+</core:FragmentDefinition>
+ 

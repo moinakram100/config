@@ -1,0 +1,40 @@
+<core:View xmlns:core2="sap.ui.core" controllerName="com.ingenx.config.controller.allocationNode"
+    xmlns="sap.suite.ui.commons.networkgraph"
+    xmlns:core="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
+    xmlns:m="sap.m"
+    displayBlock="true"
+    height="100%">
+
+    <m:Page>
+    <m:content>
+    <m:Panel> 
+    <Graph enableWheelZoom="true"  orientation="TopBottom" nodes="{AllocationNodeModel>/nodes}" lines="{AllocationNodeModel>/lines}"  searchSuggest="suggest" search="search" id="graph">
+        <layoutAlgorithm>
+            <layout:LayeredLayout mergeEdges="true" nodePlacement="Simple" nodeSpacing="40"/>
+        </layoutAlgorithm>
+        <nodes>
+            <Node icon="sap-icon://action-settings" key="{AllocationNodeModel>id}" title="{AllocationNodeModel>title}" width="90" collapsed="{AllocationNodeModel>collapsed}" attributes="{AllocationNodeModel>attributes}" showActionLinksButton="false" showDetailButton="false" descriptionLineSize="0" shape="Box" >
+                <attributes>
+                    <ElementAttribute label="{AllocationNodeModel>label}" value="{AllocationNodeModel>value}"/>
+                </attributes>
+                <image>
+                    <NodeImage src="{src}" width="80" height="100"/>
+                </image>
+                <actionButtons>
+                    <ActionButton title="Add Child" press="onAddChild" icon="sap-icon://add"></ActionButton>
+                    <ActionButton title="Edit Node" press="onEditNode" icon="sap-icon://edit"></ActionButton>
+                    <ActionButton title="Edit Node" press="onDeleteNode" icon="sap-icon://delete"></ActionButton>
+ 
+                </actionButtons>
+            </Node>
+        </nodes>
+        <lines>
+            <Line from="{AllocationNodeModel>from}" to="{AllocationNodeModel>to}" arrowOrientation="None" press="linePress" />
+        </lines>
+    </Graph>
+    </m:Panel> 
+    </m:content>
+    </m:Page>
+</core:View>

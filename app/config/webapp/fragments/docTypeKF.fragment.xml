@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="docType"
+        noDataText="No Document Found"
+        title="Select Document Type"
+      <core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="docTypeKF"
+        noDataText="No Document Found"
+        initialFocus="SearchField"
+        title="Select Document Type"
+        search="onValueHelpDialogSearch"
+        confirm="onValueHelpDialogPurchaseClose"
+        cancel="onValueHelpDialogCancel"
+        items="{doctypeKFmodel>/}">
+        <StandardListItem id="_IDGenStandardListItemKF"
+            title="{doctypeKFmodel>Auart}"
+            description="{doctypeKFmodel>Description}"
+            info="{doctypeKFmodel>Kopgr}"        
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>  search="onValueHelpDialogSearch"
+        confirm="onValueHelpDialogClose"
+        cancel="onValueHelpDialogCancel"
+        items="{/xGMSxContractType}">
+        <StandardListItem id="_IDGenStandardListItem1"
+            title="{Auart}"
+            description="{Kopgr}"   
+            info="{Description}"  
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

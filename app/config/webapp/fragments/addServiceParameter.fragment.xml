@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="createDialog" title="Create Field" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="_IDGenLabel17" text="Field Name :" />
+            <Input id="newFieldNameInput" value="{addParameterModel>/fieldName}" liveChange="inputHandler" placeholder="Enter field name" />
+            <Label id="_IDGenLabel182" text="Field Description :" />
+            <Input id="newFieldNameInputdesc" value="{addParameterModel>/fieldDesc}" liveChange="inputHandler" placeholder="Enter field name description" />
+            <Label id="_IDGenLabel162" text="Field Type :" />
+            <Select id="fieldTypeComboBox3" width="100%" selectedKey="{addParameterModel>/selectedFieldType}" items="{addParameterModel>/fieldTypeList}" change="onComboBoxChange" >
+                <items>
+                    <core:Item key="{addParameterModel>key}" text="{addParameterModel>text}" />
+                </items>
+            </Select>
+<Input placeholder="Enter String Length (max=30)" maxLength="2" required="true" liveChange="onStringLengthChange" value="{addParameterModel>/fieldLength}"
+type="Number" visible="{=${addParameterModel>/selectedFieldType} === 'String' ? true : false}" />    
+        <VBox id="listInputsVBox" visible="{=${addParameterModel>/selectedFieldType} === 'List' ? true : false}" class="createParameterFrag">
+                <VBox items="{path: 'addParameterModel>/listValues'}">
+                    <items>
+                        <Input placeholder="Enter Value" value="{addParameterModel>value}" width="200px" />
+                    </items>
+                </VBox>
+                <Button icon="sap-icon://add" press="onAddListItem" />
+            </VBox>
+        </VBox>
+        <footer>
+            <OverflowToolbar id="otbFooter">    
+                <ToolbarSpacer/>        
+                <Button type="Accept" text="Save" press="onsaveNewParameter" />
+                <Button type="Reject" text="Cancel" press="oncancelNewParameter" />
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>
+ 

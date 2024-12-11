@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+    <SelectDialog
+        id="allocationSchRed"
+        noDataText="No Scheduling Reduction Found"
+        title="Select Scheduling Reduction"
+        search="schRedDialogSearch"
+        confirm="schRedValueHelpClose"
+        cancel="schRedValueHelpCancel"
+        items="{/AllocationProfile}">
+        <StandardListItem
+            title="{allocationProfileName}"     
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>
+

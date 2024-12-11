@@ -1,0 +1,15 @@
+<mvc:View controllerName="com.ingenx.config.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt">
+    <tnt:ToolPage id="toolPage">
+    <tnt:mainContents>
+        <App id="app">
+        </App>
+    </tnt:mainContents>
+    </tnt:ToolPage>
+   
+ 
+</mvc:View>

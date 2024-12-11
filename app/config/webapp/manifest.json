@@ -1,0 +1,348 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.ingenx.config",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.15.7",
+      "toolsId": "709727d3-6da1-440d-9ae9-780d2c44c07f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/config-services/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.131.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ingenx.config.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "com.ingenx.config.view"
+      },
+      "routes": [
+        {
+          "name": "Routehome",
+          "pattern": ":?query:",
+          "target": [
+            "Targethome"
+          ]
+        },
+        {
+          "name": "RoutecreateParameter",
+          "pattern": "createParameter",
+          "target": [
+            "TargetcreateParameter"
+          ]
+        },
+        {
+          "name": "RoutecreateProfile",
+          "pattern": "createProfile",
+          "target": [
+            "TargetcreateProfile"
+          ]
+        },
+        {
+          "name": "RouteprofileParameter",
+          "pattern": "profileParameter/{ID}/{serviceProfileName}/{serviceProfileDesc}",
+          "target": [
+            "TargetprofileParameter"
+          ]
+        },
+        {
+          "name": "RouteprofileMapping",
+          "pattern": "profileMapping",
+          "target": [
+            "TargetprofileMapping"
+          ]
+        },
+        {
+          "name": "RoutepathFuel",
+          "pattern": "pathFuel",
+          "target": [
+            "TargetpathFuel"
+          ]
+        },
+        {
+          "name": "RouteallocationRule",
+          "pattern": "allocation",
+          "target": [
+            "TargetallocationRule"
+          ]
+        },
+        {
+          "name": "RouteallocationNode",
+          "pattern": "allocationNode/{ID}/{allocationProfileName}/{allocationProfileDesc}/{allocationServProf}",
+          "target": [
+            "TargetallocationNode"
+          ]
+        },
+        {
+          "name": "RouteallocationNodeTree",
+          "pattern": "allocationNode/{ID}/{allocationProfileName}/{allocationProfileDesc}",
+          "target": [
+            "TargetallocationNode"
+          ]
+        },
+        {
+          "name": "RouteallocationMap",
+          "pattern": "allocationMapping",
+          "target": [
+            "TargetallocationMap"
+          ]
+        },
+        {
+          "name": "RoutecgcConfig",
+          "pattern": "cgcConfig",
+          "target": [
+            "TargetcgcConfig"
+          ]
+        },
+        {
+          "name": "Routeezreport",
+          "pattern": "EzReportPenaltyTiles",
+          "target": [
+            "TargetEzReportPenaltyTiles"
+          ]
+        },
+        {
+          "name": "RoutetransportConfig",
+          "pattern": "transportConfig",
+          "target": [
+            "TargettransportConfig"
+          ]
+        },
+        {
+          "name": "RouteEzIDView",
+          "pattern": "EzReportIDs",
+          "target": [
+            "TargetEzIDView"
+          ]
+        },
+        {
+          "name": "RouteTables",
+          "pattern": "RouteTables/{Snum}/{EzID}",
+          "target": [
+            "TargetTable"
+          ]
+        },
+        {
+          "name": "RouteEzPanelty",
+          "pattern": "EzPaneltyMapping",
+          "target": [
+            "TargetEzPanelty"
+          ]
+        },
+        {
+          "name": "RouteFieldMapping",
+          "pattern": "TableFieldMappings",
+          "target": [
+            "TargetFieldMapping"
+          ]
+        },
+        {
+          "name": "RoutePenaltyParamOperations",
+          "pattern": "PenaltyOperations",
+          "target": [
+            "TargetPenaltyOperations"
+          ]
+        }
+      ],
+      "targets": {
+        "Targethome": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "home",
+          "viewName": "home"
+        },
+        "TargetcreateParameter": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "createParameter",
+          "viewName": "createParameter"
+        },
+        "TargetcreateProfile": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "createProfile",
+          "viewName": "createProfile"
+        },
+        "TargetprofileParameter": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "profileParameter",
+          "viewName": "profileParameter"
+        },
+        "TargetprofileMapping": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "profileMapping",
+          "viewName": "profileMapping"
+        },
+        "TargetpathFuel": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "pathFuel",
+          "viewName": "pathFuel"
+        },
+        "TargetallocationRule": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "allocation",
+          "viewName": "allocation"
+        },
+        "TargetallocationNode": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "allocationNode",
+          "viewName": "allocationNode"
+        },
+        "TargetallocationMap": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "allocationMapping",
+          "viewName": "allocationMapping"
+        },
+        "TargetcgcConfig": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "cgcConfig",
+          "viewName": "cgcConfig"
+        },
+        "TargetEzReportPenaltyTiles": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "EzReportPenaltyTiles",
+          "viewName": "EzReportPenaltyTiles"
+        },
+        "TargettransportConfig": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "transportConfig",
+          "viewName": "transportConfig"
+        },
+        "TargetEzIDView": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "createEzID",
+          "viewName": "createEzID"
+        },
+        "TargetTable": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "EzIdtableMapping",
+          "viewName": "EzIdtableMapping"
+        },
+        "TargetEzPanelty": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ezReportMapping",
+          "viewName": "ezReportMapping"
+        },
+        "TargetFieldMapping": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "tableFieldMapping",
+          "viewName": "tableFieldMapping"
+        },
+        "TargetPenaltyOperations": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "penaltyOperations",
+          "viewName": "penaltyOperations"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.ingenx.config.view.App",
+      "type": "XML",
+      "id": "App"
+    }
+  }
+}

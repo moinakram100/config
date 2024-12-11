@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+ 
+    <SelectDialog
+        id="plant"
+        noDataText="No Parameter Found"
+        title="Select Parameter"
+        search="onValueHelpSearchPenalty"
+        confirm="onValueHelpClosePenalty"
+        cancel="onValueHelpClosePenalty"
+        items="{paneltyVal>/}">
+        <StandardListItem id="_IDGenStandardListItem9"
+            title="{paneltyVal>serviceParameter}"
+            description="{paneltyVal>serviceParameterDesc}"
+            iconDensityAware="false"
+            iconInset="false"
+            type="Active" />
+    </SelectDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,136 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        id="_IDGenDialog1111"
+        title="Generate Mapping with Profile"
+        class="sapUiSmallMargin"
+    >
+        <IconTabBar
+            id="idIconTabBar"
+            select=".onFilterSelect"
+            class="sapUiResponsiveContentPadding"
+            expandable="false"
+            expanded="true"
+        >
+            <items>
+                <IconTabFilter
+                    id="_IDGenIconTabFilter1"
+                    icon="sap-icon://detail-more"
+                    iconColor="Positive"
+                    text="Sales"
+                    key="Sales"
+                >
+                    <VBox
+                        id="_IDGenVBox1"
+                        class="sapUiContentPadding sapUiSmallMargin"
+                    >
+                        <Label
+                            id="_IDGenLabel1111"
+                            text="Document Type :"
+                            design="Bold"
+                        />
+                        <Input
+                            id="_IDGenInput1"
+                            value="{addDocDataModelSales>/DocumentNo}"
+                            showValueHelp="true"
+                            valueHelpRequest="onDocValueHelpLP"
+                            valueHelpOnly="true"
+                        />
+                        
+                        <Text id="_IDGenText6" text="{addDocDataModelSales>/DocumentDesc}" visible="false"/>
+                        <Text id="_IDGenText7" text="{addDocDataModelSales>/description}" visible="false"/>
+                        <Label
+                            id="_IDGenLabel2"
+                            text="Service Profile :"
+                            design="Bold"
+                        />
+                        <Input
+                            id="_IDGenInput2"
+                            value="{addDocDataModelSales>/profileName}"
+                            showValueHelp="true"
+                            valueHelpRequest="onServiceProfileValueHelp"
+                            valueHelpOnly="true"
+                        />
+                        <Text
+                            id="_IDGenText2"
+                            text="{addDocDataModelSales>/profileDesc}"
+                        />
+                    </VBox>
+ 
+                    <Button
+                        id="_IDGenButton1"
+                        text="Save"
+                        press="onsaveDocumentNoMappingSales"
+                        class="sapUiTinyMargin"
+                        width="70px"
+                        type="Accept"
+                    />
+                    <Button
+                        id="_IDGenButton2"
+                        text="Cancel"
+                        press="oncanceleNewDocumentNo"
+                        class="sapUiTinyMargin"
+                        width="70px"
+                        type="Reject"
+                    />
+                </IconTabFilter>
+ 
+                <IconTabFilter
+                    id="_IDGenIconTabFilter2"
+                    icon="sap-icon://detail-more"
+                    iconColor="Positive"
+                    text="Purchase"
+                    key="Purchase"
+                >
+                    <VBox id="_IDGenVBox2" class="sapUiContentPadding sapUiSmallMargin">
+                        <Label id="_IDGenLabel3"
+                            text="Document Type :"
+                            design="Bold"
+                        />
+                        <Input
+                            id="_IDGenInput3"
+                            value="{addDocDataModelPurchase>/DocumentNo}"
+                            showValueHelp="true"
+                            valueHelpRequest="onDocValueHelpKF"
+                            valueHelpOnly="true"
+                        />
+                        <Text id="_IDGenText3" text="{addDocDataModelPurchase>/DocumentDesc}" visible="false"/>
+                        <Text id="_IDGenText5" text="{addDocDataModelPurchase>/description}" visible="false"/>
+                        <Label id="_IDGenLabel4"
+                            text="Service Profile :"
+                            design="Bold"
+                        />
+                        <Input
+                            id="_IDGenInput4"
+                            value="{addDocDataModelPurchase>/profileName}"
+                            showValueHelp="true"
+                            valueHelpRequest="onServiceProfileValueHelp"
+                            valueHelpOnly="true"
+                        />
+                        <Text id="_IDGenText4" text="{addDocDataModelPurchase>/profileDesc}"/>
+                    </VBox>
+                   
+                    <Button
+                        id="_IDGenButton3"
+                        text="Save"
+                        press="onsaveDocumentNoMappingPurchase"
+                        class="sapUiTinyMargin"
+                        width="70px"
+                        type="Accept"
+                    />
+                    <Button
+                        id="_IDGenButton4"
+                        text="Cancel"
+                        press="oncanceleNewDocumentNo"
+                        class="sapUiTinyMargin"
+                        width="70px"
+                        type="Reject"
+                    />
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+    </Dialog>
+</core:FragmentDefinition>

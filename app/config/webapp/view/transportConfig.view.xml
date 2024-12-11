@@ -1,0 +1,155 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.transportConfig"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <OverflowToolbar
+        id="_IDGenOverflowToolbar9"
+        height="50px"
+    >
+        <FlexBox direction="Column" class="sapUiSmallMargin">
+            <FlexBox  alignItems="Center">
+            <HBox class="sapUiSmallMarginTop">
+                <Label
+                    text="Transmission Type "
+                    design="Bold"
+                    class="sapUiTinyMarginTop sapUiSmallMarginEnd"
+                />
+                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Select id="mySelect" forceSelection="false" class="sapUiSmallMarginEnd" change="onTransmissionTypeChange">
+                        <core:Item text="1 : 1" />
+                        <core:Item text="1 : N" />
+                        <core:Item text="N : 1" />
+                    </Select>
+                </HBox>
+            </HBox>
+            </FlexBox>
+        </FlexBox>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+        <Button
+            id="createTransID"
+            text="Create"
+            width="100px"
+            press="onAdd"
+            type="Emphasized"
+            visible="true"
+        />
+        <Button
+            id="deleteTransID"
+            text="Delete"
+            width="100px"
+            press="onDelete"
+            type="Emphasized"
+            visible="true"
+        />
+        <Button
+            id="deleteTransportConfirmBtn"
+            text="Confirm"
+            width="100px"
+            press="onConfirmDelete"
+            type="Emphasized"
+            visible="false"
+        />
+        <Button
+            id="cancelTransportDeleteBtn"
+            text="Cancel"
+            width="100px"
+            press="onCancelTransportDeletion"
+            type="Emphasized"
+            visible="false"
+        />
+    </OverflowToolbar>
+    <Page
+        id="page"
+        showHeader="false"
+    >
+        <content>
+                <!-- items="{/TransportConfig}" -->
+            <Table
+                items="{transportconfig>/TransportConfig}"
+                id="transportTable"
+            >
+               
+                <columns>
+                    <Column
+                        id="deletetransLabel"
+                        width="6rem"
+                        visible="false"
+                    >
+                        <header>
+                            <CheckBox
+                                id="selectAllTransport"
+                                select="onSelectAll"
+                               
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn1">
+                        <header>
+                            <Label
+                                id="_IDGenLabel6"
+                                text="ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn5">
+                        <header>
+                            <Label
+                                id="_IDGenLabel10"
+                                text="Sales Document Type"
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <header>
+                            <Label
+                                id="_IDGenLabel7"
+                                text="Purchase Document Type"
+                            />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn4">
+                        <header>
+                            <Label
+                                id="_IDGenLabel9"
+                                text="Exchange Document Type"
+                            />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        type="Active"
+                        id="item0"
+                    >
+                        <cells>
+                            <CheckBox
+                                id="deleteAllocCheckBox"
+                                select="onSelectTransport"
+                            />
+                            <Text
+                                id="id1"
+                                text="{transportconfig>ID}"
+                            />
+                            <Text
+                                id="id2"
+                                text="{transportconfig>documentType}"
+                            />
+                            <Text
+                                id="id3"
+                                text="{transportconfig>side}"
+                            />
+                            <Text
+                                id="id4"
+                                text="{transportconfig>exchangeType}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+               
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
+ 

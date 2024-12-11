@@ -1,0 +1,81 @@
+<mvc:View controllerName="com.ingenx.config.controller.allocationMapping"
+xmlns:table="sap.ui.table"
+xmlns:mvc="sap.ui.core.mvc"
+busyIndicatorDelay="0"
+displayBlock="true"
+xmlns:form="sap.ui.layout.form"
+xmlns:core="sap.ui.core"
+xmlns="sap.m"
+xmlns:f="sap.f"
+xmlns:tnt="sap.tnt">
+<OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+    <Title
+        id="pageHeader"
+        text="Allocation Rule Mapping"
+        textAlign="Center">
+    </Title>
+    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+    <Button id="allocNewMappingBtn" text="Create" width="100px" press="onNewMap" type="Emphasized" visible="true"/>
+    <Button id="deleteAllocMappingBtn" text="Delete" width="100px" press="onDeleteAllocMap" type="Emphasized" visible="true"/>
+    <Button id="deleteAllocMapConfirmBtn" text="Confirm" width="100px" press="onConfirmAllocMapDeletion" type="Emphasized" visible="false"/>
+    <Button id="cancelAllocMapDeleteBtn" text="Cancel" width="100px" press="onCancelAllocMapDeletion" type="Emphasized" visible="false"/>
+</OverflowToolbar>
+    <Page id="page" showHeader="false">
+        <content>
+            <Table items="{path: '/AllocationLocation',parameters: {$count: true}}" noDataText="No Mapping exists" id="allocTableMapping" selectionChange="onSelect" mode="None">
+               
+                <columns>
+                    <Column id="deleteMapLabel" width="6rem" visible="false">
+                        <header>
+                            <CheckBox id="selectAllAllocMap" select="onSelectAllocMap"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn" visible="false">
+                        <Text id="_IDGenText" text="ID" />
+                    </Column>
+                    <Column id="_IDGenColumn1">
+                        <Text id="_IDGenText1" text="Location" />
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <Text id="_IDGenText2" text="Scheduling Reduction" />
+                    </Column>
+                    <Column id="_IDGenColumn3">
+                        <Text id="_IDGenText3" text="Technical Balancing" />
+                    </Column>
+                    <Column id="_IDGenColumn4">
+                        <Text id="_IDGenText4" text="Buisness Balancing" />
+                    </Column>
+                    <Column id="_IDGenColumn5">
+                        <Text id="_IDGenText5" text="Valid From" />
+                    </Column>
+                    <Column id="_IDGenColumn6">
+                        <Text id="_IDGenText6" text="Valid To" />
+                    </Column>
+                </columns>
+                <ColumnListItem id="_IDGenColumnListItem1">
+                    <cells>
+                        <CheckBox id="deleteAllocCheckBox" select="onDeleteAllocMapArray"/>
+                        <Text id="id" text="{mapID}" />
+                        <Text id="id1" text="{location}" />
+                        <Text id="id2" text="{schedulingReduction}" />
+                        <Text id="id3" text="{technicalBalancing}" />
+                        <Text id="id4" text="{buisnessBalancing}" />
+                        <DatePicker id="DatePicker5" width="150px" change="datePickerAllocMap" value="{validFromAlloc}"></DatePicker>
+                        <DatePicker id="DatePicker6" width="150px" change="datePickerAllocMap" value="{validToAlloc}"></DatePicker>
+                    </cells>
+                </ColumnListItem>
+                 <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage2" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+        </content>
+        <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar2">
+                <content>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                    <Button id="_IDGenButton1" text="Submit" press="onSubmit" type="Emphasized" />
+                </content>
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

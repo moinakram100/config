@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Edit Node"  class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Text id="ChildId" text="{path : '/id'}" visible="false"/>
+            <Label text="Service Parameter:" width="auto" />
+            <Text id="titleId" text="{path: '/title'}"  width="auto"/>
+            <Label text="Level:" />
+            <Text id="levelId" text="{path: '/attributes/0/value'}" width="auto" />
+            <Label text="Rank:" />
+            <Input id="rankId" value="{path: '/attributes/1/value'}" width="auto" />
+            <Label text="New Parent:" />
+            <Input id="newParentId" value="{path: '/newParent'}" width="auto" showValueHelp="true" valueHelpRequest="onValueHelpNewParent" valueHelpOnly="true"/>
+        </VBox>
+        <beginButton>
+            <Button type="Accept" text="Save" press="onSaveEditNode" />
+        </beginButton>
+        <endButton>
+            <Button type="Reject" text="Cancel" press="onCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
+ 

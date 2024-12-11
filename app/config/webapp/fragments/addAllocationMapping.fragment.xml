@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Generate Mapping with Allocation Rule" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label  text="Location :" design="Bold" />
+            <Input  value="{allocMapDataModel>/location}" showValueHelp="true" valueHelpRequest="onAllocLocation" valueHelpOnly="true"/>
+            <Label  text="Scheduling Reduction :" design="Bold" />
+            <Input  value="{allocMapDataModel>/schedulingReduction}" showValueHelp="true" valueHelpRequest="onSchedulingReduction" valueHelpOnly="true"/>
+            <Label  text="Technical Balancing :" design="Bold" />
+            <Input  value="{allocMapDataModel>/technicalBalancing}" showValueHelp="true" valueHelpRequest="onTechnicalBalancing" valueHelpOnly="true"/>
+            <Label  text="Business Balancing :" design="Bold"/>
+            <Input  value="{allocMapDataModel>/buisnessBalancing}" showValueHelp="true" valueHelpRequest="onBuisnessBalancing" valueHelpOnly="true"/>        
+        </VBox>
+        <footer>
+        	<OverflowToolbar >	
+                <ToolbarSpacer/>		
+				<Button type="Accept" text="Save" press="onsaveAllcoationMapping">
+				</Button>
+                <Button type="Reject" text="Cancel" press="oncancelAllocMapping">
+				</Button>
+			</OverflowToolbar>
+            <!-- <Button id="_IDGenButton3" text="Create" press="onCreateField" />
+            <Button id="_IDGenButton4" text="Cancel" press="onCancelCreateField" /> -->
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>   

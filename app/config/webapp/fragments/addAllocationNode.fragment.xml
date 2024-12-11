@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog id="_IDGenDialog1" title="Create Node" class="sapUiSmallMargin">
+        <VBox id="_IDGenVBox" class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="nname"  text="Node Name :" />
+            <Input id="inpGenInput1"  value="{allocationNodeModel>/serviceTitle}" placeholder="Enter Service Parameter" showValueHelp="true" valueHelpRequest="onValuehelp" valueHelpOnly="true"/>
+            <Label id="ranki" text="Rank :" />
+            <Input id="rankinput" value="{allocationNodeModel>/rank}" placeholder="Enter Rank" />
+        </VBox>
+        <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar11" >  
+                <ToolbarSpacer id="_IDGenToolbarSpacer12"/>      
+                <Button id="acept" type="Accept" text="Save" press="onsaveNewNode">
+                </Button>
+                <Button id="rej" type="Reject" text="Cancel" press="oncancelNewNode">
+                </Button>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>  

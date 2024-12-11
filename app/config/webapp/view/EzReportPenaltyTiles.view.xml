@@ -1,0 +1,25 @@
+<mvc:View controllerName="com.ingenx.config.controller.EzReportPenaltyTiles"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" showHeader="false">
+        <content>
+            <GenericTile id="_IDGenGenericTile10" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Penalty ID Definition" press="onEzReport" frameType="OneByOne" >
+                <TileContent id="_IDGenTileContent10" >
+                    <ImageContent id="_IDGenImageContent10" src="sap-icon://create" />
+                </TileContent>
+            </GenericTile>
+ 
+            <GenericTile class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout"  header="Penalty ID Operation" press="onPenaltyOperations" frameType="OneByOne">
+                <TileContent>
+                    <ImageContent src="sap-icon://developer-settings" />
+                </TileContent>
+            </GenericTile>
+ 
+            <GenericTile id="_IDGenGenericTile12" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Penalty ID - Penalty Parameter Mapping" press="onPaneltyEz" >
+                <TileContent id="_IDGenTileContent12" >
+                    <ImageContent id="_IDGenImageContent12" src="sap-icon://SAP-icons-TNT/value-mapping" />
+                </TileContent>
+            </GenericTile>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,60 @@
+<mvc:View controllerName="com.ingenx.config.controller.home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+     <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+            <Title
+                id="pageHeader"
+                text="Configuration Panel"
+                textAlign="Center">
+            </Title>
+        </OverflowToolbar>
+    <Page id="page" showHeader="false">
+        <content>
+            <GenericTile id="_IDGenGenericTile1" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Service Parameter Definition" press="onCreateParameter" >
+                <TileContent id="_IDGenTileContent1" >
+                    <ImageContent id="_IDGenImageContent1" src="sap-icon://numbered-text" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile2" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Service Profile Definition" press="onCreateProfile" >
+                <TileContent id="_IDGenTileContent2" >
+                    <ImageContent id="_IDGenImageContent2" src="sap-icon://user-edit" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile3" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Service Profile Mapping" press="onProMap">
+             <TileContent id="_IDGenTileContent3" >
+                    <ImageContent id="_IDGenImageContent3" src="sap-icon://SAP-icons-TNT/value-mapping" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile4" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Path And Fuel Mapping" press="onPathFuel" >
+            <TileContent id="_IDGenTileContent4" >
+                    <ImageContent id="_IDGenImageContent4" src="sap-icon://journey-change" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile5" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Allocation Rule Definition" press="onAllocationRule" >
+            <TileContent id="_IDGenTileContent5" >
+                    <ImageContent id="_IDGenImageContent5" src="sap-icon://tree" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile6" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Allocation Rule Mapping" press="onAllocationMapping" >
+            <TileContent id="_IDGenTileContent6" >
+                    <ImageContent id="_IDGenImageContent6" src="sap-icon://customer-order-entry" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile7" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Contract Field Definition" press="onCGCCOnfig" >
+            <TileContent id="_IDGenTileContent7" >
+                    <ImageContent id="_IDGenImageContent7" src="sap-icon://numbered-text" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile8" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Penalty Configuration" press="onEZReport" >
+            <TileContent id="_IDGenTileContent8" >
+                    <ImageContent id="_IDGenImageContent8" src="sap-icon://sales-order-item" />
+                </TileContent>
+            </GenericTile>
+            <GenericTile id="_IDGenGenericTile9" class="sapUiSmallMarginBegin sapUiSmallMarginTop tileLayout" header="Gas Transmission Configuration" press="onGasTrans" >
+            <TileContent id="_IDGenTileContent9" >
+                    <ImageContent id="_IDGenImageContent9" src="sap-icon://BusinessSuiteInAppSymbols/icon-gas" />
+                </TileContent>
+            </GenericTile>
+        </content>
+    </Page>
+</mvc:View>

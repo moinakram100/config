@@ -1,0 +1,115 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.tableFieldMapping"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns:forms="sap.ui.layout.form"
+    xmlns="sap.m"
+>
+ 
+    <Page id="_IDGenPage1" showHeader="false" floatingFooter="true">
+        <content>
+            <Table id="FieldsTable" items="{/FieldMapping}" growing="true" sticky="ColumnHeaders,HeaderToolbar" fixedLayout="false">
+                <headerToolbar>
+                    <OverflowToolbar id="_IDGenOverflowToolbar1">
+                    <Title id="_IDGenTitle1"  text="Field Selection" textAlign="Center"/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        <Button press="onAdd" icon="sap-icon://add" type="Emphasized"/>
+                        <SearchField id="_IDGenSearchField1" search="onSearch" width="17.5rem"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        id="_IDGenColumn3"
+                        mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText5"
+                                text="S.No"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn1"
+                        mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText1"
+                                text="Penalty ID"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn2"
+                        mergeDuplicates="true"
+                       
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText2"
+                                text="Table"
+                            />
+                        </header>
+                    </Column>
+                    <Column
+                        id="_IDGenColumn5"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText9"
+                                text="Field"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn11"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText11"
+                                text="Field Description"
+                            />
+                        </header>
+                    </Column>
+ 
+                    <Column
+                        id="_IDGenColumn6"
+                    >
+                        <header>
+                            <Text
+                                id="_IDGenText10"
+                                text="Select"
+                            />
+                        </header>
+                    </Column>
+ 
+                </columns>
+                <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                    <Text id="_IDGenText3" text="{Snum}"/>
+                    <Text id="_IDGenText4" text="{EzID}"/>
+                    <Text id="_IDGenText6" text="{Table}"/>
+                    <Text id="_IDGenText8" text="{Field}"/>
+                    <Text id="_IDGenText12" text="{FieldDesc}"/>
+                    <CheckBox id="check" selected="{path:'selected'}" select="onChangebox" />
+                   
+                </ColumnListItem>
+                <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage14" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+        </content>
+            <!-- <footer>
+                <OverflowToolbar id="_IDGenOverflowToolbar2">
+                    <ToolbarSpacer id="_IDGenToolbarSpacer2"/>
+                        <Button id="_IDGenButton1" text="Save" type="Emphasized" press="onSave"/>
+                </OverflowToolbar>
+            </footer> -->
+    </Page>
+ 
+</mvc:View>

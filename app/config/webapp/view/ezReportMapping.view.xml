@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="com.ingenx.config.controller.ezReportMapping"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns:t="sap.ui.table"
+    height="100%"
+>
+    <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
+        <Title
+            id="pageHeader"
+            text="Penalty-Calculation Mapping"
+            textAlign="Center">
+        </Title>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+        <Button id="createPenaltyID" text="Create" width="100px" press="onAdd" type="Emphasized"  />
+        <Button id="deletePenaltyID" text="Delete" width="100px" press="onDeletePenaltyMap" type="Emphasized"  />
+        <Button id="deletePenaltyMapConfirmBtn" text="Confirm" width="100px" press="onConfirmPenaltyMapDeletion" type="Emphasized" visible="false"/>
+        <Button id="cancelPenaltyMapDeleteBtn" text="Cancel" width="100px" press="onCancelPenaltyMapDeletion" type="Emphasized" visible="false"/>
+    </OverflowToolbar>
+    <Page id="_IDGenPage1" showHeader="false">
+   
+        <content>
+             <Table items="{path: '/penalties'}" id="penaltyTable" selectionChange="onSelect" mode="None"  >
+                <columns>
+                    <Column id="deleteMapLabel" width="1rem" visible="false">
+                        <header>
+                            <CheckBox id="selectAllPenaltyMap" select="onSelectPenaltyMap"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn" visible="false" >
+                        <Text id="_IDGenText" text="ID" />
+                    </Column>
+                    <Column id="_IDGenColu" width="2rem">
+                        <header>
+                            <Label id="_IDGenLl12" wrapping="true" design="Bold" text="Service Profile" />
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn2" width="7rem">
+                        <header>
+                            <Label id="_IDGenLabel7" wrapping="true" design="Bold" text="Service Parameter" />
+                        </header>
+                    </Column>
+ 
+                    <Column id="_IDGenColum" width="5rem">
+                        <header>
+                            <Label id="_IDGenLabe" wrapping="true" design="Bold" text="Penalty ID Associated" />
+                        </header>
+                    </Column>
+ 
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" id="item0">
+                        <cells>
+                            <CheckBox id="deleteAllocCheckBox" select="onDeletePenaltyMapArray"/>
+                            <Text id="id" text="{ID}" />
+                            <Text id="id2" text="{profileName}" />
+                            <Text id="id1" text="{paneltyParmeter}" />
+                            <Text id="id3" text="{ezReportId}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                 <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage6" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
+ 

@@ -1,0 +1,59 @@
+<mvc:View controllerName="com.ingenx.config.controller.createEzID"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page showHeader="false">
+        <content>
+            <Table id="ezidtable" items="{path: '/EzIdTable'}" selectionChange="onSelect" mode="None" sticky="ColumnHeaders,HeaderToolbar">
+                <headerToolbar>
+                    <OverflowToolbar id="_IDGenOverflowToolbar9" height="40px">
+                        <Title
+                            id="_IDGenTitle1"
+                            text="Penalty IDs"
+                            textAlign="Center">
+                        </Title>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                        <Button id="newId" width="100px" text="Create" press="onCreateId" type="Emphasized" visible="true"/>
+                        <Button id="deleteIdBtn" text="Delete" width="100px" press="onDeleteId" type="Emphasized" visible="true"/>
+                        <Button id="deleteIdConfirmBtn" text="Confirm" width="100px" press="onConfirmIdDeletion" type="Emphasized" visible="false"/>
+                        <Button id="cancelIdDeleteBtn" text="Cancel" width="100px" press="onCancelIdDeletion" type="Emphasized" visible="false"/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>  
+                    <Column   id="deleteIdLabel" width="6rem" visible="false">
+                        <header>
+                            <CheckBox id="selectAllId" select="onSelectAllId"/>
+                        </header>
+                    </Column>
+                    <Column >
+                        <header>
+                            <Label  wrapping="true" design="Bold" text="S.No" />
+                        </header>
+                    </Column>
+                    <Column >
+                        <header>
+                            <Label  wrapping="true" design="Bold" text="Penalty ID" />
+                        </header>
+                    </Column>
+                     <Column >
+                        <header>
+                            <Label  wrapping="true" design="Bold" text="Description" />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem  press="onSelectEzId" id="item" type="Navigation">
+                        <cells>
+                            <CheckBox id="deleteEzIdCheckBox" select="onDeleteArrayEzId"/>
+                            <Text id="id1" text="{Snum}" />
+                            <Text id="id2" text="{EzID}" />
+                            <Text id="id3" text="{EzIdDescription}" />  
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <noData>
+                    <IllustratedMessage id="_IDGenIllustratedMessage11" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                </noData>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

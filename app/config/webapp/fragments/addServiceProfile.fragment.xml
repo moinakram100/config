@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="Create Profile" class="sapUiSmallMargin">
+        <VBox class="sapUiContentPadding sapUiSmallMargin">
+            <Label  text="Profile Name :" design="Bold"/>
+            <Input  value="{addServiceProfileModel>/profileName}" liveChange="onProfileNameChange"  placeholder="Enter field name" />
+            <Label text="Profile Description :" design="Bold"/>
+            <Input value="{addServiceProfileModel>/profileDesc}" liveChange="inputHandler" placeholder="Enter field name description" />
+            
+        </VBox>
+        <footer>
+        	<OverflowToolbar >	
+                <ToolbarSpacer/>		
+				<Button type="Accept" text="Save" press="onSaveNewProfile">
+				</Button>
+                <Button type="Reject" text="Cancel" press="oncancelNewProfile">
+				</Button>
+			</OverflowToolbar>
+            <!-- <Button id="_IDGenButton3" text="Create" press="onCreateField" />
+            <Button id="_IDGenButton4" text="Cancel" press="onCancelCreateField" /> -->
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>   

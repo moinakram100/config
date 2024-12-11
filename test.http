@@ -1,0 +1,13 @@
+POST http://localhost:4004/odata/v4/config-services/ServiceProfileMaster
+Content-Type: application/json
+
+{
+    "ID" : 1,
+    "masterProfileName" : "Test1",
+    "profileDescription" : "Testing abc",
+    "additionalField1" : "Value1",
+    "additionalField2" : "value2",
+    "additionalField3" : "value2",
+    "additionalField4" : "value2",
+    "additionalField5" : "value2"
+}
