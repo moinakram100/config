@@ -3,14 +3,15 @@
     xmlns:core="sap.ui.core">
  
     <SelectDialog
-        id="plant"
+        id="PenalityMappingProfileParameterDialog"
         noDataText="No Parameter Found"
         title="Select Parameter"
-        search="onValueHelpSearchPenalty"
+        search="onValueHelpSearchPenaltyParam"
+        liveChange="onValueHelpSearchPenaltyParam"
         confirm="onValueHelpClosePenalty"
         cancel="onValueHelpClosePenalty"
         items="{paneltyVal>/}">
-        <StandardListItem id="_IDGenStandardListItem9"
+        <StandardListItem id="PenalityMappingProfileParameterList"
             title="{paneltyVal>serviceParameter}"
             description="{paneltyVal>serviceParameterDesc}"
             iconDensityAware="false"

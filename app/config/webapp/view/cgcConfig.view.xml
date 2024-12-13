@@ -7,30 +7,30 @@
     xmlns:t="sap.ui.table"
 >
     <!-- Main Toolbar -->
-    <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px">
-        <Title id="pageHeader" text="Contract Field Definition" textAlign="Center" />
-        <ToolbarSpacer />
-        <Button id="createFieldID" text="Create" width="100px" press="onAddDynamic" type="Emphasized" />
-        <Button id="deleteFieldID" text="Delete" width="100px" press="onDeleteDynamic" type="Emphasized" />
-        <Button id="deleteFieldConfirmBtn" text="Confirm" width="100px" press="onConfirmFieldDeletion" type="Emphasized" visible="false" />
-        <Button id="cancelFieldDeleteBtn" text="Cancel" width="100px" press="onCancelFieldDeletion" type="Emphasized" visible="false" />
+    <OverflowToolbar id="cgcConfig_MainToolbar" height="50px">
+        <Title id="cgcConfig_Title_FieldDefinition" text="Contract Field Definition" textAlign="Center" />
+        <ToolbarSpacer id="cgcConfig_ToolbarSpacer" />
+        <Button id="cgcConfig_Button_Create" text="Create" width="100px" press="onAddDynamic" type="Emphasized" />
+        <Button id="cgcConfig_Button_DeleteField" text="Delete" width="100px" press="onDeleteDynamic" type="Emphasized" />
+        <Button id="cgcConfig_Button_ConfirmDeletion" text="Confirm" width="100px" press="onConfirmFieldDeletion" type="Emphasized" visible="false" />
+        <Button id="cgcConfig_Button_CancelDeletion" text="Cancel" width="100px" press="onCancelFieldDeletion" type="Emphasized" visible="false" />
     </OverflowToolbar>
 
     <!-- Contract and Document Type Selection -->
-    <OverflowToolbar id="_IDGenOverflowToolbar1" height="50px">
+    <OverflowToolbar id="cgcConfig_ContractDocToolbar" height="50px">
         <content>
-            <HBox class="sapUiSmallMarginTop">
-                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
-                    <Label text="Contract Type :" class="configTypeLabel" />
-                    <Select id="contractType_Id" forceSelection="false" change="onContractTypeSelect" class="sapUiSmallMarginBegin">
-                        <core:Item key="salesContract" text="Sales Contract" />
-                        <core:Item key="purchaseContract" text="Purchase Contract" />
+            <HBox id="cgcConfig_HBox_Main" class="sapUiSmallMarginTop">
+                <HBox id="cgcConfig_HBox_ContractType" class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Label id="cgcConfig_Label_ContractType" text="Contract Type :" class="configTypeLabel" />
+                    <Select id="cgcConfig_Select_ContractType" forceSelection="false" change="onContractTypeSelect" class="sapUiSmallMarginBegin">
+                        <core:Item id="cgcConfig_Item_SalesContract" key="salesContract" text="Sales Contract" />
+                        <core:Item id="cgcConfig_Item_PurchaseContract" key="purchaseContract" text="Purchase Contract" />
                     </Select>
                 </HBox>
-                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
-                    <Label text="Document Type :" class="configTypeLabel" />
-                    <Select id="documentType_Id" forceSelection="false" items="{docHITypes>/DocumentTypes}" change="onDocumentTypeSelect" class="sapUiSmallMarginBegin">
-                        <core:Item key="{docHITypes>DocumentNo}" text="{docHITypes>DocumentNo}" />
+                <HBox id="cgcConfig_HBox_DocumentType" class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Label id="cgcConfig_Label_DocumentType" text="Document Type :" class="configTypeLabel" />
+                    <Select id="cgcConfig_Select_DocumentType" forceSelection="false" items="{docHITypes>/DocumentTypes}" change="onDocumentTypeSelect" class="sapUiSmallMarginBegin">
+                        <core:Item id="cgcConfig_Item_Document" key="{docHITypes>DocumentNo}" text="{docHITypes>DocumentNo}" />
                     </Select>
                 </HBox>
             </HBox>
@@ -38,120 +38,117 @@
     </OverflowToolbar>
 
     <!-- Main Page -->
-    <Page id="page" showHeader="false">
-        <ScrollContainer height="auto" vertical="true">
+    <Page id="cgcConfig_Page" showHeader="false">
+        <ScrollContainer id="cgcConfig_ScrollContainer" height="auto" vertical="true">
             <content>
                 <!-- Static Table -->
-                <Table items="{staticModel>/}" id="staticTable" visible="false" growing="true">
+                <Table items="{staticModel>/}" id="cgcConfig_StaticTable" visible="false" growing="true">
                     <infoToolbar>
-                        <OverflowToolbar height="50px">
+                        <OverflowToolbar id="cgcConfig_StaticTable_Toolbar" height="50px">
                             <content>
-                                <Title text="Static Fields"></Title>
+                                <Title id="cgcConfig_StaticTable_Title" text="Static Fields"></Title>
                             </content>
                         </OverflowToolbar>
                     </infoToolbar>
                     <items>
-                        <ColumnListItem type="Active" id="staticItem">
+                        <ColumnListItem type="Active" id="cgcConfig_StaticItem">
                             <cells>
-                                <Text id="staticID1" text="{staticModel>ID}" />
-                                <Text id="staticID2" text="{staticModel>service_parameter}" />
-                                <Input id="_IDStaticInput1" value="{staticModel>label}" liveChange="onStaticLabelUpdate" width="250px"/>
+                                <Text id="cgcConfig_StaticCell_ID" text="{staticModel>ID}" />
+                                <Text id="cgcConfig_StaticCell_ServiceParameter" text="{staticModel>service_parameter}" />
+                                <Input id="cgcConfig_StaticCell_Label" value="{staticModel>label}" liveChange="onStaticLabelUpdate" width="250px"/>
                             </cells>
                         </ColumnListItem>
                     </items>
                     <columns>
-                        <Column id="_IDStaticColumn1">
+                        <Column id="cgcConfig_StaticColumn_ID">
                             <header>
-                                <Label id="_IDStaticLabel6" text="ID" />
+                                <Label id="cgcConfig_StaticColumn_Label_ID" text="ID" />
                             </header>
                         </Column>
-                        <Column id="_IDStaticColumn2">
+                        <Column id="cgcConfig_StaticColumn_ServiceParameter">
                             <header>
-                                <Label id="_IDStaticLabel7" text="Service Parameter" />
+                                <Label id="cgcConfig_StaticColumn_Label_ServiceParameter" text="Service Parameter" />
                             </header>
                         </Column>
-                        <Column id="_IDStaticColun3">
+                        <Column id="cgcConfig_StaticColumn_Label">
                             <header>
-                                <Label id="_IDStaticLab7" text="Label" />
+                                <Label id="cgcConfig_StaticColumn_Label_Label" text="Label" />
                             </header>
                         </Column>
-                        </columns>
+                    </columns>
                     <noData>
-                        <IllustratedMessage id="_IDStaticIllustratedMessage3" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
+                        <IllustratedMessage id="cgcConfig_StaticTable_NoData" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
                     </noData>
                 </Table>
 
                 <!-- Dynamic Table -->
-                <VBox class="vboxmargin" >
-                <Table items="{dynamicModel>/}" id="dynamicTable" visible="false" growing="true">
+                <VBox id="cgcConfig_DynamicTable_VBox" class="vboxmargin">
+                <Table items="{dynamicModel>/}" id="cgcConfig_DynamicTable" visible="false" growing="true">
                     <infoToolbar>
-                        <OverflowToolbar height="50px">
+                        <OverflowToolbar id="cgcConfig_DynamicTable_Toolbar" height="50px">
                             <content>
-                                <Title text="Dynamic Fields"></Title>
+                                <Title id="cgcConfig_DynamicTable_Title" text="Dynamic Fields"></Title>
                             </content>
                         </OverflowToolbar>
                     </infoToolbar>
                     <items>
-                        <ColumnListItem type="Active" id="dynamicItem">
+                        <ColumnListItem type="Active" id="cgcConfig_DynamicItem">
                             <cells>
-                                <CheckBox id="deleteDynamicCheckBox" select="onDeleteDynamicFieldArray" enabled="{path: 'dataModel>flag', formatter: '.checkMandatory'}" />
-                                <Text id="idDynamic" text="{dynamicModel>ID}" visible="false"/>
-                                <Text id="idDynamic2" text="{dynamicModel>service_parameter}" />
-                                <Input id="dynamicIDGenInput" value="{dynamicModel>label}" liveChange="onDynamicLabelUpdate" />
-                                <CheckBox id="_IDDynamicCheckBox2" selected="{dynamicModel>mandatory}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onMandatoryCheckboxChange" />
-                                <CheckBox id="dynamicModelCheckBox" selected="{dynamicModel>visible}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onVisibleCheckboxChange" />
-                                <Select id="comboDynamic"
-                                        selectedKey="{dynamicModel>parameterRelevancy}"
-                                        enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}"
-                                        change="onMandatoryChange">
+                                <CheckBox id="cgcConfig_DynamicCheckbox_Delete" select="onDeleteDynamicFieldArray" enabled="{path: 'dataModel>flag', formatter: '.checkMandatory'}" />
+                                <Text id="cgcConfig_DynamicCell_ID" text="{dynamicModel>ID}" visible="false"/>
+                                <Text id="cgcConfig_DynamicCell_ServiceParameter" text="{dynamicModel>service_parameter}" />
+                                <Input id="cgcConfig_DynamicCell_Label" value="{dynamicModel>label}" liveChange="onDynamicLabelUpdate" />
+                                <CheckBox id="cgcConfig_DynamicCheckbox_Mandatory" selected="{dynamicModel>mandatory}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onMandatoryCheckboxChange" />
+                                <CheckBox id="cgcConfig_DynamicCheckbox_Visible" selected="{dynamicModel>visible}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" select="onVisibleCheckboxChange" />
+                                <Select id="cgcConfig_DynamicSelect_Relevancy" selectedKey="{dynamicModel>parameterRelevancy}" enabled="{path: 'dynamicModel>flag', formatter: '.checkMandatory'}" change="onMandatoryChange">
                                     <items>
-                                        <core:Item id="dynamicCore1" key="Select" text="Select" />
-                                        <core:Item id="dynamicCore2" key="Org Details" text="Org Details" />
-                                        <core:Item id="dynamicCore3" key="Capacity Details" text="Capacity Details" />
+                                        <core:Item id="cgcConfig_DynamicSelect_Item_Select" key="Select" text="Select" />
+                                        <core:Item id="cgcConfig_DynamicSelect_Item_OrgDetails" key="Org Details" text="Org Details" />
+                                        <core:Item id="cgcConfig_DynamicSelect_Item_CapacityDetails" key="Capacity Details" text="Capacity Details" />
                                     </items>
                                 </Select>
                             </cells>
                         </ColumnListItem>
                     </items>
                     <columns>
-                        <Column id="deleteDynamicField" width="4rem" visible="false">
+                        <Column id="cgcConfig_DynamicColumn_Delete" width="4rem" visible="false">
                             <header>
-                                <CheckBox id="selectAllDynamicFields" select="onSelectAllDynamicField" />
+                                <CheckBox id="cgcConfig_DynamicColumn_Checkbox_SelectAll" select="onSelectAllDynamicField" />
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColumn1" visible="false">
+                        <Column id="cgcConfig_DynamicColumn_ID" visible="false">
                             <header>
-                                <Label id="_IDDynamicLabelID" text="ID"/>
+                                <Label id="cgcConfig_DynamicColumn_Label_ID" text="ID"/>
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColumn2">
+                        <Column id="cgcConfig_DynamicColumn_ServiceParameter">
                             <header>
-                                <Label id="_IDDynamicLabel7" text="Service Parameter" />
+                                <Label id="cgcConfig_DynamicColumn_Label_ServiceParameter" text="Service Parameter" />
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColun3">
+                        <Column id="cgcConfig_DynamicColumn_Label">
                             <header>
-                                <Label id="_IDDynamicLab7" text="Label" />
+                                <Label id="cgcConfig_DynamicColumn_Label_Label" text="Label" />
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColun4">
+                        <Column id="cgcConfig_DynamicColumn_Mandatory">
                             <header>
-                                <Label id="_IDDynamicLab8" text="Mandatory" />
+                                <Label id="cgcConfig_DynamicColumn_Label_Mandatory" text="Mandatory" />
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColumn3">
+                        <Column id="cgcConfig_DynamicColumn_Display">
                             <header>
-                                <Label id="_IDDynamicLabel8" text="Display" />
+                                <Label id="cgcConfig_DynamicColumn_Label_Display" text="Display" />
                             </header>
                         </Column>
-                        <Column id="_IDDynamicColumn4">
+                        <Column id="cgcConfig_DynamicColumn_Relevancy">
                             <header>
-                                <Label id="_IDDynamicLabel9" text="Parameter relevancy" />
+                                <Label id="cgcConfig_DynamicColumn_Label_Relevancy" text="Parameter Relevancy" />
                             </header>
                         </Column>
                     </columns>
                     <noData>
-                        <IllustratedMessage id="_IDDynamicIllustratedMessage3" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
+                        <IllustratedMessage id="cgcConfig_DynamicTable_NoData" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table" />
                     </noData>
                 </Table>
                 </VBox>

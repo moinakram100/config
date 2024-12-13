@@ -1,23 +1,23 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Dialog title="Copy Profile" class="sapUiSmallMargin">
-        <VBox class="sapUiContentPadding sapUiSmallMargin">
-            <Label text="Select Profile to Copy:" design="Bold"/>
+    <Dialog id="createProfile_copyServiceProfileDialog" title="Copy Profile" class="sapUiSmallMargin">
+        <VBox id="copyServiceProfileDialogVBox" class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="serviceProfileNameLabel" text="Select Profile to Copy:" design="Bold"/>
             <Select id="selectProfileToCopy" items="{/ServiceProfileMaster}">
                 <core:Item id = "selectedProfile" key="{ID}" text="{serviceProfileName}" />
             </Select>
 
-            <Label  text="Profile Name :" design="Bold"/>
-            <Input  value="{addServiceProfileModel>/profileName}" liveChange="onProfileNameChange" placeholder="Enter field name" />
-            <Label text="Profile Description :" design="Bold"/>
-            <Input value="{addServiceProfileModel>/profileDesc}" liveChange="inputHandler" placeholder="Enter field name description" />
+            <Label id="profileNameLabel"  text="Profile Name :" design="Bold"/>
+            <Input id="profileNameInput"  value="{addServiceProfileModel>/profileName}" liveChange="onProfileNameChange" placeholder="Enter field name" />
+            <Label id="profileDescriptionLabel" text="Profile Description :" design="Bold"/>
+            <Input id="profileDescInput" value="{addServiceProfileModel>/profileDesc}" liveChange="inputHandler" placeholder="Enter field name description" />
             
         </VBox>
         <footer>
-            <OverflowToolbar>
-                <ToolbarSpacer/>
-                <Button type="Accept" text="Save" press="onSaveCopy"/>
-                <Button type="Reject" text="Cancel" press="onCancelCopy"/>
+            <OverflowToolbar id="copyServiceOvewflowTb">
+                <ToolbarSpacer id="copyServiceToolbarS"/>
+                <Button id="onSaveCopyBtn" type="Accept" text="Save" press="onSaveCopy"/>
+                <Button id="onCancelCopyBtn" type="Reject" text="Cancel" press="onCancelCopy"/>
             </OverflowToolbar>
         </footer>
     </Dialog>

@@ -16,7 +16,7 @@ entity ServiceProfileMaster : managed {
         field5             : String;
 }
 
-entity serviceParametersItems :  managed{
+entity serviceParametersItems : managed {
     key ID                     : Integer;
     key serviceParameter       : String;
         serviceParameterDesc   : String;
@@ -27,7 +27,7 @@ entity serviceParametersItems :  managed{
         Level                  : String;
 }
 
-entity serviceProfileParametersItems : managed{
+entity serviceProfileParametersItems : managed {
         checkedParameter       : Boolean;
     key serviceProfileName     : String;
         serviceProfileDesc     : String;
@@ -49,24 +49,32 @@ entity serviceProfileParametersItems : managed{
         Price_Relevant         : Boolean;
 }
 
-entity pathAndFuelMapping : cuid, managed {
-    rowID            : Integer;
-    DeliveryPoint    : String;
-    DpTsSystem       : String;
-    ReDeliveryPoint  : String;
-    RDpTsSystem      : String;
-    InterconnectPath : String;
-    Interconnect     : String;
-    path             : String;
-    FuelPercentage   : Decimal;
+entity pathAndFuelMapping : managed {
+    key DeliveryPoint    : String;
+        DpTsSystem       : String;
+    key ReDeliveryPoint  : String;
+        RDpTsSystem      : String;
+        InterconnectPath : String;
+        Interconnect     : String;
+        path             : String;
+        FuelPercentage   : Decimal;
 }
 
-entity DocumentNoProfileMappingMaster : managed{
-    key ID                 : String;
-        DocumentNo         : String;
+entity AllocationRuleOnLocation : managed {
+    key location            : String(50);
+        schedulingReduction : String(50);
+        technicalBalancing  : String(50);
+        buisnessBalancing   : String(50);
+        validFromAlloc      : Date;
+        validToAlloc        : Date;
+}
+
+entity DocumentNoProfileMappingMaster : managed {
+    
+    key  DocumentNo         : String;
         DocumentDesc       : String;
         ProfileId          : String;
-        serviceProfileName : String;
+    key    serviceProfileName : String;
         serviceProfileDesc : String;
         description        : String;
         field2             : String;
@@ -95,17 +103,16 @@ entity serviceParameterNode : managed {
         rank         : Integer;
 }
 
-entity AllocationLocation : cuid, managed {
-    key mapID               : Integer;
-        location            : String;
-        schedulingReduction : String;
-        technicalBalancing  : String;
-        buisnessBalancing   : String;
+entity AllocationLocation : managed {
+        key location            : String(50);
+        schedulingReduction : String(50);
+        technicalBalancing  : String(50);
+        buisnessBalancing   : String(50);
         validFromAlloc      : Date;
         validToAlloc        : Date;
 }
 
-entity HeaderItem_Config : managed{
+entity HeaderItem_Config : managed {
     key unique                 : UUID;
         ID                     : Integer;
         contractType           : String;
@@ -122,21 +129,21 @@ entity HeaderItem_Config : managed{
 }
 
 
-entity penalties : managed{
-    key ID              : Integer;
-        profileName     : String;
-        paneltyParmeter : String;
-        ezReportId      : String;
+entity penalties : managed {
+    
+    key    profileName     : String;
+    key    paneltyParmeter : String;
+    key   ezReportId      : String;
 }
 
-entity TransportConfig : managed{
+entity TransportConfig : managed {
     key ID           : Integer;
         documentType : array of String;
         side         : array of String;
         exchangeType : String;
 }
 
-entity transportAgreementDetail : managed{
+entity transportAgreementDetail : managed {
     key salesNumber    : String;
         purchaseNumber : String;
         exchangeNumber : String;
@@ -144,44 +151,44 @@ entity transportAgreementDetail : managed{
 
 // PENALITY CALCULATION
 
-entity EzIdTable : managed{
+entity EzIdTable : managed {
     key Snum            : Integer;
         EzID            : String;
         EzIdDescription : String;
 }
 
-entity TableMappings : managed{
-        key ID          :UUID;
-        Snum            :String;
-        key EzID        :String;
-        key Table       :String;
-        SubProcessId    :String;
-        TableDesc       :String;
+entity TableMappings : managed {
+    key ID           : UUID;
+        Snum         : String;
+    key EzID         : String;
+    key Table        : String;
+        SubProcessId : String;
+        TableDesc    : String;
 }
 
-entity FieldMapping : managed{
-    key ID              :UUID;
-    Snum                :String;
-    Key EzID            :String;
-    Table               :String;
-    SubProcessId        :String;
-    key Field           :String;
-    FieldType           :String;
-    FieldID             :String;
-    FieldDesc           :String;
-    selected            :Boolean;
-    display             :Boolean;
-    mandatory           :Boolean;
-    filterfield         :Boolean;
-    Operation           :String;
-    DefaultVal          :String;
-    MappedTable         :String;
-    MappedField         :String;
-    AddiFunction        :String;
-    Formula             :String;
+entity FieldMapping : managed {
+    key ID           : UUID;
+        Snum         : String;
+    key EzID         : String;
+        Table        : String;
+        SubProcessId : String;
+    key Field        : String;
+        FieldType    : String;
+        FieldID      : String;
+        FieldDesc    : String;
+        selected     : Boolean;
+        display      : Boolean;
+        mandatory    : Boolean;
+        filterfield  : Boolean;
+        Operation    : String;
+        DefaultVal   : String;
+        MappedTable  : String;
+        MappedField  : String;
+        AddiFunction : String;
+        Formula      : String;
 }
- 
-entity AddiFunction : managed{
-   key Function :String;
-    FunctionDesc: String;
+
+entity AddiFunction : managed {
+    key Function     : String;
+        FunctionDesc : String;
 }

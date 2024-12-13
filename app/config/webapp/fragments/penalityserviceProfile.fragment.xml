@@ -4,17 +4,17 @@
     xmlns:core="sap.ui.core">
     <SelectDialog
        
-        id="configProfileMap_ValueHelpDialogSrvProf"
+        id="PenalityMapServiceProfileDialog"
         initialFocus="SearchField"
-        noDataText="Loading ..."
+        noDataText="No Service Profile Found"
         title="Select Service Profile"
         search="onServiceProfileValueHelpDialogSearch"
-        liveChange="onServiceProfileValueHelpDialogSearch"
         confirm="onServiceProfileValueHelpClose"
         cancel="onServiceProfileValueHelpCancel"
+        liveChange="onServiceProfileValueHelpDialogSearch"
         items="{/ServiceProfileMaster}">
         <StandardListItem
-            id="configProfileMap_StandardListItem"
+            id="PenalityMapServiceProfileList"
             title="{serviceProfileName}"
             description="{serviceProfileDesc}"     
             iconDensityAware="false"

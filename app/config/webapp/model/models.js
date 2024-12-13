@@ -2,19 +2,43 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/Device"
 ], 
-function (JSONModel, Device) {
-    "use strict";
+    /**
+     * provide app-view type models (as in the first "V" in MVVC)
+     * 
+     * @param {typeof sap.ui.model.json.JSONModel} JSONModel
+     * @param {typeof sap.ui.Device} Device
+     * 
+     * @returns {Function} createDeviceModel() for providing runtime info for the device the UI5 app is running on
+     */
+    function (JSONModel, Device) {
+        "use strict";
 
-    return {
-        /**
-         * Provides runtime information for the device the UI5 app is running on as a JSONModel.
-         * @returns {sap.ui.model.json.JSONModel} The device model.
-         */
-        createDeviceModel: function () {
-            var oModel = new JSONModel(Device);
-            oModel.setDefaultBindingMode("OneWay");
-            return oModel;
+        return {
+            createDeviceModel: function () {
+                var oModel = new JSONModel(Device);
+                oModel.setDefaultBindingMode("OneWay");
+                return oModel;
+        },
+        createExchangeTypeModel: function (oDataModel) {
+ 
+            let aExchangeTypeValueHelpData = [];
+            let oExchangeTypeModel  = new JSONModel()
+            let oBindList = oDataModel.bindList("/xGMSxEXCHGTYPEVH")
+            oBindList.requestContexts().then(aContext => {
+                aContext.forEach(element => {                    
+                    aExchangeTypeValueHelpData.push(element.getObject())
+                });
+            })
+            oExchangeTypeModel.setData(aExchangeTypeValueHelpData);
+            return oExchangeTypeModel
+        },
+
+        createEzReportNavModel:function(){
+            var oSharedModel = new JSONModel({
+                EzID:"",
+                Table:"",
+            });
+            return oSharedModel;
         }
     };
-
 });

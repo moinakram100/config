@@ -2,13 +2,13 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
     <SelectDialog
-        id="docType34"
+        id="PathFuelRedeliveryPointDialog"
         noDataText="Loading ..."
-        title="Select Location"
-        search="onValueHelpDialogSearch"
-        liveChange="onValueHelpDialogSearch"
-        confirm="onValueredivery"
-        cancel="onValueredivery"
+        title="Select Redelivery Location"
+        search="onSearchRedeliveryLocation"
+        liveChange="onSearchRedeliveryLocation"
+        confirm="onRedeliverypointSelection"
+        cancel="onRedeliverypointSelection"
        items="{
             path : '/xGMSxLocPoint_Map',
             parameters : {
@@ -17,7 +17,7 @@
               
             }
         }">
-        <StandardListItem id="_IDGenStanddLtItem13"
+        <StandardListItem id="PathFuelRedeliveryPointList"
             title="{Locid}" 
               description="{Tsyst}"   
             iconDensityAware="false"
@@ -27,21 +27,3 @@
 </core:FragmentDefinition>
 
 
-<!-- <core:FragmentDefinition
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <SelectDialog
-        id="docType34"
-        noDataText="No Products Found"
-        title="Select Location"
-        search="onValueHelpDialogSearch"
-        confirm="onValueredivery"
-        cancel="onValueredivery"
-        items="{/xGMSxLocPoint}">
-        <StandardListItem id="_IDGenStanddLtItem13"
-            title="{Locid}"  
-            iconDensityAware="false"
-            iconInset="false"
-            type="Active" />
-    </SelectDialog>
-</core:FragmentDefinition> -->

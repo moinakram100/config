@@ -5,7 +5,7 @@
     xmlns="sap.m"
 >
     <Page
-        id="page"
+        id="createProfilePage"
         showHeader="false"
     >
         <content>
@@ -13,17 +13,16 @@
                 items="{path: '/ServiceProfileMaster',parameters: {$count: true,$$updateGroupId : 'peopleGroup'}}"
                 id="createProTable"
                 selectionChange="onSelect"
-
                 mode="None"
                 sticky="ColumnHeaders,HeaderToolbar"
             >
                 <headerToolbar>
                     <OverflowToolbar
-                        id="_IDGenOverflowToolbar9"
+                        id="createProfile_overflowToolbar"
                         height="50px"
                     >
                         <Title
-                            id="pageHeader"
+                            id="CreateProfile_PageHeader"
                             text="Service Profile Definition"
                             textAlign="Center"
                         />
@@ -83,20 +82,20 @@
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColu">
+                    <Column id="CreateProfile_IdLabelColumn">
                         <header>
                             <Label
-                                id="_IDGenLl12"
+                                id="CreateProfile_IdLabel"
                                 wrapping="true"
                                 design="Bold"
                                 text="ID"
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColumn2">
+                    <Column id="CreateProfile_ServiceProfileLabelColumn">
                         <header>
                             <Label
-                                id="_IDGenLabel7"
+                                id="CreateProfile_ServiceProfileLabel"
                                 wrapping="true"
                                 design="Bold"
                                 text="Service Profile"
@@ -104,10 +103,10 @@
                         </header>
                     </Column>
 
-                    <Column id="_IDGenColum">
+                    <Column id="CreateProfile_ProfileDescLabelColumn">
                         <header>
                             <Label
-                                id="_IDGenLabe"
+                                id="CreateProfile_ProfileDescLabel"
                                 wrapping="true"
                                 design="Bold"
                                 text="Service Profile Description"
@@ -119,7 +118,7 @@
                     <ColumnListItem
                         type="Navigation"
                         press="onSelectServiceProfile"
-                        id="item0"
+                        id="CreateProfileTableItem"
                     >
                         <cells>
                             <CheckBox
@@ -127,15 +126,15 @@
                                 select="onDeleteArrayProfile"
                             />
                             <Text
-                                id="id2"
+                                id="CreateProfile_id"
                                 text="{ID}"
                             />
                             <Text
-                                id="id1"
+                                id="CreateProfile_serviceProfileName"
                                 text="{serviceProfileName}"
                             />
                             <Text
-                                id="id3"
+                                id="CreateProfile_serviceProfileDesc"
                                 text="{serviceProfileDesc}"
                             />
                         </cells>
@@ -143,7 +142,7 @@
                 </items>
                 <noData>
                     <IllustratedMessage
-                        id="_IDGenIllustratedMessage5"
+                        id="CreateProfile_IllustratedMessage"
                         enableVerticalResponsiveness="true"
                         title="No Data Found"
                         description="There are no items in this Table"

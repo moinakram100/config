@@ -5,7 +5,7 @@
     xmlns="sap.m"
 >
     <Page
-        id="page"
+        id="profileParameterPage"
         showHeader="false"
     >
         <content>
@@ -18,13 +18,11 @@
             >
                 <headerToolbar>
                     <OverflowToolbar
-                        id="_IDGenOverflowToolbar9"
+                        id="profileParameterOverFlow"
                         height="50px"
                     >
                         <content>
-                            <Title
-                                text="{profileModel>/ProfileName} [{profileModel>/ProfileDesc}]"
-                            />
+                            <Title id="profileParameter_profileName" text="{profileModel>/ProfileName} [{profileModel>/ProfileDesc}]"/>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
@@ -42,12 +40,12 @@
                         </header>
                     </Column>
                     <Column
-                        id="colID"
+                        id="ProfileParam_colID"
                         width="7rem"
                     >
                         <header>
                             <Label
-                                id="labelID"
+                                id="ProfileParam_labelID"
                                 wrapping="true"
                                 text="ID"
                             />
@@ -55,127 +53,121 @@
                     </Column>
 
                     <Column
-                        id="_IDGenColumn2"
+                        id="ProfileParam_ServiceParamCol"
                         width="7rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel7"
+                                id="ProfileParam_ServiceParamLabel"
                                 wrapping="true"
                                 text="Service Parameter"
                             />
                         </header>
                     </Column>
 
-                    <!-- <Column id="colParentID" width="7rem">
-                        <header>
-                            <Label id="labelParentID" wrapping="true" text="Parent ID" />
-                        </header>
-                    </Column> -->
-
                     <Column
-                        id="_IDGenColun3"
+                        id="ProfileParam_ContractRelCol"
                         width="7rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLab7"
+                                id="ProfileParam_ContractRelLabel"
                                 wrapping="true"
                                 text="Contract Relevant"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn3"
+                        id="ProfileParam_valueParamCol"
                         width="7rem"
                     >
                         <header>
                             <Label
                                 id="_IDGenLabel8"
                                 wrapping="true"
-                                text="Value Parameter"
+                                text="ProfileParam_valueParamLabel"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn4"
+                        id="ProfileParam_ThresholdRelevanceCol"
                         width="7rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel9"
+                                id="ProfileParam_ThresholdRelevanceLabel"
                                 wrapping="true"
                                 text="Threshold Relevance"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn5"
+                        id="ProfileParam_ThresholdRefCol"
                         width="8rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel10"
+                                id="ProfileParam_ThresholdRefLabel"
                                 wrapping="true"
                                 text="Threshold Reference"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn6"
+                        id="ProfileParam_nomRelevantCol"
                         width="8rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel11"
+                                id="ProfileParam_nomRelevantLabel"
                                 wrapping="true"
                                 text="Nomination Relevant"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn7"
+                        id="ProfileParam_BalancingRelCol"
                         width="8rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel12"
+                                id="ProfileParam_BalancingRelLabel"
                                 wrapping="true"
                                 text="Balancing Relevant"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn8"
+                        id="ProfileParam_allocRelCol"
                         width="8rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel13"
+                                id="ProfileParam_allocRelLabel"
                                 wrapping="true"
                                 text="Allocation Relevant"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn9"
+                        id="ProfileParam_billingRelCol"
                         width="6rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel14"
+                                id="ProfileParam_billingRelLabel"
                                 wrapping="true"
                                 text="Billing Relevant"
                             />
                         </header>
                     </Column>
                     <Column
-                        id="_IDGenColumn10"
+                        id="ProfileParam_penaltyRelCol"
                         width="6rem"
                     >
                         <header>
                             <Label
-                                id="_IDGenLabel15"
+                                id="ProfileParam_penaltyRelLabel"
                                 wrapping="true"
                                 text="Penalty Relevant"
                             />
@@ -185,7 +177,7 @@
                 <items>
                     <ColumnListItem
                         type="Active"
-                        id="item0"
+                        id="ProfileParam_listItem"
                     >
                         <cells>
                             <CheckBox
@@ -193,11 +185,11 @@
                                 selected="{checkedParameter}"
                             />
                             <Text
-                                id="id2"
+                                id="ProfileParam_id2"
                                 text="{ID}"
                             />
                             <Text
-                                id="id1"
+                                id="ProfileParam_servParam"
                                 text="{serviceParameter}"
                             />
                             <!-- <Input id="id3" value="{ParentId}" width="30px"/> -->
@@ -243,7 +235,7 @@
                 </items>
                 <noData>
                     <IllustratedMessage
-                        id="_IDGenIllustratedMessage9"
+                        id="ProfileParam_IllustratedMessage"
                         enableVerticalResponsiveness="true"
                         title="No Data Found"
                         description="There are no items in this Table"

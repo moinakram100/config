@@ -21,7 +21,7 @@ sap.ui.define([
  
             },
  
-            onCreateId:function(){
+            onCreatePenaltyId:function(){
                 this.usedEzIdAndDesc();
                 var oView=this.getView();
                 const addEzIdData = {
@@ -126,7 +126,7 @@ sap.ui.define([
             },
  
             RefreshData: function () {
-                this.getView().byId("ezidtable").getBinding("items").refresh();
+                this.getView().byId("PenaltyIdDefezidtable").getBinding("items").refresh();
             },
  
             saveEZReportId:function(){
@@ -166,7 +166,7 @@ sap.ui.define([
  
             onLastSnum: function () {
                 try {
-                    var oTable = this.getView().byId("ezidtable");
+                    var oTable = this.getView().byId("PenaltyIdDefezidtable");
                     var oItems = oTable.getItems();
  
                     var usedSnums = new Set();
@@ -191,15 +191,15 @@ sap.ui.define([
                 console.log("Next Available ID:", LastSnum);
             },
  
-            onDeleteId: function () {
-                var newId = this.byId("newId");
-                var DeleteLabel = this.byId("deleteIdLabel");
-                var DeleteCheckBox = this.byId("deleteEzIdCheckBox");
-                var confirmDelete = this.byId("deleteIdConfirmBtn")
-                var deleteBtn = this.byId("deleteIdBtn")
-                var cancelBtn = this.byId("cancelIdDeleteBtn")
+            onDeletePenaltyId: function () {
+                var newId = this.byId("PenaltyIdDefnewId");
+                var DeleteLabel = this.byId("PenaltyIdDefdeleteIdLabel");
+                var DeleteCheckBox = this.byId("PenaltyIdDefDeleteEzIdCheckBox");
+                var confirmDelete = this.byId("PenaltyIdDefDeleteIdConfirmBtn")
+                var deleteBtn = this.byId("PenaltyIdDefDeleteIdBtn")
+                var cancelBtn = this.byId("PenaltyIdDefCancelIdDeleteBtn")
  
-                // Toggle Visibility
+                
                 newId.setVisible(!newId.getVisible());
                 DeleteLabel.setVisible(!DeleteLabel.getVisible());
                 DeleteCheckBox.setVisible(!DeleteCheckBox.getVisible());
@@ -208,8 +208,8 @@ sap.ui.define([
                 cancelBtn.setVisible(!cancelBtn.getVisible());
             },
  
-            onCancelIdDeletion: function () {
-                this.onDeleteId();
+            ononPenaltyIdCancelIdDeletion: function () {
+                this.onDeletePenaltyId();
                 this.onCheckBox();
                 this.onNullSelected();
             },
@@ -222,8 +222,8 @@ sap.ui.define([
                 allAssociatedParameters = [];
             },
  
-            onSelectAllId:function(oEvent){
-                var oTable = this.byId("ezidtable");
+            onPenaltySelectAllId:function(oEvent){
+                var oTable = this.byId("PenaltyIdDefezidtable");
                 var oItems = oTable.getItems();
                 var selectAll = oEvent.getParameter("selected");
  
@@ -246,9 +246,9 @@ sap.ui.define([
  
             onCheckBox: function () {
                 var selectedItems = initialDeleteArray.Snum;
-                var oTable = this.byId("ezidtable");
+                var oTable = this.byId("PenaltyIdDefezidtable");
                 var oItems = oTable.getItems();
-                this.getView().byId("selectAllId").setSelected(false);
+                this.getView().byId("PenaltyIdDefCheckboxCol").setSelected(false);
  
                 selectedItems.forEach(function (itemId) {
                     oItems.forEach(function (oItem) {
@@ -309,7 +309,7 @@ sap.ui.define([
             },
  
  
-            onConfirmIdDeletion: function () {
+            onPenaltyIdConfirmIdDeletion: function () {
                 var unfilteredSnum = initialDeleteArray.Snum;
                 var unfilteredID = initialDeleteArray.EzID;
                 var selectedItems = Array.from(new Set(unfilteredSnum));
@@ -359,7 +359,7 @@ sap.ui.define([
                 }
            
                 // Ensure these are always called
-                this.onDeleteId();
+                this.onDeletePenaltyId();
                 this.onCheckBox();
             },
            
@@ -394,7 +394,7 @@ sap.ui.define([
                 this.onNullSelected();
             },
  
-            onSelectEzId:function(oEvent){
+            onSelectPenaltyEzId:function(oEvent){
                 const router = this.getOwnerComponent().getRouter();
                 var data = oEvent.getSource().getBindingContext().getObject();
                 console.log("data",data);

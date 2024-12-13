@@ -12,34 +12,24 @@ sap.ui.define([
      */
     function (Controller, JSONModel, Fragment, Filter, FilterOperator, FilterType, MessageBox) {
         "use strict";
-        var lastID;
-        var initialDeleteArray = {
+        let lastID;
+        let initialDeleteArray = {
             ID: [],
             Name: []
         };
-        var validateNewParameter;
-        var proParameters;
-        let parametersCount
+        let validateNewParameter;
+        let proParameters;
+        let parametersCount;
+        let oView;
  
         return Controller.extend("com.ingenx.config.controller.createParameter", {
             onInit: function () {
-                var oTable = this.byId("parameterTable");
-                oTable.setSticky([sap.m.Sticky.ColumnHeaders, sap.m.Sticky.HeaderToolbar]);
-
-
-                  // getting count of entries
-                  let oModel2 = this.getOwnerComponent().getModel();
-                  let oBindListSPM = oModel2.bindList("/serviceParametersItems");
-              
-                  // Get the total count of all entries
-                  oBindListSPM.requestContexts().then(function(aContexts) {
-                      parametersCount = aContexts.length;
-                      console.log("Total number of entries:", parametersCount);
-                  });
+                oView = this.getView();
+               
             },
             onCreate: function () {
                 this.usedNameAndDesc();
-                var oView = this.getView();
+                oView = this.getView();
                 const addServiceData = {
                     fieldName: "",
                     fieldDesc: "",
@@ -60,16 +50,15 @@ sap.ui.define([
                 };
                 const addParameterModel = new JSONModel(addServiceData);
                 oView.setModel(addParameterModel, "addParameterModel");
-                if (!this._oDialogItem) {
-                    this._oDialogItem = sap.ui.xmlfragment("com.ingenx.config.fragments.addServiceParameter", this);
-                    oView.addDependent(this._oDialogItem);
+                if (!this._configServiceParameter_oDialog) {
+                    this._configServiceParameter_oDialog = sap.ui.xmlfragment("com.ingenx.config.fragments.addServiceParameter", this);
+                    oView.addDependent(this._configServiceParameter_oDialog);
                 }
-                this._oDialogItem.open();
+                this._configServiceParameter_oDialog.open();
             },
 
             onComboBoxChange: function (oEvent) {
-                var selectedKey = oEvent.getParameter("selectedItem").getKey();
-                var oView = this.getView();
+                let selectedKey = oEvent.getParameter("selectedItem").getKey();
                 oView.getModel("addParameterModel").setProperty("/selectedFieldType", selectedKey);
                 oView.getModel("addParameterModel").setProperty("/fieldLength", "");
                 if (selectedKey !== 'List') {
@@ -79,25 +68,25 @@ sap.ui.define([
             },
  
             oncancelNewParameter: function () {
-                this._oDialogItem.close();
+                this._configServiceParameter_oDialog.close();
             },
 
             inputHandler: function(oEvent) {
-                var oInput = oEvent.getSource();
-                var sValue = oInput.getValue();           
-                var sValidatedValue = sValue.replace(/[^a-zA-Z0-9\-_+\.\/ ]/g, '');           
-                var capitalizeWords = function(value) {
+                let oInput = oEvent.getSource();
+                let sValue = oInput.getValue();           
+                let sValidatedValue = sValue.replace(/[^a-zA-Z0-9\-_+\.\/ ]/g, '');           
+                let capitalizeWords = function(value) {
                     return value.replace(/\b\w/g, function(char) {
                         return char.toUpperCase();
                     });
                 };
-                var sCapitalizedValue = capitalizeWords(sValidatedValue);
+                let sCapitalizedValue = capitalizeWords(sValidatedValue);
                 oInput.setValue(sCapitalizedValue);
               },  
 
               onStringLengthChange: function(oEvent) {
-                var oInput = oEvent.getSource();
-                var iValue = parseInt(oInput.getValue(), 10);               
+                let oInput = oEvent.getSource();
+                let iValue = parseInt(oInput.getValue(), 10);               
                 if (iValue > 30) {
                     sap.m.MessageToast.show("The maximum allowed value is 30.");
                     oInput.setValue(30);
@@ -105,22 +94,22 @@ sap.ui.define([
             },
  
             onAddListItem: function () {
-                var oView = this.getView();
-                var listValues = oView.getModel("addParameterModel").getProperty("/listValues");
+    
+                let listValues = oView.getModel("addParameterModel").getProperty("/listValues");
                 listValues.push({ value: "" });
                 oView.getModel("addParameterModel").setProperty("/listValues", listValues);
             },
  
-            // LAST ID
+            //  Handler function to determine the next available smallest unused ID
             onLastID: function (oEvent) {
                 try {
-                    var oTable = this.getView().byId("parameterTable");
-                    var oItems = oTable.getItems();
+                    let oTable = this.getView().byId("parameterTable");
+                    let oItems = oTable.getItems();
  
-                    var usedIDs = new Set();
+                    let usedIDs = new Set();
  
                     oItems.forEach(function (oItem) {
-                        var currentID = parseInt(oItem.getCells()[1].getText(), 10);
+                        let currentID = parseInt(oItem.getCells()[1].getText(), 10);
                         if (!isNaN(currentID)) {
                             usedIDs.add(currentID);
                         }
@@ -139,27 +128,12 @@ sap.ui.define([
  
                 console.log("Next Available ID:", lastID);
             },
-
-            onFieldNameChange: function(oEvent) {
-                var oInput = oEvent.getSource();
-                var sValue = oInput.getValue();
-                
-                // Regular expression to allow only alphanumeric characters, dots, dashes, and spaces
-                var sValidatedValue = sValue.replace(/[^a-zA-Z0-9 .-]/g, '');
-                
-                // Automatically capitalize the entire string
-                var sCapitalizedValue = sValidatedValue.toUpperCase();
-                
-                // Set the corrected and capitalized value back to the input field
-                oInput.setValue(sCapitalizedValue);
-            
-            },  
- 
+            // function to determine already Used name and description for validating before creating new parameter
             usedNameAndDesc: function () {
-                var that = this;
+                let that = this;
  
-                var loadDataPromise = new Promise(function (resolve, reject) {
-                    var usedParameterDataModel = new sap.ui.model.json.JSONModel();
+                let loadDataPromise = new Promise(function (resolve, reject) {
+                    let usedParameterDataModel = new sap.ui.model.json.JSONModel();
                     that.getView().setModel(usedParameterDataModel, "usedParameterDataModel");
                     let oModel = that.getOwnerComponent().getModel();
                     let oBindList = oModel.bindList("/serviceParametersItems");
@@ -169,7 +143,7 @@ sap.ui.define([
                             proParameters.push(oContext.getObject());
                         });
                         usedParameterDataModel.setData(proParameters);
-                        var usedParameterModelData = that.getView().getModel("usedParameterDataModel").getData();
+                        let usedParameterModelData = oView.getModel("usedParameterDataModel").getData();
                         validateNewParameter = usedParameterModelData.map(function (obj) {
                             return {
                                 ID: obj.ID,
@@ -182,22 +156,36 @@ sap.ui.define([
                     });
                 });
             },
+            reusableMessageToast : function ( msg ){
+                sap.m.MessageToast.show( msg , {
+                    duration: 3000,
+                    width: "15em",
+                    my: "center top",
+                    at: "center top",
+                    of: window,
+                    offset: "30 30",
+                    onClose: function () {
+                        console.log("Message toast closed");
+                    }
+                });
+            },
  
- 
+           // Handler function to  create new service parameter
             onsaveNewParameter: function () {
-                var oView = this.getView();
-                var oModels = oView.getModel("addParameterModel");
-                var addServicedata = this.getView().getModel("addParameterModel").getData();
-                var listValues = oModels.getProperty("/listValues");
+              
+                let oModels = oView.getModel("addParameterModel");
+                let addServicedata = this.getView().getModel("addParameterModel").getData();
+                let listValues = oModels.getProperty("/listValues");
+                let fieldLength = null;
                 if (addServicedata.fieldLength) {
-                    var fieldLength = parseInt(addServicedata.fieldLength)
+                    fieldLength = parseInt(addServicedata.fieldLength)
                 } else {
-                    var fieldLength = 0;
+                     fieldLength = 0;
                 }
- 
+                // Handler Function to calculate last created ID
                 this.onLastID();
  
-                var oEntryDataServiceParameterMapping = {
+                let oEntryDataServiceParameterMapping = {
                     ID: parseInt(lastID, 10),
                     serviceParameter: addServicedata.fieldName.trim(),
                     serviceParameterDesc: addServicedata.fieldDesc.trim(),
@@ -208,36 +196,16 @@ sap.ui.define([
                 };
  
                 if (oEntryDataServiceParameterMapping.serviceParameter === '' || oEntryDataServiceParameterMapping.serviceParameterDesc === '') {
-                    sap.m.MessageToast.show("Input fields cannot be blank.", {
-                        duration: 3000,
-                        width: "15em",
-                        my: "center top",
-                        at: "center top",
-                        of: window,
-                        offset: "30 30",
-                        onClose: function () {
-                            console.log("Message toast closed");
-                        }
-                    });
+                   this.reusableMessageToast( "Input fields cannot be blank.");
                     console.log("serviceParameter or serviceParameterDesc cannot be null");
                     return;
                 } else {
-                    var isDuplicateParameter = validateNewParameter.some(function (entry) {
+                    let isDuplicateParameter = validateNewParameter.some(function (entry) {
                         return entry.serviceParameter.toLowerCase() === oEntryDataServiceParameterMapping.serviceParameter.toLowerCase() || entry.serviceParameterDesc.toLowerCase() === oEntryDataServiceParameterMapping.serviceParameterDesc.toLowerCase();
                     });
  
                     if (isDuplicateParameter) {
-                        sap.m.MessageToast.show("Parameter or Description already exists.", {
-                            duration: 3000,
-                            width: "15em",
-                            my: "center top",
-                            at: "center top",
-                            of: window,
-                            offset: "30 30",
-                            onClose: function () {
-                                console.log("Message toast closed");
-                            }
-                        });
+                        this.reusableMessageToast( "Parameter or Description already exists.");
                         console.log("Duplicate serviceParameter or serviceParameterDesc found");
                         return;
                     } else {
@@ -246,30 +214,47 @@ sap.ui.define([
                     }
                 }
  
- 
-                let oModel = this.getView().getModel();
-                let oBindListSPM = oModel.bindList("/serviceParametersItems");
-                oBindListSPM.create(oEntryDataServiceParameterMapping);
+                try {
+                    let oModel = oView.getModel();
+                    let oBindListSPM = oModel.bindList("/serviceParametersItems");
+                
+                    // Create entry in the service parameters
+                    oBindListSPM.create(oEntryDataServiceParameterMapping);
+                
+                    // Attach event listener for create completion
+                    oBindListSPM.attachCreateCompleted((p) => {
+                        let p1 = p.getParameters();
+                        if (p1.success) {
+                            sap.m.MessageToast.show("Service Parameter Successfully created.");
+                        } else {
+                            sap.m.MessageToast.show(p1.context.oModel.mMessages[""][0].message);
+                        }
+                    });
+                } catch (error) {
+                    sap.m.MessageToast.show("An error occurred while creating the service parameter.");
+                    console.error(error.message);
+                }
+                
                 parametersCount++
-                this._oDialogItem.close();
+                this._configServiceParameter_oDialog.close();
                 this.RefreshData();
             },
  
-            // REFRESH
+            // Refreshing  Table  Binding
  
             RefreshData: function () {
-                this.getView().byId("parameterTable").getBinding("items").refresh();
+                oView.byId("parameterTable").getBinding("items").refresh();
             },
  
-            // BUTTONS
+            // function  on press of Delete button
  
-            onDelete: function () {
-                var createParam = this.byId("createParameterBtn");
-                var oDeleteLabel = this.byId("deleteLabel");
-                var oDeleteCheckBox = this.byId("deleteCheckBox");
-                var confirmDelete = this.byId("deleteConfirmBtn")
-                var deleteParamBtn = this.byId("deleteParameterBtn")
-                var cancelBtn = this.byId("cancelDeleteBtn")
+            onDeletePressToggle: function () {
+                let createParam = this.byId("createParameterBtn");
+                let oDeleteLabel = this.byId("deleteLabel");
+                let oDeleteCheckBox = this.byId("ServiceParameter_deleteCheckBox");
+                let confirmDelete = this.byId("deleteConfirmBtn")
+                let deleteParamBtn = this.byId("deleteParameterBtn")
+                let cancelBtn = this.byId("cancelDeleteBtn")
  
                 // Toggle Visibility
                 createParam.setVisible(!createParam.getVisible());
@@ -281,8 +266,8 @@ sap.ui.define([
             },
  
             onCancelDeletion: function () {
-                this.onDelete();
-                this.onRCheckBox();
+                this.onDeletePressToggle();
+                this.onResetCheckBox();
                 this.onNullSelectedParameters();
             },
  
@@ -292,16 +277,15 @@ sap.ui.define([
                     Name: []
                 };
             },
- 
-            onRCheckBox: function () {
-                var selectedItems = initialDeleteArray.ID;
-                var oTable = this.byId("parameterTable");
-                var oItems = oTable.getItems();
-                this.getView().byId("selectAll").setSelected(false);
+            onResetCheckBox: function () {
+                let selectedItems = initialDeleteArray.ID;
+                let oTable = this.byId("parameterTable");
+                let oItems = oTable.getItems();
+                oView.byId("selectAll").setSelected(false);
  
                 selectedItems.forEach(function (itemId) {
                     oItems.forEach(function (oItem) {
-                        var sRowId = oItem.getCells()[1].getText();
+                        let sRowId = oItem.getCells()[1].getText();
  
                         if (sRowId === itemId) {
                             oItem.getCells()[0].setSelected(false);
@@ -310,26 +294,24 @@ sap.ui.define([
                 });
             },
  
-            onSelectAll: function (oEvent) {
-                var oTable = this.byId("parameterTable");
-                var oItems = oTable.getItems();
-                var selectAll = oEvent.getParameter("selected");
+            onSelectAllCheckBoxes: function (oEvent) {
+                let oTable = this.byId("parameterTable");
+                let oItems = oTable.getItems();
+                let selectAll = oEvent.getParameter("selected");
 
                 console.log("slall", selectAll)
-                console.log("initialProDeleteArray",initialDeleteArray)
-                
+                console.log("initialProDeleteArray",initialDeleteArray);
 
                 if (!selectAll) {
                     initialDeleteArray.ID = [];
                     initialDeleteArray.Name = [];
                 }
-
             
-                for (var i = 0; i < oItems.length; i++) {
-                    var oItem = oItems[i];
-                    var oCheckBox = oItem.getCells()[0];
-                    var sID = oItem.getCells()[1].getText();
-                    var sName = oItem.getCells()[3].getText();
+                for (let i = 0; i < oItems.length; i++) {
+                    let oItem = oItems[i];
+                    let oCheckBox = oItem.getCells()[0];
+                    let sID = oItem.getCells()[1].getText();
+                    let sName = oItem.getCells()[3].getText();
  
                     if (oCheckBox instanceof sap.m.CheckBox) {
                         oCheckBox.setSelected(selectAll);
@@ -342,11 +324,10 @@ sap.ui.define([
                 }
             },
  
+            onSelectCheckBox: function (oEvent) {
+                let selectedParameters = oEvent.getSource().getParent().getAggregation("cells");
  
-            onDeleteArray: function (oEvent) {
-                var selectedParameters = oEvent.getSource().getParent().getAggregation("cells");
- 
-                for (var i = 0; i < selectedParameters.length; i++) {
+                for (let i = 0; i < selectedParameters.length; i++) {
                     if (i === 0) {
                         let checkbox = selectedParameters[i];
                         let parameters = selectedParameters[i + 1].getProperty("text");
@@ -358,7 +339,7 @@ sap.ui.define([
                                 initialDeleteArray.Name.push(parameterName);
                             }
                         } else {
-                            var index = initialDeleteArray.ID.indexOf(parameters);
+                            let index = initialDeleteArray.ID.indexOf(parameters);
                             if (index !== -1) {
                                 initialDeleteArray.ID.splice(index, 1);
                                 initialDeleteArray.Name.splice(index, 1);
@@ -367,8 +348,8 @@ sap.ui.define([
                     }
                 }
 
-                 // handling select all checkbox  toggel
-                 var selectAllCheckbox = this.byId("selectAll");
+                 // handling select all checkbox  toggle
+                 let selectAllCheckbox = this.byId("selectAll");
                  console.log("parametersCount",parametersCount)
                  console.log("initialDeleteArray",initialDeleteArray.ID.length)
                  if (parametersCount !== initialDeleteArray.ID.length) {
@@ -386,23 +367,23 @@ sap.ui.define([
                 this.RefreshData();
             },
  
- 
+           // Handler function to  take final confirmation  of user before deleting
             onConfirmDeletion: function () {
-                var unfilteredItems = initialDeleteArray.ID;
-                var selectedItems = Array.from(new Set(unfilteredItems));
+                let unfilteredItems = initialDeleteArray.ID;
+                let selectedItems = Array.from(new Set(unfilteredItems));
  
                 if (selectedItems.length > 0) {
                     sap.m.MessageBox.confirm("Are you sure you want to delete the selected parameters?", {
                         title: "Confirmation",
                         onClose: function (oAction) {
                             if (oAction === sap.m.MessageBox.Action.OK) {
-                                var oTable = this.byId("parameterTable");
-                                var oItems = oTable.getItems();
+                                let oTable = this.byId("parameterTable");
+                                let oItems = oTable.getItems();
                                 this.parameterVanish();
  
                                 selectedItems.forEach(function (itemId) {
                                     oItems.forEach(function (oItem) {
-                                        var sRowId = oItem.getCells()[1].getText();
+                                        let sRowId = oItem.getCells()[1].getText();
  
                                         if (sRowId === itemId) {
                                             oItem.getBindingContext().delete().catch(function (oError) {
@@ -414,8 +395,11 @@ sap.ui.define([
                                         }
                                     });
                                 });
+                                sap.m.MessageToast.show("Items Successfully deleted.")
+                                this.onDeletePressToggle();
+                                this.onResetCheckBox();
                             } else if (oAction === sap.m.MessageBox.Action.CANCEL) {
-                                this.onRCheckBox();
+                                this.onResetCheckBox();
                                 this.onNullSelectedParameters();
                             }
                         }.bind(this)
@@ -423,18 +407,17 @@ sap.ui.define([
                 } else {
                     MessageBox.information("Please select at least one parameter for deletion.");
                 }
-                this.onDelete();
-                this.onRCheckBox();
+               
             },
  
-            // DELETE PARAMETERS FROM THE PROFILE PARAMETERS TABLE
+            // DELETE PARAMETERS FROM THE SERVICE PARAMETERS TABLE
  
             parameterVanish: function () {
-                var unfilteredItems = initialDeleteArray.Name;
-                var selectedItems = Array.from(new Set(unfilteredItems));
+                let unfilteredItems = initialDeleteArray.Name;
+                let selectedItems = Array.from(new Set(unfilteredItems));
                 console.log("Selected Items:", selectedItems);
-                var that = this;
-                let oModel = that.getView().getModel();
+            
+                let oModel = oView.getModel();
  
                 selectedItems.forEach(function (parameter) {
                     let oBindList = oModel.bindList("/serviceProfileParametersItems");

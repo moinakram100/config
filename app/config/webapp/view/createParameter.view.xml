@@ -3,149 +3,186 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:tnt="sap.tnt"
 >
     <Page
-        id="page"
+        id="configServiceParameter_page"
         showHeader="false"
     >
-        <content>
-            <Table
-                items="{/serviceParametersItems}"
-                id="parameterTable"
-                selectionChange="onSelect"
-                mode="None"
+        <tnt:ToolHeader
+            id="configServiceParameter_ToolHeader"
+            class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop"
+        >
+            <ToolbarSpacer
+                id="configServiceParameter_ToolbarSpacer1"
+                width="15px"
+            />
+            <Title
+                text="Service Parameter Definition"
+                wrapping="true"
+                id="configServiceParameter_Title"
+                level="H3"
+            />
+            <ToolbarSpacer id="configServiceParameter_ToolbarSpacer2" />
+            <HBox id="configServiceParameter_HBox1">
+                <Button
+                    id="createParameterBtn"
+                    text="Create"
+                    width="100px"
+                    press="onCreate"
+                    type="Emphasized"
+                    visible="true"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    id="deleteParameterBtn"
+                    text="Delete"
+                    width="100px"
+                    press="onDeletePressToggle"
+                    type="Emphasized"
+                    visible="true"
+                />
+                <Button
+                    id="deleteConfirmBtn"
+                    text="Confirm"
+                    width="100px"
+                    press="onConfirmDeletion"
+                    type="Emphasized"
+                    visible="false"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    id="cancelDeleteBtn"
+                    text="Cancel"
+                    width="100px"
+                    press="onCancelDeletion"
+                    type="Emphasized"
+                    visible="false"
+                />
+            </HBox>
+        </tnt:ToolHeader>
+
+        <l:VerticalLayout
+            id="configServiceParameter_VerticalLayout1"
+            width="100%"
+            
+        >
+            <l:BlockLayout
+                id="configServiceParameter_BlockLayout1"
+                background="Dashboard"
+                
             >
-                <headerToolbar>
-                    <OverflowToolbar
-                        id="_IDGenOverflowToolbar9"
-                        height="50px"
-                    >
-                        <Title
-                            id="pageHeader"
-                            text="Service Parameter Definition"
-                            textAlign="Center"
-                        />
-                        <ToolbarSpacer />
-                        <Button
-                            id="createParameterBtn"
-                            text="Create"
-                            width="100px"
-                            press="onCreate"
-                            type="Emphasized"
-                            visible="true"
-                        />
-                        <Button
-                            id="deleteParameterBtn"
-                            text="Delete"
-                            width="100px"
-                            press="onDelete"
-                            type="Emphasized"
-                            visible="true"
-                        />
-                        <Button
-                            id="deleteConfirmBtn"
-                            text="Confirm"
-                            width="100px"
-                            press="onConfirmDeletion"
-                            type="Emphasized"
-                            visible="false"
-                        />
-                        <Button
-                            id="cancelDeleteBtn"
-                            text="Cancel"
-                            width="100px"
-                            press="onCancelDeletion"
-                            type="Emphasized"
-                            visible="false"
-                        />
-                    </OverflowToolbar>
-                </headerToolbar>
-                <columns>
-                    <Column
-                        id="deleteLabel"
-                        width="3rem"
-                        visible="false"
-                    >
-                        <header>
-                            <CheckBox
-                                id="selectAll"
-                                select="onSelectAll"
-                            />
-                        </header>
-                    </Column>
-                    <Column
-                        id="_IDGenColu"
-                        width="4rem"
-                    >
-                        <header>
-                            <Label
-                                id="_IDGenLl12"
-                                wrapping="true"
-                                text="ID"
-                            />
-                        </header>
-                    </Column>
-                    <Column
-                        id="_colLevel"
-                        width="3rem"
-                    >
-                        <header>
-                            <Label
-                                id="_IDLevel"
-                                wrapping="true"
-                                text="Allocation Level"
-                            />
-                        </header>
-                    </Column>
-                    <Column
-                        id="_IDGenColumn2"
-                        width="6rem"
-                    >
-                        <header>
-                            <Label
-                                id="_IDGenLabel7"
-                                wrapping="true"
-                                text="Service Parameter"
-                            />
-                        </header>
-                    </Column>
-                </columns>
-                <items>
-                    <ColumnListItem
-                        type="Active"
-                        id="item0"
-                    >
-                        <cells>
-                            <CheckBox
-                                id="deleteCheckBox"
-                                select="onDeleteArray"
-                            />
-                            <Text
-                                id="id2"
-                                text="{ID}"
-                            />
-                            <Input
-                                id="_IDGenInput2"
-                                value="{Level}"
-                                width="40px"
-                                type="Number"
-                            />
-                            <Text
-                                id="id1"
-                                text="{serviceParameter}"
-                            />
-                        </cells>
-                    </ColumnListItem>
-                </items>
-                <noData>
-                    <IllustratedMessage
-                        id="_IDGenIllustratedMessage4"
-                        enableVerticalResponsiveness="true"
-                        title="No Data Found"
-                        description="There are no items in this Table"
-                    />
-                </noData>
-            </Table>
-        </content>
+          
+                <l:BlockLayoutRow id="configServiceParameter_BlockLayoutRow1">
+                    <l:BlockLayoutCell
+                        id="configServiceParameter_BlockLayoutCell1"
+                        width="90%"
+
+                    >   
+                    <ScrollContainer id="configServiceParameter_scrollcont1"  width="100%"
+                height="calc(100vh - 100px)"
+                horizontal="false"
+                vertical="true">
+                        <Table
+                            items="{/serviceParametersItems}"
+                            id="parameterTable"
+                            selectionChange="onSelect"
+                            mode="None"
+                            sticky="ColumnHeaders"
+                        
+                        >
+                           
+                            <columns>
+                                <Column
+                                    id="deleteLabel"
+                                    width="3rem"
+                                    visible="false"
+                                >
+                                    <header>
+                                        <CheckBox
+                                            id="selectAll"
+                                            select="onSelectAllCheckBoxes"
+                                        />
+                                    </header>
+                                </Column>
+                                <Column
+                                    id="configServiceParameter_ColID"
+                                    width="4rem"
+                                >
+                                    <header>
+                                        <Label
+                                            id="configServiceParameter_Label1"
+                                            wrapping="true"
+                                            text="ID"
+                                        />
+                                    </header>
+                                </Column>
+                                <Column
+                                    id="configServiceParameter_ColAllocationLevel"
+                                    width="3rem"
+                                >
+                                    <header>
+                                        <Label
+                                            id="configServiceParameter_Label2"
+                                            wrapping="true"
+                                            text="Allocation Level"
+                                        />
+                                    </header>
+                                </Column>
+                                <Column
+                                    id="configServiceParameter_Col3"
+                                    width="6rem"
+                                >
+                                    <header>
+                                        <Label
+                                            id="configServiceParameter_Label3"
+                                            wrapping="true"
+                                            text="Service Parameter"
+                                        />
+                                    </header>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    type="Active"
+                                    id="configServiceParameter_ColListItem1"
+                                >
+                                    <cells>
+                                        <CheckBox
+                                            id="ServiceParameter_deleteCheckBox"
+                                            select="onSelectCheckBox"
+                                        />
+                                        <Text
+                                            id="configServiceParameter_Text1"
+                                            text="{ID}"
+                                        />
+                                        <Input
+                                            id="configServiceParameter_Input1"
+                                            value="{Level}"
+                                            width="40px"
+                                            type="Number"
+                                        />
+                                        <Text
+                                            id="configServiceParameter_Text2"
+                                            text="{serviceParameter}"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <noData>
+                                <IllustratedMessage
+                                    id="configServiceParameter_IllustratedMessage1"
+                                    enableVerticalResponsiveness="true"
+                                    title="No Data Found"
+                                    description="There are no items in this Table"
+                                />
+                            </noData>
+                        </Table>
+                    </ScrollContainer>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
     </Page>
 </mvc:View>

@@ -2,26 +2,27 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
     <SelectDialog
-        id="configProfileMap_Dialog_DocTypeKF"
+        id="configProfileMap_DialogdocTypeLP"
         noDataText="Loading ..."
         initialFocus="SearchField"
         title="Select Document Type"
-         liveChange=".onFilterDocTypeDialog"
-        confirm="onValueHelpDialogPurchaseClose"
+        liveChange=".onFilterDocTypeDialog"
+        confirm="onValueHelpDialogSalesClose"
         cancel="onValueHelpDialogCancel"
-         items="{
+           items="{
             path: '/xGMSxContractType',
             parameters : {
                 $$operationMode : 'Server',
-                $filter : 'Kopgr eq \'K\' or Kopgr eq \'F\''
+                $filter : 'Kopgr	 eq \'LP\''
               
-            }  
+            }
+           
          
         }">
-        <StandardListItem id="configProfileMap_StandardListItemKF"
+        <StandardListItem id="configProfileMap_StandardListItemLP"
             title="{Auart}"
-            description="{Description}"
-            info="{Kopgr}"        
+            description="{Description}"  
+            info="{Kopgr}"   
             iconDensityAware="false"
             iconInset="false"
             type="Active" />

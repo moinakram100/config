@@ -1,57 +1,57 @@
 <mvc:View controllerName="com.ingenx.config.controller.createEzID"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page showHeader="false">
+    <Page id="PenaltyIdDefinationPage" showHeader="false">
         <content>
-            <Table id="ezidtable" items="{path: '/EzIdTable'}" selectionChange="onSelect" mode="None" sticky="ColumnHeaders,HeaderToolbar">
+            <Table id="PenaltyIdDefezidtable" items="{path: '/EzIdTable'}" selectionChange="onSelect" mode="None" sticky="ColumnHeaders,HeaderToolbar">
                 <headerToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar9" height="40px">
+                    <OverflowToolbar id="PenaltyIdDefOverflowToolbar" height="40px">
                         <Title
-                            id="_IDGenTitle1"
+                            id="PenaltyIdDefTitle"
                             text="Penalty IDs"
                             textAlign="Center">
                         </Title>
-                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                        <Button id="newId" width="100px" text="Create" press="onCreateId" type="Emphasized" visible="true"/>
-                        <Button id="deleteIdBtn" text="Delete" width="100px" press="onDeleteId" type="Emphasized" visible="true"/>
-                        <Button id="deleteIdConfirmBtn" text="Confirm" width="100px" press="onConfirmIdDeletion" type="Emphasized" visible="false"/>
-                        <Button id="cancelIdDeleteBtn" text="Cancel" width="100px" press="onCancelIdDeletion" type="Emphasized" visible="false"/>
+                        <ToolbarSpacer id="PenaltyIdDefToolbarSpacer" />
+                        <Button id="PenaltyIdDefnewId" width="100px" text="Create" press="onCreatePenaltyId" type="Emphasized" visible="true"/>
+                        <Button id="PenaltyIdDefDeleteIdBtn" text="Delete" width="100px" press="onDeletePenaltyId" type="Emphasized" visible="true"/>
+                        <Button id="PenaltyIdDefDeleteIdConfirmBtn" text="Confirm" width="100px" press="onPenaltyIdConfirmIdDeletion" type="Emphasized" visible="false"/>
+                        <Button id="PenaltyIdDefCancelIdDeleteBtn" text="Cancel" width="100px" press="ononPenaltyIdCancelIdDeletion" type="Emphasized" visible="false"/>
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>  
-                    <Column   id="deleteIdLabel" width="6rem" visible="false">
+                    <Column   id="PenaltyIdDefdeleteIdLabel" width="6rem" visible="false">
                         <header>
-                            <CheckBox id="selectAllId" select="onSelectAllId"/>
+                            <CheckBox id="PenaltyIdDefCheckboxCol" select="onPenaltySelectAllId"/>
                         </header>
                     </Column>
-                    <Column >
+                    <Column id ="PenaltyIdDefSnoCol" >
                         <header>
-                            <Label  wrapping="true" design="Bold" text="S.No" />
+                            <Label id ="PenaltyIdDefSnolabel" wrapping="true" design="Bold" text="S.No" />
                         </header>
                     </Column>
-                    <Column >
+                    <Column id ="PenaltyIdDefIdCol" >
                         <header>
-                            <Label  wrapping="true" design="Bold" text="Penalty ID" />
+                            <Label id ="PenaltyIdDefIdLabel"  wrapping="true" design="Bold" text="Penalty ID" />
                         </header>
                     </Column>
-                     <Column >
+                     <Column  id="PenaltyIdDefDescCol">
                         <header>
-                            <Label  wrapping="true" design="Bold" text="Description" />
+                            <Label id="PenaltyIdDefDescLabel" wrapping="true" design="Bold" text="Description" />
                         </header>
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem  press="onSelectEzId" id="item" type="Navigation">
+                    <ColumnListItem  press="onSelectPenaltyEzId" id="PenaltyIdDefColoumnlistitem" type="Navigation">
                         <cells>
-                            <CheckBox id="deleteEzIdCheckBox" select="onDeleteArrayEzId"/>
-                            <Text id="id1" text="{Snum}" />
-                            <Text id="id2" text="{EzID}" />
-                            <Text id="id3" text="{EzIdDescription}" />  
+                            <CheckBox id="PenaltyIdDefDeleteEzIdCheckBox" select="onDeleteArrayEzId"/>
+                            <Text id="PenaltyIdDefSno" text="{Snum}" />
+                            <Text id="PenaltyIdDefEzId" text="{EzID}" />
+                            <Text id="PenaltyIdDefDescription" text="{EzIdDescription}" />  
                         </cells>
                     </ColumnListItem>
                 </items>
                 <noData>
-                    <IllustratedMessage id="_IDGenIllustratedMessage11" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+                    <IllustratedMessage id="PenaltyIdDefIllustratedMessage" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
                 </noData>
             </Table>
         </content>

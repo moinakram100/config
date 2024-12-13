@@ -1,119 +1,118 @@
 <mvc:View controllerName="com.ingenx.config.controller.pathFuel"
   xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
   xmlns="sap.m" xmlns:core="sap.ui.core">
-   <Page id="page" showHeader="false">
-  <OverflowToolbar id="_IDGenOverflowToolbar9" height="50px" >
+ <Page id="PathFuelpage" showHeader="false">
+  <OverflowToolbar id="PathfuelToolbar" height="50px" >
       <Title
-          id="pageHeader"
+          id="PathFuelHeader"
           text="Path &amp; Fuel"
           textAlign="Center"
           >
       </Title>
-      <ToolbarSpacer />
-      <Button id="addPathBtn" text="Create" width="100px" press="onAddPath" type="Emphasized" visible="true"/>
-      <Button id="canAddBtn" text="Cancel" width="100px" press="onCancelAddPath" type="Emphasized" visible="false"/>
-      <Button id="deletePathBtn" text="Delete" width="100px" press="onDelPath" type="Emphasized" visible="true"/>
-      <Button id="delPathConfirm" text="Confirm" width="100px" press="onConfirmPath" type="Emphasized" visible="false"/>
-      <Button id="canPathDelete" text="Cancel" width="100px" press="onCancelDelPath" type="Emphasized" visible="false"/>
+      <ToolbarSpacer id="PathFuelToolbarSpacer"  />
+      <Button id="PathFueladdPathBtn" text="Create" width="100px" press="onAddPath" type="Emphasized" visible="true"/>
+      <Button id="PathFuelcancelAddBtn" text="Cancel" width="100px" press="onCancelAddPath" type="Emphasized" visible="false"/>
+      <Button id="PathFueldeletePathBtn" text="Delete" width="100px" press="onDeletePath" type="Emphasized" visible="true"/>
+      <Button id="PathFueldelPathConfirm" text="Confirm" width="100px" press="onConfirmDeletePath" type="Emphasized" visible="false"/>
+      <Button id="PathFuelcancelPathDelete" text="Cancel" width="100px" press="onCancelDelPath" type="Emphasized" visible="false"/>
   </OverflowToolbar>
  
   <content>
-  <Table id="viewPathtable" items="{/pathAndFuelMapping}" mode="None">  
+  <Table id="PathFuelviewPathtable" items="{/pathAndFuelMapping}" mode="None" >  
  
       <columns>
-        <Column id="deletePathLabel" width="6rem" visible="false">
+        <Column id="PathFueldeletePathLabel" width="6rem" visible="false">
             <header>
-                <CheckBox id="selectAllPath" select="onSelectAllPath"/>
+                <CheckBox id="PathFuelselectAllPath" select="onSelectAllPath"/>
             </header>
         </Column>
-        <Column id="_Column1" width="60px" visible="false">
-          <Text id="Text1" text="S.No" />
+        
+        <Column id="PathFuelDeliveryPointCol">
+          <Text id="PathFuelDeliveryPointText" text="Delivery Point" />
         </Column>
-        <Column id="Column2">
-          <Text id="Text2" text="Delivery Point" />
+        <Column id="PathFuelDeliveryPointTranCol">
+          <Text id="PathFuelDeliveryPointTraText" text="Delivery Point Transport System" />
         </Column>
-        <Column id="Column3">
-          <Text id="Text3" text="Delivery Point Transport System" />
+        <Column id="PathFuelReDeliveryPointCol">
+          <Text id="PathFuelReDeliveryPointText" text="Redelivery Point" />
         </Column>
-        <Column id="Column4">
-          <Text id="Text4" text="Redelivery Point" />
+        <Column id="PathFuelReDeliveryPointTranCol">
+          <Text id="PathFuelReDeliveryPointTranText" text="Redelivery Point Transport System" />
         </Column>
-        <Column id="Column5">
-          <Text id="Text5" text="Redelivery Point Transport System" />
+        <Column id="PathFuelSplitCol">
+          <Text id="PathFuelSplitText" text="Split Path Required" />
         </Column>
-        <Column id="Column6">
-          <Text id="Text6" text="Split Path Required" />
+        <Column id="PathFuelInterCol">
+          <Text id="PathFuelInterText" text="Interconnect" />
         </Column>
-        <Column id="Column7">
-          <Text id="Text7" text="Interconnect" />
+        <Column id="PathFuelPathCol" width="16rem">
+          <Text id="PathFuelPathText" text="Path"/>
         </Column>
-        <Column id="Column8" width="16rem">
-          <Text id="Text8" text="Path"/>
-        </Column>
-        <Column id="Column9">
-          <Text id="Text9" text="Fuel %" />
+        <Column id="PathFuelFuelPerCol">
+          <Text id="PathFuelFuelPerTExt" text="Fuel %" />
         </Column>
       </columns>
    
       <items>
-        <ColumnListItem id="_IDGenColumnListItem">
+        <ColumnListItem id="PathFuelColumnListItem">
  
-        <!-- EXISTING DATA -->
+        
           <cells>
-            <CheckBox id="deletePathCB" select="onDeletePathArray"/>
-            <Text id="pathID" text="{rowID}" />
-            <Text id="pathDelivery" text="{DeliveryPoint}" />
-            <Text id="pathDelPoint" text="{DpTsSystem}" />
-            <Text id="pathReDelPoint" text="{ReDeliveryPoint}" />
-            <Text id="pathRelPoint" text="{RDpTsSystem}" />
-            <Text id="pathIC" text="{InterconnectPath}" />
-            <Text id="pathInterConnect" text="{Interconnect}" />
-            <Text id="path" text="{path}" />
-            <Text id="pathFuel" text="{FuelPercentage}" />
+            <CheckBox id="PathdeletePathCB" select="onDeletePathArray"/>
+          
+            <Text id="PathFuelpathDelivery" text="{DeliveryPoint}" />
+            <Text id="PathFuelpathDelPoint" text="{DpTsSystem}" />
+            <Text id="PathFuelpathReDelPoint" text="{ReDeliveryPoint}" />
+            <Text id="PathFuelpathRelPoint" text="{RDpTsSystem}" />
+            <Text id="PathfuelpathIC" text="{InterconnectPath}" />
+            <Text id="PathFuelpathInterConnect" text="{Interconnect}" />
+            <Text id="PathFuelpath" text="{path}" />
+            <Text id="PathFuelpathFuelper" text="{FuelPercentage}" />
           </cells>
         </ColumnListItem>
       </items>
        <noData>
-          <IllustratedMessage id="_IDGenIllustratedMessage7" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
+          <IllustratedMessage id="PathFuelIllustratedMessage7" enableVerticalResponsiveness="true" title="No Data Found" description="There are no items in this Table"/>
       </noData>
-    </Table>
+  </Table>
  
-    <Label id="pathHeading" text="Add Path" design="Bold" class="sapUiSmallMargin pathFuelAddHeading" visible="false"/>
+    <Label id="PathFuelpathHeading" text="Add Path" design="Bold" class="sapUiSmallMargin pathFuelAddHeading" visible="false"/>
    
-    <Table id="addPathtable" items="{pathmodel>/}" mode="None" visible="false">      
+    <Table id="PathFueladdPathTable" items="{pathmodel>/}" mode="None" visible="false">      
           <columns>
-            <Column id="_IDGenColumn1" visible="false"/>
-            <Column id="_IDGenColumn2"/>
-            <Column id="_IDGenColumn3"/>
-            <Column id="_IDGenColumn4"/>
-            <Column id="_IDGenColumn5"/>
-            <Column id="_IDGenColumn6"/>
-            <Column id="_IDGenColumn7"/>
-            <Column id="_IDGenColumn8"  width="16rem"/>
-            <Column id="_IDGenColumn9"/>
+            <Column id="test" visible="false"/>
+            <Column id="PathFuelDeliveryColumn"/>
+            <Column id="PathFuelDeliveryTransportColumn"/>
+            <Column id="PathFuelRedeliveryColumn"/>
+            <Column id="PathFuelRedeliveryTransportColumn"/>
+            <Column id="PathFuelsplitpathColumn"/>
+            <Column id="PathFuelIs_InterconnectColumn"/>
+            <Column id="PathFuelInterconnectPathColumn" />
+            <Column id="PathFuelFuelPercentageColumn" />
+        
           </columns>
        
           <items>
-            <ColumnListItem id="_IDGenColumnListItem1">
+            <ColumnListItem id="PathFueladdPathColumnListItem">
               <cells>
-              <Text id="_IDGenText10"/>
-              <Input id="Delivery_Point" width="100px" showValueHelp="true" required="true" valueHelpRequest="onDeliveryPoint" value="{pathmodel>delPoint}" valueHelpOnly="true"  />
-              <Input id="_IDGenInput1" editable="false" width="100px" value="{pathmodel>delPointTsyst}"/>
-              <Input id="reDelivery_Point" width="100px" showValueHelp="true"  required="true" valueHelpRequest="onReDeliveryPoint" value="{pathmodel>reDelPoint}"  valueHelpOnly="true" />
-              <Input id="_IDGenInput2" editable="false" width="100px" value="{pathmodel>reDelPointTsyst}"/>
-              <Input id="_IDGenInput3" width="100px" liveChange="onInput6LiveChange" value="{pathmodel>isInterconnect}" editable="false" />
-              <Input id="_IDGenInput5" width="100px" liveChange="onInput5LiveChange" value="{pathmodel>sInterconnect}" editable="{pathmodel>bInterconnect}"></Input>
-              <Input id="_IDGenInput6" width="180px" editable="false" liveChange="onInput7LiveChange" value="{pathmodel>path}"></Input>
-              <Input id="fuelPer" liveChange="onFuelPerChange" width="60px" value="{pathmodel>fuelpct}"/>
+              <Text id="PathFuelTestText"/>
+              <Input id="PathFuelDeliveryPoint" width="100px" showValueHelp="true" required="true" valueHelpRequest="onDeliveryPoint" value="{pathmodel>delPoint}" valueHelpOnly="true"  />
+              <Input id="PathFuelDelivery_Point_TransportSystem" editable="false" width="100px" value="{pathmodel>delPointTsyst}"/>
+              <Input id="PathFuelreDelivery_Point" width="100px" showValueHelp="true"  required="true" valueHelpRequest="onReDeliveryPoint" value="{pathmodel>reDelPoint}"  valueHelpOnly="true" />
+              <Input id="PathFuelReDelivery_Point_TransportSystem" editable="false" width="100px" value="{pathmodel>reDelPointTsyst}"/>
+              <Input id="PathFuelsplitPathRequired" width="100px" liveChange="onInput6LiveChange" value="{pathmodel>isInterconnect}" editable="false" />
+              <Input id="PathFuelisInterconnect" width="100px" liveChange="onInput5LiveChange" value="{pathmodel>sInterconnect}" editable="{pathmodel>bInterconnect}"></Input>
+              <Input id="PathFuelinterconnectPath" width="180px" editable="false" liveChange="onInput7LiveChange" value="{pathmodel>path}"></Input>
+              <Input id="PathFuelFuelPercentage" liveChange="onFuelPerChange" width="60px" value="{pathmodel>fuelpct}"/>
             </cells>
           </ColumnListItem>
         </items>
       </Table>
    
-      <HBox id="submitPathBtn" class="id_hbox pathFuelAddHeading" visible="false">
+      <HBox id="PathFuelsubmitPathBtn" class="id_hbox pathFuelAddHeading" visible="false">
           <Button xmlns="sap.m"
               text="Submit"
-              id="button0"
+              id="SubmitButton"
               class="sapUiSmallMargin"
               press="onSubmit"
               type="Emphasized" />

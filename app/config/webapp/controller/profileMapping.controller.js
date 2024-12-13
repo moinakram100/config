@@ -4,60 +4,35 @@ sap.ui.define([
     'sap/ui/core/Fragment',
     "../model/formatter",
     "sap/ui/model/odata/v4/ODataModel",
-    
+    "sap/m/MessageBox"
+
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Filter, Fragment, formatter, ODataModel) {
+    function (Controller, JSONModel, Filter, Fragment, formatter, ODataModel, MessageBox) {
         "use strict";
-        var lastMapID;
-        var initialDelMapArray = {
-            ID: []
-        };
-        var validateNewMapping;
-        var proMapping;
-        var docTypeArray = [];
-        let profileMapCount ;
-        // count of total entries
-        this.sModelType = "";
+        
+        this.sModelType;
+        let oView;
 
         return Controller.extend("com.ingenx.config.controller.profileMapping", {
             formatter: formatter,
             onInit: function () {
-                let oModel = this.getOwnerComponent().getModel();
-                var oData = oModel.bindList("/xGMSxContractType");
-                oData.requestContexts(0, Infinity).then(function (aContexts) {
-                docTypeArray = [];
-                aContexts.forEach(function (oContext) {
-                    docTypeArray.push(oContext.getObject());
-                });
-                })
+                oView = this.getView();
+                this.sModelType = "Sales" //  default value 
 
-                 // getting count of entries
-                 let oModel2 = this.getOwnerComponent().getModel();
-                 let oBindListSPM = oModel2.bindList("/DocumentNoProfileMapping");
-             
-                 // Get the total count of all entries
-                 oBindListSPM.requestContexts().then(function(aContexts) {
-                    profileMapCount = aContexts.length;
-                     console.log("Total number of entries:", profileMapCount);
-                 });
+            },
+            onFilterSelect: function (oEvent) {
+                this.sModelType = oEvent.getSource().getSelectedKey();
 
-                
- 
+
             },
 
-             // shruti code
-            
-            
+            onAddMap: function () {
 
-            
 
-             onAddMap: function () {
-                this.usedMappingAndDesc();
-    
-                // Create temporary data models for Sales and Purchase
+
                 const tempAddDocDataSales = {
                     DocumentNo: "",
                     DocumentNoDesc: "",
@@ -65,605 +40,420 @@ sap.ui.define([
                     profileName: "",
                     profileDesc: ""
                 };
-    
+
                 const tempAddDocDataSalesModel = new JSONModel(tempAddDocDataSales);
                 const tempAddDocDataPurchase = {
                     DocumentNo: "",
                     DocumentNoDesc: "",
-                    ID: "",
                     profileName: "",
                     profileDesc: ""
                 };
-    
+
                 const tempAddDocDataPurchaseModel = new JSONModel(tempAddDocDataPurchase);
-    
-                var oView = this.getView();
+
                 // Set the temporary models for Sales and Purchase
                 oView.setModel(tempAddDocDataSalesModel, "addDocDataModelSales");
                 oView.setModel(tempAddDocDataPurchaseModel, "addDocDataModelPurchase");
-    
+
                 if (!this._oDialogDOCNoMapping) {
                     this._oDialogDOCNoMapping = sap.ui.xmlfragment("com.ingenx.config.fragments.addDocumentNo", this);
                     oView.addDependent(this._oDialogDOCNoMapping);
                 }
-    
+
                 this._oDialogDOCNoMapping.open();
             },
-             onDocValueHelpKF:function(){
-                var oView = this.getView();
-                if (!this._oDialogDOCvalueHelpMapKF) {
-                    this._oDialogDOCvalueHelpMapKF = sap.ui.xmlfragment("com.ingenx.config.fragments.docTypeKF", this);
-                    oView.addDependent(this._oDialogDOCvalueHelpMapKF);
-                }
-                var docTypeKFArray=docTypeArray.filter(function (obj) {
-                    return (obj.Kopgr === "K" || obj.Kopgr === "F" );
-                });
-                var doctypeKFmodel = new sap.ui.model.json.JSONModel(docTypeKFArray);
-                oView.setModel(doctypeKFmodel, "doctypeKFmodel");
-                this._oDialogDOCvalueHelpMapKF.open();
-               this.sModelType = "Purchase"
+            onDocValueHelpKF: async function () {
 
+                try {
+
+                    // Load and open the fragment
+                    if (!this._oDialogDOCvalueHelpMapKF) {
+                        this._oDialogDOCvalueHelpMapKF = sap.ui.xmlfragment("com.ingenx.config.fragments.docTypeKF", this);
+                        oView.addDependent(this._oDialogDOCvalueHelpMapKF);
+                    }
+
+                    this._oDialogDOCvalueHelpMapKF.open();
+                    this.sModelType = "Purchase";
+                } catch (oError) {
+                    // Handle errors
+                    sap.m.MessageToast.show("Failed to fetch data. Please try again.");
+                    console.log(oError);
+                }
             },
-             onValueHelpDialogPurchaseClose: function (oEvent) {
-                var sDescription,
+
+
+            onValueHelpDialogPurchaseClose: function (oEvent) {
+                let sDescription,
                     oSelectedItem = oEvent.getParameter("selectedItem");
                 oEvent.getSource().getBinding("items").filter([]);
- 
+
                 if (!oSelectedItem) {
                     return;
                 }
- 
-                sDescription = oSelectedItem.getTitle();
-                this.getView().getModel("addDocDataModelPurchase").setProperty("/DocumentNo", sDescription);
-                this.getView().getModel("addDocDataModelPurchase").setProperty("/description", oSelectedItem.getDescription());
-                this.getView().getModel("addDocDataModelPurchase").setProperty("/DocumentNoDesc", oSelectedItem.getInfo());
-                this._oDialogDOCvalueHelpMap.close();
-              
-            },
-            onDocValueHelpLP:function(){
-                var oView = this.getView();
 
-                if (!this._oDialogDOCvalueHelpMapLP) {
-                    this._oDialogDOCvalueHelpMapLP = sap.ui.xmlfragment("com.ingenx.config.fragments.docTypeLP", this);
-                    oView.addDependent(this._oDialogDOCvalueHelpMapLP);
-                }
-                var docTypeLPArray=docTypeArray.filter(function (obj) {
-                    return obj.Kopgr === "LP" ;
-                });
-                var doctypeLPmodel = new sap.ui.model.json.JSONModel(docTypeLPArray);
-                oView.setModel(doctypeLPmodel, "doctypeLPmodel");
-                this._oDialogDOCvalueHelpMapLP.open();
-                this.sModelType = "Sales"; 
-               
-              
+                sDescription = oSelectedItem.getTitle();
+                oView.getModel("addDocDataModelPurchase").setProperty("/DocumentNo", sDescription);
+                oView.getModel("addDocDataModelPurchase").setProperty("/description", oSelectedItem.getDescription());
+                oView.getModel("addDocDataModelPurchase").setProperty("/DocumentNoDesc", oSelectedItem.getInfo());
+
+
             },
+
+            onDocValueHelpLP: async function () {
+
+                try {
+
+                    // Load and open the fragment
+                    if (!this._oDialogDOCvalueHelpMapLP) {
+                        this._oDialogDOCvalueHelpMapLP = sap.ui.xmlfragment("com.ingenx.config.fragments.docTypeLP", this);
+                        oView.addDependent(this._oDialogDOCvalueHelpMapLP);
+                    }
+
+                    this._oDialogDOCvalueHelpMapLP.open();
+                    this.sModelType = "Sales";
+                } catch (oError) {
+                    // Handle errors
+                    sap.m.MessageToast.show("Failed to fetch data. Please try again.");
+                    console.log(oError);
+                }
+            },
+
             onValueHelpDialogSalesClose: function (oEvent) {
-                  console.log("Retrieved Model Type: ", this.sModelType);
-                 
-                var sDescription,
+                // console.log("Retrieved Model Type: ", this.sModelType);
+
+                let sDescription,
                     oSelectedItem = oEvent.getParameter("selectedItem");
                 oEvent.getSource().getBinding("items").filter([]);
- 
+
                 if (!oSelectedItem) {
                     return;
                 }
- 
-                sDescription = oSelectedItem.getTitle();
-                this.getView().getModel("addDocDataModelSales").setProperty("/DocumentNo", sDescription);
-                this.getView().getModel("addDocDataModelSales").setProperty("/description", oSelectedItem.getDescription());
-                this.getView().getModel("addDocDataModelSales").setProperty("/DocumentNoDesc", oSelectedItem.getInfo());
-                this._oDialogDOCvalueHelpMap.close();
-            
-               
-            },
-           
-    
-           
-    
-           
-            onServiceProfileValueHelp: function () { 
-                console.log("Retrieved Model Type: ", this.sModelType);
-                
 
-                var oView = this.getView();
+                sDescription = oSelectedItem.getTitle();
+                oView.getModel("addDocDataModelSales").setProperty("/DocumentNo", sDescription);
+                oView.getModel("addDocDataModelSales").setProperty("/description", oSelectedItem.getDescription());
+                oView.getModel("addDocDataModelSales").setProperty("/DocumentNoDesc", oSelectedItem.getInfo());
+
+
+            },
+
+            onServiceProfileValueHelp: function () {
+                console.log("Retrieved Model Type: ", this.sModelType);
+
+
                 if (!this._oDialogSPvalueHelpNo) {
                     this._oDialogSPvalueHelpNo = sap.ui.xmlfragment("com.ingenx.config.fragments.serviceProfile", this);
                     oView.addDependent(this._oDialogSPvalueHelpNo);
                 }
-            
+
                 // Set the model type to the dialog for later reference
-                this._oDialogSPvalueHelpNo.data("modelType",  this.sModelType);
+                this._oDialogSPvalueHelpNo.data("modelType", this.sModelType);
                 this._oDialogSPvalueHelpNo.open();
             },
-            onServiceProfileValueHelpClose: function(oEvent) {
-                var sDescription,
+            onServiceProfileValueHelpClose: function (oEvent) {
+                let sDescription,
                     oSelectedItem = oEvent.getParameter("selectedItem");
                 oEvent.getSource().getBinding("items").filter([]);
-            
+
                 if (!oSelectedItem) {
                     return;
                 }
-            
+
                 sDescription = oSelectedItem.getTitle();
-                
-                var sModelType = this._oDialogSPvalueHelpNo.data("modelType");
-                console.log("Model Type retrieved in close event: ", sModelType); 
-            
+
+                let sModelType = this._oDialogSPvalueHelpNo.data("modelType");
+                console.log("Model Type retrieved in close event: ", sModelType);
+
                 if (sModelType === "Sales") {
-                    this.getView().getModel("addDocDataModelSales").setProperty("/profileName", sDescription);
-                    this.getView().getModel("addDocDataModelSales").setProperty("/profileDesc", oSelectedItem.getDescription());
-                    this.getView().getModel("addDocDataModelSales").setProperty("/ID", oSelectedItem.getBindingContext().getObject().ID);
+                    oView.getModel("addDocDataModelSales").setProperty("/profileName", sDescription);
+                    oView.getModel("addDocDataModelSales").setProperty("/profileDesc", oSelectedItem.getDescription());
+                    oView.getModel("addDocDataModelSales").setProperty("/ID", oSelectedItem.getBindingContext().getObject().ID);
                 } else if (sModelType === "Purchase") {
-                    this.getView().getModel("addDocDataModelPurchase").setProperty("/profileName", sDescription);
-                    this.getView().getModel("addDocDataModelPurchase").setProperty("/profileDesc", oSelectedItem.getDescription());
-                    this.getView().getModel("addDocDataModelPurchase").setProperty("/ID", oSelectedItem.getBindingContext().getObject().ID);
+                    oView.getModel("addDocDataModelPurchase").setProperty("/profileName", sDescription);
+                    oView.getModel("addDocDataModelPurchase").setProperty("/profileDesc", oSelectedItem.getDescription());
+                    oView.getModel("addDocDataModelPurchase").setProperty("/ID", oSelectedItem.getBindingContext().getObject().ID);
                 }
-            
-                this._oDialogSPvalueHelpNo.close();
+
             },
+
+            // Handler function for creating  sales Document profile mapping
             onsaveDocumentNoMappingSales: function () {
-                this.onLastMapID();
-            
-                var salesData = this.getView().getModel("addDocDataModelSales").getData();
-                var purchaseData = this.getView().getModel("addDocDataModelPurchase").getData();
-            
-                var oEntryServProfMapping = {
-                    ID: parseInt(lastMapID, 10).toString(),
-                    DocumentNo: salesData.DocumentNo,
-                    DocumentDesc: salesData.DocumentNoDesc,
-                    serviceProfileName: salesData.profileName,
-                    serviceProfileDesc: salesData.profileDesc,
-                    description: salesData.description || "",
-                    field2: "",
-                    field3: "",
-                    field4: "",
-                    field5: ""
-                };
-            
-                // Validation
-                if (!oEntryServProfMapping.DocumentNo || !oEntryServProfMapping.serviceProfileName) {
-                    sap.m.MessageToast.show("Input fields cannot be blank.");
-                    return;
-                }
-            
-                // Duplicate Check
-                var isDuplicateMapping = validateNewMapping.some(entry =>
-                    entry.DocumentNo.toLowerCase() === oEntryServProfMapping.DocumentNo.toLowerCase() &&
-                    entry.serviceProfileName.toLowerCase() === oEntryServProfMapping.serviceProfileName.toLowerCase()
-                );
-            
-                if (isDuplicateMapping) {
-                    sap.m.MessageToast.show("Mapping already exists.");
-                    return;
-                } else {
-                    validateNewMapping.push(oEntryServProfMapping);
-                    console.log("Entry added successfully");
-                }
-            
-                let oModel = this.getView().getModel();
-                let oBindListSP = oModel.bindList("/DocumentNoProfileMapping");
-            
-                try {
-                    oBindListSP.create(oEntryServProfMapping);
-                    profileMapCount++;
-                    this.RefreshData();
-            
-                    // Clear the sales document fields after successful save
-                    salesData.DocumentNo = "";
-                    salesData.DocumentNoDesc = "";
-                    salesData.profileName = "";
-                    salesData.profileDesc = "";
-                    salesData.description = "";
-            
-                    // Update the sales model to reflect the cleared values
-                    this.getView().getModel("addDocDataModelSales").setData(salesData);
-                    this.getView().getModel("addDocDataModelSales").refresh();
-            
-                    // Now check for purchase data and show the confirmation dialog
-                    if (purchaseData.DocumentNo && purchaseData.profileName) {
-                        sap.m.MessageBox.confirm(
-                            "Sales data saved successfully. Do you want to save Purchase data?",
-                            {
-                                actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
-                                onClose: function (sAction) {
-                                    if (sAction === sap.m.MessageBox.Action.OK) {
-                                        // Allow the user to save purchase data
-                                    } else {
-                                        this._oDialogDOCNoMapping.close();
-                                    }
-                                }.bind(this)
-                            }
-                        );
-                    } else {
-                        // If no purchase data, just close the dialog and refresh
-                        this._oDialogDOCNoMapping.close();
-                        this.RefreshData();
-                    }
-                } catch (error) {
-                    sap.m.MessageToast.show("Error saving the mapping: " + error.message);
-                    console.error("Error during create operation:", error);
-                }
+
+                this.onsaveDocumentNoMapping("Sales");
+
             },
             onsaveDocumentNoMappingPurchase: function () {
-                this.onLastMapID();
-            
-                var purchaseData = this.getView().getModel("addDocDataModelPurchase").getData();
-                var salesData = this.getView().getModel("addDocDataModelSales").getData();
-            
-                var oEntryServProfMapping = {
-                    ID: parseInt(lastMapID, 10).toString(),
-                    DocumentNo: purchaseData.DocumentNo,
-                    DocumentDesc: purchaseData.DocumentNoDesc,
-                    serviceProfileName: purchaseData.profileName,
-                    serviceProfileDesc: purchaseData.profileDesc,
-                    description: purchaseData.description || "",
-                    field2: "",
-                    field3: "",
-                    field4: "",
-                    field5: ""
-                };
-            
-                // Validation
-                if (!oEntryServProfMapping.DocumentNo || !oEntryServProfMapping.serviceProfileName) {
-                    sap.m.MessageToast.show("Input fields cannot be blank.");
-                    return;
-                }
-            
-                // Duplicate Check
-                var isDuplicateMapping = validateNewMapping.some(entry =>
-                    entry.DocumentNo.toLowerCase() === oEntryServProfMapping.DocumentNo.toLowerCase() &&
-                    entry.serviceProfileName.toLowerCase() === oEntryServProfMapping.serviceProfileName.toLowerCase()
-                );
-            
-                if (isDuplicateMapping) {
-                    sap.m.MessageToast.show("Mapping already exists.");
-                    return;
-                } else {
-                    validateNewMapping.push(oEntryServProfMapping);
-                    console.log("Entry added successfully");
-                }
-            
-                let oModel = this.getView().getModel();
-                let oBindListSP = oModel.bindList("/DocumentNoProfileMapping");
-            
+
+                this.onsaveDocumentNoMapping("Purchase");
+
+            },
+
+            onsaveDocumentNoMapping: function (context) {
+                let that = this;
+
                 try {
-                    oBindListSP.create(oEntryServProfMapping);
-                    profileMapCount++;
-                    this.RefreshData();
-            
-                    // Clear the purchase document fields after successful save
-                    purchaseData.DocumentNo = "";
-                    purchaseData.DocumentNoDesc = "";
-                    purchaseData.profileName = "";
-                    purchaseData.profileDesc = "";
-                    purchaseData.description = "";
-            
-                    // Update the purchase model to reflect the cleared values
-                    this.getView().getModel("addDocDataModelPurchase").setData(purchaseData);
-                    this.getView().getModel("addDocDataModelPurchase").refresh();
-            
-                    // Check if Sales data is filled and show confirmation dialog
-                    if (salesData.DocumentNo && salesData.profileName) {
-                        sap.m.MessageBox.confirm(
-                            "Purchase data saved successfully. Do you want to save Sales data?",
-                            {
-                                actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
-                                onClose: function (sAction) {
-                                    if (sAction === sap.m.MessageBox.Action.OK) {
-                                        // Keep the dialog open for the user to save sales data
-                                    } else {
-                                        this._oDialogDOCNoMapping.close();
-                                    }
-                                }.bind(this)
-                            }
-                        );
-                    } else {
-                        // If no sales data, just close the dialog and refresh
-                        this._oDialogDOCNoMapping.close();
-                        this.RefreshData();
+                    let oView = this.getView();
+                    let currentData =
+                        context === "Sales"
+                            ? oView.getModel("addDocDataModelSales").getData()
+                            : oView.getModel("addDocDataModelPurchase").getData();
+                    let oppositeData =
+                        context === "Sales"
+                            ? oView.getModel("addDocDataModelPurchase").getData()
+                            : oView.getModel("addDocDataModelSales").getData();
+
+                    // Prepare the entry for Service Profile Mapping
+                    let oEntryServProfMapping = {
+                        DocumentNo: currentData.DocumentNo,
+                        DocumentDesc: currentData.DocumentNoDesc,
+                        serviceProfileName: currentData.profileName,
+                        serviceProfileDesc: currentData.profileDesc,
+                        description: currentData.description || "",
+                        field2: "",
+                        field3: "",
+                        field4: "",
+                        field5: ""
+                    };
+
+                    // Validation
+                    if (!oEntryServProfMapping.DocumentNo || !oEntryServProfMapping.serviceProfileName) {
+                        sap.m.MessageToast.show("Input fields cannot be blank.");
+                        return;
                     }
+
+                    let oModel = this.getOwnerComponent().getModel();
+                    let oBindList = oModel.bindList("/DocumentNoProfileMapping");
+
+                    oBindList.attachEventOnce("dataReceived", function () {
+                        try {
+                            let existingEntries = oBindList.getContexts().map(context => context.getObject());
+                            let isDuplicate = existingEntries.some(entry =>
+                                entry.DocumentNo === oEntryServProfMapping.DocumentNo &&
+                                entry.serviceProfileName === oEntryServProfMapping.serviceProfileName
+                            );
+
+                            if (isDuplicate) {
+                                sap.m.MessageToast.show("Mapping already exists.");
+                                return;
+                            }
+
+                            // Create a new entry
+                            oBindList.create(oEntryServProfMapping);
+
+                            oBindList.attachCreateCompleted((p) => {
+                                try {
+                                    let p1 = p.getParameters();
+                                    if (p1.success) {
+                                        sap.m.MessageToast.show("Service Profile Successfully Mapped.");
+                                        that.RefreshData();
+                                    } else {
+                                        sap.m.MessageToast.show(p1.context.oModel.mMessages[""][0].message || "Error during mapping.");
+                                    }
+                                } catch (error) {
+                                    sap.m.MessageToast.show("Error in attachCreateCompleted: " + error.message);
+                                    console.log("Error in attachCreateCompleted:", error);
+                                }
+                            });
+
+                            // Clear and refresh current data
+                            currentData.DocumentNo = "";
+                            currentData.DocumentNoDesc = "";
+                            currentData.profileName = "";
+                            currentData.profileDesc = "";
+                            currentData.description = "";
+
+                            if (context === "Sales") {
+                                oView.getModel("addDocDataModelSales").setData(currentData);
+                                oView.getModel("addDocDataModelSales").refresh();
+                            } else {
+                                oView.getModel("addDocDataModelPurchase").setData(currentData);
+                                oView.getModel("addDocDataModelPurchase").refresh();
+                            }
+
+                            // Handle opposite data confirmation
+                            if (oppositeData.DocumentNo && oppositeData.profileName) {
+                                sap.m.MessageBox.confirm(
+                                    `${context} data saved successfully. Do you want to save ${context === "Sales" ? "Purchase" : "Sales"} data?`,
+                                    {
+                                        actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                                        onClose: function (sAction) {
+                                            if (sAction === sap.m.MessageBox.Action.OK) {
+                                                // const oIconTabBar1 = sap.ui.getCore().byId("configProfileMap_IconTabBar");
+                                                // oIconTabBar1.setSelectedKey(context === "Sales" ? "Purchase" : "Sales");
+                                            } else {
+                                                that._oDialogDOCNoMapping.close();
+                                            }
+                                        }.bind(this)
+                                    }
+                                );
+                            } else {
+                                that._oDialogDOCNoMapping.close();
+                            }
+                        } catch (error) {
+                            sap.m.MessageToast.show("Error in dataReceived event: " + error.message);
+                            console.log("Error in dataReceived event:", error);
+                        }
+                    });
+
+                    // Trigger the data fetch
+                    oBindList.getContexts();
                 } catch (error) {
-                    sap.m.MessageToast.show("Error saving the mapping: " + error.message);
-                    console.error("Error during create operation:", error);
+                    sap.m.MessageToast.show("Unexpected error occurred: " + error.message);
+                    console.log("Error in onsaveDocumentNoMapping:", error);
                 }
             },
-            
-           
-          
-         
-            
-            
 
-            
-            
-          
-            
-
-
-            // shruti code ends here
-    
-    
-        
-            
-            
-            
-            
-    
-     
-            
-            
-
-            usedMappingAndDesc: function () {
-                var that = this;
-           
-                return new Promise(function (resolve, reject) {
-                    var usedMappingData = new sap.ui.model.json.JSONModel();
-                    var usedMappingDataModel = new sap.ui.model.json.JSONModel();
-                    that.getView().setModel(usedMappingDataModel, "usedMappingDataModel");
-                    let oModel = that.getOwnerComponent().getModel();
-                    let oBindList = oModel.bindList("/DocumentNoProfileMapping");
-           
-                    oBindList.requestContexts(0,Infinity).then(function (aContexts){
-                        proMapping=[];
-                        aContexts.forEach(function (oContext) {
-                            proMapping.push(oContext.getObject());
-                        });
-                        usedMappingDataModel.setData(proMapping);
-                        that.getView().setModel(usedMappingDataModel, "usedMappingDataModel");
-                        var usedMappingModelData = that.getView().getModel("usedMappingDataModel").getData();
-                        console.log(usedMappingModelData)
-                        validateNewMapping = usedMappingModelData.map(function (obj) {
-                            return {
-                                ID: obj.ID,
-                                DocumentNo: obj.DocumentNo,
-                                serviceProfileName: obj.serviceProfileName
-                            };
-                        });
-                        console.log("Validate New Mapping", validateNewMapping);
-           
-                        resolve(proMapping);
-                        });
-                        usedMappingData.attachRequestFailed(function (oError) {
-                            reject(oError);
-                        });
- 
-                    });
-            },
-            
 
             oncanceleNewDocumentNo: function () {
                 this._oDialogDOCNoMapping.close();
             },
-           
+
             onServiceProfileValueHelpDialogSearch: function (oEvent) {
-                var sValue = oEvent.getParameter("value");
-                var oFilter = new sap.ui.model.Filter("serviceProfileName", sap.ui.model.FilterOperator.Contains, sValue);
-                oEvent.getSource().getBinding("items").filter([oFilter]);
-            },
-           
-            onServiceProfileValueHelpCancel: function () {
-                this._oDialogSPvalueHelpNo.close();
-            },
- 
-           
- 
-        
- 
-            onValueHelpDialogSearch: function (oEvent) {
-                var sValue = oEvent.getParameter("value");
-                var oFilter = new sap.ui.model.Filter("Auart", sap.ui.model.FilterOperator.Contains, sValue);
-                oEvent.getSource().getBinding("items").filter([oFilter]);
-            },
+                let sValue = oEvent.getParameter("value");
+                let oFilter = new sap.ui.model.Filter("serviceProfileName", sap.ui.model.FilterOperator.Contains, sValue);
+                let oDialog = oEvent.getSource();
+                let oBinding = oDialog.getBinding("items");
 
-           
+                // Apply the filter
+                oBinding.filter([oFilter]);
 
+                // Attach to the "change" event to check the updated binding contexts after filtering
+                oBinding.attachEventOnce("change", function () {
+                    // Get the filtered items length
+                    let aFilteredContexts = oBinding.aLastContexts || []; // Use cached contexts to avoid conflicts
+                    console.log(aFilteredContexts.length);
 
-            onValueHelpDialogCancel: function () {
-                this._oDialogDOCvalueHelpMap.close();
-            },
- 
-            // FETCH LAST ID USED
- 
-            onLastMapID: function () {
-                try {
-                    var oTable = this.getView().byId("tablemapping");
-                    var oItems = oTable.getItems();
- 
-                    var usedIDs = new Set();
- 
-                    oItems.forEach(function (oItem) {
-                        var currentID = parseInt(oItem.getCells()[1].getText(), 10);
-                        if (!isNaN(currentID)) {
-                            usedIDs.add(currentID);
-                        }
-                    });
- 
-                    for (let i = 1; i <= oItems.length + 1; i++) {
-                        if (!usedIDs.has(i)) {
-                            lastMapID = i.toString();
-                            break;
-                        }
+                    if (aFilteredContexts.length === 0) {
+                        oDialog.setNoDataText("No Service Profile Found");
+                    } else {
+                        oDialog.setNoDataText("Loading ...");
                     }
-                } catch (error) {
-                    lastMapID = "0";
-                }
- 
-                console.log("Next Available Mapping ID:", lastMapID);
-            },  
- 
-           
-           
- 
-          
-            RefreshData: function () {
-                this.getView().byId("tablemapping").getBinding("items").refresh();
+                });
             },
- 
-            // BUTTONS
- 
-            // DELETE
- 
-            onDeleteMap: function () {
-                var addMap = this.byId("addMappingBtn");
-                var delMap = this.byId("deleteMappingBtn");
-                var conDelMap = this.byId("deleteMapConfirmBtn");
-                var canDelMap = this.byId("cancelMapDeleteBtn")
-                var delMapLabel = this.byId("deleteMapLabel")
- 
+
+            onServiceProfileValueHelpCancel: function () {
+                // this._oDialogSPvalueHelpNo.close();
+            },
+
+            // Common filter used for fagment DocTypeLP  and DoctTypeKF
+            onFilterDocTypeDialog: function (oEvent) {
+                let sValue = oEvent.getParameter("value");
+                let oFilter = new sap.ui.model.Filter("Auart", sap.ui.model.FilterOperator.Contains, sValue);
+                let oDialog = oEvent.getSource(); // Reference to the SelectDialog
+                let oBinding = oDialog.getBinding("items");
+
+                // Apply the filter
+                oBinding.filter([oFilter]);
+
+                // Attach to the "change" event to check the updated binding contexts after filtering
+                oBinding.attachEventOnce("change", function () {
+                    // Get the filtered items length
+                    let aFilteredContexts = oBinding.aLastContexts || []; // Use cached contexts to avoid conflicts
+                    console.log(aFilteredContexts.length);
+                    console.log(aFilteredContexts.length);
+
+                    if (aFilteredContexts.length === 0) {
+                        oDialog.setNoDataText("No Document Found");
+                    } else {
+                        oDialog.setNoDataText("Loading ...");
+                    }
+                });
+            },
+
+            //refresh the table binding
+            RefreshData: function () {
+                oView.byId("tablemapping").getBinding("items").refresh();
+            },
+
+            // Hander function to senabling table checkboxe column for deletion and toggling buttons
+            onDeletePressMap: function () {
+                let addMap = this.byId("addMappingBtn");
+                let delMap = this.byId("deleteMappingBtn");
+                let conDelMap = this.byId("deleteMapConfirmBtn");
+                let canDelMap = this.byId("cancelMapDeleteBtn")
+                let delMapLabel = this.byId("configProfileMap_col_checkbox")
+
                 // Toggle Visibility
                 addMap.setVisible(!addMap.getVisible());
                 delMap.setVisible(!delMap.getVisible());
                 conDelMap.setVisible(!conDelMap.getVisible());
                 canDelMap.setVisible(!canDelMap.getVisible());
                 delMapLabel.setVisible(!delMapLabel.getVisible());
-            },
- 
-            onCancelMapDeletion: function () {
-                this.onDeleteMap();
-                this.onNullSelectedMapping();
-                this.onUnCheckBox();
-            },
- 
-            onNullSelectedMapping: function () {
-                initialDelMapArray = {
-                    ID: []
-                };
-            },
- 
-            onUnCheckBox: function () {
-                var selectedItems = initialDelMapArray.ID;
-                var oTable = this.byId("tablemapping");
-                var oItems = oTable.getItems();
-                this.getView().byId("selectAllMap").setSelected(false);
- 
-                selectedItems.forEach(function (itemId) {
-                    oItems.forEach(function (oItem) {
-                        var sRowId = oItem.getCells()[1].getText();
- 
-                        if (sRowId === itemId) {
-                            oItem.getCells()[0].setSelected(false);
-                        }
-                    });
+                let oTable = this.byId("tablemapping");
+                oTable.getItems().forEach(function (oItem) {
+                    let oCheckBox = oItem.getCells()[0];
+                    oCheckBox.setSelected(false);
                 });
             },
- 
-            onSelectAllMap: function (oEvent) {
-                var oTable = this.byId("tablemapping");
-                var oItems = oTable.getItems();
-                var selectAll = oEvent.getParameter("selected");
 
-                if (!selectAll) {
-                    initialDelMapArray.ID = []
+            onCancelMapDeletion: function () {
+              
+                this.onDeletePressMap();
+              
+            },
+            onConfirmMapDeletion: async function () {
+                let that = this;
+                let oTable = this.byId("tablemapping");
+                let oSelectedItems = [];
+        
+        
+                oTable.getItems().forEach(function (oItem) {
+                  let oCheckBox = oItem.getCells()[0];
+                  if (oCheckBox.getSelected()) {
+                    oSelectedItems.push(oItem.getBindingContext().getPath());
+                  }
+                });
+        
+                if (oSelectedItems.length === 0) {
+                  sap.m.MessageToast.show("No Mapping selected for deletion.");
+                  return;
                 }
- 
-                for (var i = 0; i < oItems.length; i++) {
-                    var oItem = oItems[i];
-                    var oCheckBox = oItem.getCells()[0];
-                    var sID = oItem.getCells()[1].getText();
- 
-                    if (oCheckBox instanceof sap.m.CheckBox) {
-                        oCheckBox.setSelected(selectAll);
- 
-                        if (selectAll && oCheckBox.getSelected()) {
-                            initialDelMapArray.ID.push(sID);
+        
+                sap.m.MessageBox.confirm(
+                  `Are you sure you want to delete the selected Mapping(s)?`,
+                  {
+                    actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+                    onClose: async function (sAction) {
+                      if (sAction === sap.m.MessageBox.Action.OK) {
+        
+                        sap.ui.core.BusyIndicator.show(0);
+        
+                        try {
+                          let oModel = that.getView().getModel();
+                          let oBindList = oModel.bindList("/DocumentNoProfileMapping");
+                          let aContexts = await oBindList.requestContexts();
+        
+                          for (let sPath of oSelectedItems) {
+                            let oContext = aContexts.find(context => context.getPath() === sPath);
+                            if (oContext) {
+                              await oContext.delete("$auto");
+                            }
+                          }
+                          sap.m.MessageToast.show("Selected Mapping deleted successfully.");
+        
+        
+                          await that.RefreshData();
+                          that.onCancelMapDeletion();
+                        } catch (oError) {
+                          sap.m.MessageToast.show("Error occurred while deleting path(s).");
+                          console.log("Deletion Error:", oError);
+                        } finally {
+        
+                          sap.ui.core.BusyIndicator.hide();
                         }
+                      } else if (sAction === sap.m.MessageBox.Action.CANCEL) {
+        
+                        oTable.getItems().forEach(function (oItem) {
+                          let oCheckBox = oItem.getCells()[0];
+                          oCheckBox.setSelected(false);
+                        });
+                      }
                     }
-                }
-            },
- 
-            onDeleteMapArray: function (oEvent) {
-                var selectedMapping = oEvent.getSource().getParent().getAggregation("cells");
- 
-                for (var i = 0; i < selectedMapping.length; i++) {
-                    if (i === 0) {
-                        let checkbox = selectedMapping[i];
-                        let mapping = selectedMapping[i + 1].getProperty("text");
- 
-                        if (checkbox.getSelected()) {
-                            if (initialDelMapArray.ID.indexOf(mapping) === -1) {
-                                initialDelMapArray.ID.push(mapping);
-                            }
-                        } else {
-                            var index = initialDelMapArray.ID.indexOf(mapping);
-                            if (index !== -1) {
-                                initialDelMapArray.ID.splice(index, 1);
-                            }
-                        }
-                    }
-                }
-                
-                // handling select all checkbox
+                  }
+                );
+              },
 
-                var selectAllCheckbox = this.byId("selectAllMap");
+          
 
-                if (profileMapCount !== initialDelMapArray.ID.length) {
-                    if (selectAllCheckbox.getSelected()) {
-                        selectAllCheckbox.setSelected(false)
-                    }
-                }
-                else {
-                    selectAllCheckbox.setSelected(true)
-                    console.log("i'm here")
-                }
- 
-                console.log("Updated deleteArray:", initialDelMapArray.ID);
-                this.RefreshData();
-            },
- 
-            onConfirmMapDeletion: function () {
-                var unfilteredItems = initialDelMapArray.ID;
-                var selectedItems = Array.from(new Set(unfilteredItems));
-                console.log("Selected Items:", selectedItems);
- 
-                if (selectedItems.length > 0) {
-                    sap.m.MessageBox.confirm("Are you sure you want to delete the selected document mapping?", {
-                        title: "Confirmation",
-                        onClose: function (oAction) {
-                            if (oAction === sap.m.MessageBox.Action.OK) {
-                                var oTable = this.byId("tablemapping");
-                                var oItems = oTable.getItems();
- 
-                                selectedItems.forEach(function (itemId) {
-                                    oItems.forEach(function (oItem) {
-                                        var sRowId = oItem.getCells()[1].getText();
- 
-                                        if (sRowId === itemId) {
-                                            var con = oItem.getBindingContext();
-                                            console.log("Context:", con);
-                                            oItem.getBindingContext().delete().then(function () {
-                                                    // This code runs when the deletion is successful
-                                                    // MessageBox.success("Item deleted successfully!");
-                                                    profileMapCount--
-                                                    // Add your custom logic here
-                                                    // For example, refresh the data or update the UI
-                                                    this.RefreshData();
-                                                }.bind(this))
-                                                .catch(function (oError) {
-                                                    // This code runs when there is an error
-                                                    if (!oError.canceled) {
-                                                        MessageBox.error("Error during deletion: " + oError.message);
-                                                    }
-                                                    // You can also refresh data if necessary after error handling
-                                                    this.RefreshData();
-                                                }.bind(this));
-                                            
-                                        }
-                                    });
-                                });
-                            } else if (oAction === sap.m.MessageBox.Action.CANCEL) {
-                                this.onNullSelectedMapping();
-                                this.onUnCheckBox();
-                            }
-                        }.bind(this)
-                    });
-                } else {
-                    MessageBox.information("Please select at least one mapping for deletion.");
-                }
-                this.onDeleteMap();
-                this.onNullSelectedMapping();
-                this.onUnCheckBox();
-            },
- 
         });
     });
- 

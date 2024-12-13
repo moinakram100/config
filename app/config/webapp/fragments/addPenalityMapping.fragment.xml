@@ -1,21 +1,21 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout">
-    <Dialog title="Create Mapping with Penalty" class="sapUiSmallMargin">
-        <VBox class="sapUiContentPadding sapUiSmallMargin">
-            <Label  text="Service Profile :" design="Bold" />
-            <Input  value="{addPenaltyModel>/profileName}" showValueHelp="true" valueHelpRequest="onServiceProfile" valueHelpOnly="true"/>
-            <Label  text="Service Parameter :" design="Bold" />
-            <Input  value="{addPenaltyModel>/paneltyParmeter}" showValueHelp="true" valueHelpRequest="onServiceParam" valueHelpOnly="true"/>
-            <Label  text="Penalty ID :" design="Bold" />
-            <Input  value="{addPenaltyModel>/ezReportId}" showValueHelp="true" valueHelpRequest="onEzId" valueHelpOnly="true"/>
+    <Dialog id="PenalityMapAddMapDialog" title="Create Mapping with Penalty" class="sapUiSmallMargin">
+        <VBox id="PenalityMapfragVbox" class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="PenalityMapServiceProf" text="Service Profile :" design="Bold" />
+            <Input id="PenalityMapServiceProfval"  value="{addPenaltyModel>/profileName}" showValueHelp="true" valueHelpRequest="onServiceProfile" valueHelpOnly="true"/>
+            <Label id="PenalityMapServiceParam"   text="Service Parameter :" design="Bold" />
+            <Input id="PenalityMapServiceParamval"  value="{addPenaltyModel>/paneltyParmeter}" showValueHelp="true" valueHelpRequest="onServiceParam" valueHelpOnly="true"/>
+            <Label id="PenalityMapPenalityId" text="Penalty ID :" design="Bold" />
+            <Input id="PenalityMapPenalityIdVal" value="{addPenaltyModel>/ezReportId}" showValueHelp="true" valueHelpRequest="onEzId" valueHelpOnly="true"/>
         </VBox>
         <footer>
-            <OverflowToolbar >  
-                <ToolbarSpacer/>        
-                <Button type="Accept" text="Save" press="onsavePenaltyMapping">
+            <OverflowToolbar id="PenalityMapFragOverflowtoolbar" >  
+                <ToolbarSpacer id="PenalityMapFragToolbarSpacer"/>        
+                <Button id="PenalityMappingSaveButton" type="Accept" text="Save" press="onsavePenaltyMapping">
                 </Button>
-                <Button type="Reject" text="Cancel" press="oncancelPenaltyMapping">
+                <Button id="PenalityMappingCancelButton" type="Reject" text="Cancel" press="oncancelPenaltyMapping">
                 </Button>
             </OverflowToolbar>
         </footer>

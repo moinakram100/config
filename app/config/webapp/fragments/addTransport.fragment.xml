@@ -1,18 +1,17 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout">
-    <Dialog title="Add new transmission type" class="sapUiSmallMargin">
-        <VBox class="sapUiContentPadding sapUiSmallMargin">
-            <Label  text="Sales Document Type :" design="Bold" />
+    <Dialog id="transConfig_addTransDialog" title="Add new transmission type" class="sapUiSmallMargin">
+        <VBox id="addTrans_VBox" class="sapUiContentPadding sapUiSmallMargin">
+            <Label id="addTrans_salesDocType"  text="Sales Document Type :" design="Bold" />
             <MultiInput id="salesDocSingle_Id"
              showValueHelp="true"
              valueHelpRequest="onDocType"
-             valueHelpOnly="true"
- 
+             valueHelpOnly="false"
              />
-            <Label  text="Purchase Document Type :" design="Bold" />
+            <Label id="addTrans_purDocument"  text="Purchase Document Type :" design="Bold" />
             <MultiInput id="purchase_Id"   showValueHelp="true" valueHelpRequest="onPurchaseDocType" valueHelpOnly="true"/>
-            <Label  text=" Exchange Type :" design="Bold" />
+            <Label id="addTrans_exchangeType"  text=" Exchange Type :" design="Bold" />
             <ComboBox id="combo1_2" selectionChange="onSelectExchangeType" items="{/xGMSxEXCHGTYPEVH}"  width="300px">
                 <items>
                     <core:Item id="core4" key="{Exgtyp}" text="{Exgtxt}" />
@@ -21,8 +20,8 @@
  
         </VBox>
         <footer>
-            <OverflowToolbar >  
-                <ToolbarSpacer/>        
+            <OverflowToolbar id="addTrans_OT" >  
+                <ToolbarSpacer id="addTrans_toolbarSpacer"/>        
                 <Button id="submitButton_id" type="Accept" text="Save" press="onsaveTransmissionType">
                 </Button>
                 <Button id="cancelButton_id" type="Reject" text="Cancel" press="oncancelTransmissionType">

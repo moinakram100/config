@@ -6,33 +6,34 @@
     xmlns:core="sap.ui.core"
 >
     <OverflowToolbar
-        id="_IDGenOverflowToolbar9"
+        id="transportConfigOt"
         height="50px"
     >
-        <FlexBox direction="Column" class="sapUiSmallMargin">
-            <FlexBox  alignItems="Center">
-            <HBox class="sapUiSmallMarginTop">
+        <FlexBox id="transportConfig_mainFlexBox" direction="Column" class="sapUiSmallMargin">
+            <FlexBox id="transportConfig_innerFlexBox"  alignItems="Center">
+            <HBox id="transportConfig_VBox1" class="sapUiSmallMarginTop">
                 <Label
+                    id="transConfig_transType"
                     text="Transmission Type "
                     design="Bold"
                     class="sapUiTinyMarginTop sapUiSmallMarginEnd"
                 />
-                <HBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
-                    <Select id="mySelect" forceSelection="false" class="sapUiSmallMarginEnd" change="onTransmissionTypeChange">
-                        <core:Item text="1 : 1" />
-                        <core:Item text="1 : N" />
-                        <core:Item text="N : 1" />
+                <HBox id="transportConfig_VBox2" class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+                    <Select id="transportConfig_selectTransType" forceSelection="false" class="sapUiSmallMarginEnd" change="onTransmissionTypeChange">
+                        <core:Item id="transTypeItem1" text="1 : 1" />
+                        <core:Item id="transTypeItem2" text="1 : N" />
+                        <core:Item id="transTypeItem3" text="N : 1" />
                     </Select>
                 </HBox>
             </HBox>
             </FlexBox>
         </FlexBox>
-        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+        <ToolbarSpacer id="transportConfig_ToolbarSpacer" />
         <Button
             id="createTransID"
             text="Create"
             width="100px"
-            press="onAdd"
+            press="onAddNewTransType"
             type="Emphasized"
             visible="true"
         />
@@ -62,11 +63,10 @@
         />
     </OverflowToolbar>
     <Page
-        id="page"
+        id="transportConfigPage"
         showHeader="false"
     >
         <content>
-                <!-- items="{/TransportConfig}" -->
             <Table
                 items="{transportconfig>/TransportConfig}"
                 id="transportTable"
@@ -86,34 +86,34 @@
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColumn1">
+                    <Column id="transportConfig_IDCol">
                         <header>
                             <Label
-                                id="_IDGenLabel6"
+                                id="transportConfig_IDLabel"
                                 text="ID"
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColumn5">
+                    <Column id="transportConfig_sDocTypeCol">
                         <header>
                             <Label
-                                id="_IDGenLabel10"
+                                id="transportConfig_sDocTypeLabel"
                                 text="Sales Document Type"
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColumn2">
+                    <Column id="transportConfig_pDocTypeCol">
                         <header>
                             <Label
-                                id="_IDGenLabel7"
+                                id="transportConfig_pDocTypeLabel"
                                 text="Purchase Document Type"
                             />
                         </header>
                     </Column>
-                    <Column id="_IDGenColumn4">
+                    <Column id="transportConfig_exchangeDocTypeCol">
                         <header>
                             <Label
-                                id="_IDGenLabel9"
+                                id="transportConfig_exchangeDocTypeLabel"
                                 text="Exchange Document Type"
                             />
                         </header>
@@ -122,27 +122,27 @@
                 <items>
                     <ColumnListItem
                         type="Active"
-                        id="item0"
+                        id="transportConfig_colListItem"
                     >
                         <cells>
                             <CheckBox
-                                id="deleteAllocCheckBox"
+                                id="transportConfig_deleteAllocCheckBox"
                                 select="onSelectTransport"
                             />
                             <Text
-                                id="id1"
+                                id="transportConfig_itemId"
                                 text="{transportconfig>ID}"
                             />
                             <Text
-                                id="id2"
+                                id="transportConfig_itemDocType"
                                 text="{transportconfig>documentType}"
                             />
                             <Text
-                                id="id3"
+                                id="transportConfig_itemSide"
                                 text="{transportconfig>side}"
                             />
                             <Text
-                                id="id4"
+                                id="transportConfig_itemExType"
                                 text="{transportconfig>exchangeType}"/>
                         </cells>
                     </ColumnListItem>

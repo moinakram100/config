@@ -183,7 +183,7 @@
         },
         {
           "name": "RouteEzIDView",
-          "pattern": "EzReportIDs",
+          "pattern": "createEzID",
           "target": [
             "TargetEzIDView"
           ]

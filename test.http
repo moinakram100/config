@@ -11,3 +11,7 @@ Content-Type: application/json
     "additionalField4" : "value2",
     "additionalField5" : "value2"
 }
+
+#####
+
+GET http://localhost:4004/odata/v4/config-services/getPenalityRelevant?serviceProfileName=GSA001
