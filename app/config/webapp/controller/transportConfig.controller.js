@@ -343,41 +343,55 @@ sap.ui.define(
         this.setTransportConfigModel();
       },
 
-   onConfirmDelete: function () {
+   
+      onConfirmDelete: function () {
         let oModel3 = this.getOwnerComponent().getModel();
         let oBindList3 = oModel3.bindList("/TransportConfig");
-
+    
+        // Check if any items are selected
+        if (!selectedIDs || selectedIDs.length === 0) {
+            sap.m.MessageToast.show("Please select at least one item to delete.");
+            return;
+        }
+    
         sap.m.MessageBox.confirm(
-          "Are you sure you want to delete the selected fields?",
-          {
-            onClose: async (sAction) => {
-              if (sAction === sap.m.MessageBox.Action.OK) {
-                let aFilters = selectedIDs.map((id) =>
-                    new sap.ui.model.Filter("ID",sap.ui.model.FilterOperator.EQ,id)
-                );
-                let oCombinedFilter = new sap.ui.model.Filter({
-                  filters: aFilters,
-                  and: false,
-                });  
-                try {
-                  let aContexts = await oBindList3.filter(oCombinedFilter).requestContexts();
-                  for (let i = 0; i < aContexts.length; i++) {
-                    await aContexts[i].delete();
-                  }
-                  selectedIDs = [];
-                  oBindList3.filter([]);  
-                  await this.setTransportConfigModel();
-                  oModel3.refresh();
-                  this.onDelete();
-                  this.getView().byId("transportTable").getBinding("items").refresh();
-                } catch (error) {
-                  console.error("Error during deletion: ", error);
-                }
-              }
-            },
-          }
+            "Are you sure you want to delete the selected fields?",
+            {
+                onClose: async (sAction) => {
+                    if (sAction === sap.m.MessageBox.Action.OK) {
+                        let aFilters = selectedIDs.map((id) =>
+                            new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.EQ, id)
+                        );
+                        let oCombinedFilter = new sap.ui.model.Filter({
+                            filters: aFilters,
+                            and: false,
+                        });
+    
+                        try {
+                            let aContexts = await oBindList3.filter(oCombinedFilter).requestContexts();
+                            for (let i = 0; i < aContexts.length; i++) {
+                                await aContexts[i].delete();
+                            }
+    
+                            // Clear selected IDs after successful deletion
+                            selectedIDs = [];
+    
+                            // Reset filters and refresh models/views
+                            oBindList3.filter([]);
+                            await this.setTransportConfigModel();
+                            oModel3.refresh();
+                            this.onDelete();
+                            this.getView().byId("transportTable").getBinding("items").refresh();
+                        } catch (error) {
+                            console.error("Error during deletion: ", error);
+                            sap.m.MessageToast.show("An error occurred while deleting the selected items.");
+                        }
+                    }
+                },
+            }
         );
-      },
+    },
+    
 
       onSelectTransport: function (oEvent) {
         var oCheckbox = oEvent.getSource();
