@@ -96,7 +96,7 @@
             <ColumnListItem id="PathFueladdPathColumnListItem">
               <cells>
               <Text id="PathFuelTestText"/>
-              <Input id="PathFuelDeliveryPoint" width="100px" showValueHelp="true" required="true" valueHelpRequest="onDeliveryPoint" value="{pathmodel>delPoint}" valueHelpOnly="true"  />
+              <Input id="PathFuelDeliveryPoint" width="100px" showValueHelp="true" required="true" valueHelpRequest="onDeliveryPoint" value="{pathmodel>delPoint}" valueHelpOnly="true"   />
               <Input id="PathFuelDelivery_Point_TransportSystem" editable="false" width="100px" value="{pathmodel>delPointTsyst}"/>
               <Input id="PathFuelreDelivery_Point" width="100px" showValueHelp="true"  required="true" valueHelpRequest="onReDeliveryPoint" value="{pathmodel>reDelPoint}"  valueHelpOnly="true" />
               <Input id="PathFuelReDelivery_Point_TransportSystem" editable="false" width="100px" value="{pathmodel>reDelPointTsyst}"/>

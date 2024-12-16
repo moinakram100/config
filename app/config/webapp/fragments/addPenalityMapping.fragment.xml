@@ -3,12 +3,12 @@
     xmlns:l="sap.ui.layout">
     <Dialog id="PenalityMapAddMapDialog" title="Create Mapping with Penalty" class="sapUiSmallMargin">
         <VBox id="PenalityMapfragVbox" class="sapUiContentPadding sapUiSmallMargin">
-            <Label id="PenalityMapServiceProf" text="Service Profile :" design="Bold" />
-            <Input id="PenalityMapServiceProfval"  value="{addPenaltyModel>/profileName}" showValueHelp="true" valueHelpRequest="onServiceProfile" valueHelpOnly="true"/>
+            <Label id="PenalityMapServiceProfLabel" text="Service Profile :" design="Bold" />
+            <Input id="PenalityMapServiceProfvalLabel"  value="{addPenaltyModel>/profileName}" showValueHelp="true" valueHelpRequest="onServiceProfile" valueHelpOnly="true"/>
             <Label id="PenalityMapServiceParam"   text="Service Parameter :" design="Bold" />
-            <Input id="PenalityMapServiceParamval"  value="{addPenaltyModel>/paneltyParmeter}" showValueHelp="true" valueHelpRequest="onServiceParam" valueHelpOnly="true"/>
-            <Label id="PenalityMapPenalityId" text="Penalty ID :" design="Bold" />
-            <Input id="PenalityMapPenalityIdVal" value="{addPenaltyModel>/ezReportId}" showValueHelp="true" valueHelpRequest="onEzId" valueHelpOnly="true"/>
+            <Input id="PenalityMapServiceParamvalLabel"  value="{addPenaltyModel>/paneltyParmeter}" showValueHelp="true" valueHelpRequest="onServiceParam" valueHelpOnly="true"/>
+            <Label id="PenalityMapPenalityIdLabel" text="Penalty ID :" design="Bold" />
+            <Input id="PenalityMapPenalityIdValLabel" value="{addPenaltyModel>/ezReportId}" showValueHelp="true" valueHelpRequest="onEzId" valueHelpOnly="true"/>
         </VBox>
         <footer>
             <OverflowToolbar id="PenalityMapFragOverflowtoolbar" >  

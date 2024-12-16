@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core">
     <TableSelectDialog
-        id="sortT1AscOptions"
+        id="PenalityOperFragmentTableID"
         class="sapUiContentPadding"
         contentWidth="50%"
         contentHeight="60%"
@@ -14,20 +14,20 @@
         >
        
                 <columns>
-                    <Column >
-                        <Text text="Function"></Text>
+                    <Column id="PenalityOperFragFuncCol" >
+                        <Text id="PenalityOperFragmentFuncText" text="Function"></Text>
                     </Column>
  
-                    <Column >
-                        <Text text="Function Description"></Text>
+                    <Column id="PenalityOperFragFunctDescCol" >
+                        <Text id="PenalityOperFragFunctDescText" text="Function Description"></Text>
                     </Column>
                    
                 </columns>
  
                 <items>
-                    <ColumnListItem >
-                        <Text text="{Function}"></Text>
-                        <Text text="{FunctionDesc}"></Text>
+                    <ColumnListItem id="PenalityOperFragmentColoumnListItem" >
+                        <Text id="PenalityOperFragFunc" text="{Function}"></Text>
+                        <Text id="PenalityOperFragFunDesc" text="{FunctionDesc}"></Text>
                     </ColumnListItem>
                 </items>
            

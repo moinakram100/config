@@ -27,9 +27,6 @@ sap.ui.define([
 
         this.headerConfig()
 
-
-
-        // ONINIT ENDS
       },
 
 

@@ -77,7 +77,7 @@ sap.ui.define([
                 that.getView().getModel("viewModel").setProperty("/busyIndicator", false);
             });
         },
-        OnChangeCheckFilter:function(oEvent) {
+        OnPenalityOperChangeCheckFilter:function(oEvent) {
             //flag = true;
             var isSlectedFil = oEvent.getParameter("selected");
             var Filterobj= oEvent.getSource().getBindingContext("selectedFModel").getObject();
@@ -104,7 +104,7 @@ sap.ui.define([
             console.log("updatedObjects", updatedObjects);
         },
   
-        OnChangeCheckMandatory:function(oEvent) {
+        OnPenalityOperChangeCheckMandatory:function(oEvent) {
             //flag = true;
             var isSlectedman = oEvent.getParameter("selected");
             var Mandatoryobj= oEvent.getSource().getBindingContext("selectedFModel").getObject();
@@ -131,7 +131,7 @@ sap.ui.define([
             console.log("updatedObjects", updatedObjects);
         },
   
-          OnChangeCheckDisplay:function(oEvent) {
+        OnPenalityOperChangeCheckDisplay:function(oEvent) {
             //flag = true;
             var isSlectedDis = oEvent.getParameter("selected");
             var Displayobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
@@ -157,25 +157,25 @@ sap.ui.define([
             console.log("updatedObjects", updatedObjects);
           },
   
-          onFieldIDChange: function(oEvent) {
+          onPenalityOperFieldIDChange: function(oEvent) {
             var newValue = oEvent.getParameter("value");
             var FieldIDobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
             this._updateObjectInArray(FieldIDobj, "FieldID", newValue);
           },
   
-          onDefaultValChange: function(oEvent) {
+          onPenalityOperDefaultValChange: function(oEvent) {
             var newValue = oEvent.getParameter("value");
             var DefaultValobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
             this._updateObjectInArray(DefaultValobj, "DefaultVal", newValue);
           },
   
-          onMappedTableValChange: function(oEvent){
+          onPenalityOperMappedTableValChange: function(oEvent){
             var changedVal = oEvent.getParameter("value");
             var MappedTableValobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
             this._updateObjectInArray(MappedTableValobj, "MappedTable", changedVal);
           },
   
-          onMappedFieldValChange: function(oEvent){
+          onPenalityOperMappedFieldValChange: function(oEvent){
             var changedVal = oEvent.getParameter("value");
             var MappedTableValobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
             this._updateObjectInArray(MappedTableValobj, "MappedField", changedVal);
@@ -187,14 +187,14 @@ sap.ui.define([
             this._updateObjectInArray(MappedTableValobj, "AddiFunction", changedVal);
           },
   
-          onFormulaValChange: function(oEvent){
+          onPenalityOperFormulaValChange: function(oEvent){
             var changedVal = oEvent.getParameter("value");
             var MappedTableValobj = oEvent.getSource().getBindingContext("selectedFModel").getObject();
             this._updateObjectInArray(MappedTableValobj, "Formula", changedVal);
           },
   
   
-          onChangeOperation:function(oEvent){
+          onPenalityOperChangeOperation:function(oEvent){
             var oValidatedComboBox = oEvent.getSource(),
             sSelectedKey = oValidatedComboBox.getSelectedKey(),
             sValue = oValidatedComboBox.getValue();
@@ -227,7 +227,7 @@ sap.ui.define([
           },
   
        
-          onSave: function() {
+          onPenalityOperSave: function() {
             let that = this;
         
             let hasEmptyFieldID = updatedObjects.some(obj => !obj.FieldID || obj.FieldID.trim() === "");
@@ -288,7 +288,7 @@ sap.ui.define([
                 actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
                 onClose: function (oAction) {
                     if (oAction === sap.m.MessageBox.Action.OK) {
-                        that.createFieldsS4(updatedObjects);
+                        that.OnPenalityOperCreateFieldsS4(updatedObjects);
         
                         oBindList.requestContexts(0, Infinity).then(function (aContexts) {
                             aContexts.forEach(function (oContext) {
@@ -317,7 +317,7 @@ sap.ui.define([
         },
         
   
-        createFieldsS4:function(FieldArray){
+        OnPenalityOperCreateFieldsS4:function(FieldArray){
           let arrayDatas4=FieldArray;
           console.log("arrayDatas4",arrayDatas4);
           for (var i = 0; i < arrayDatas4.length; i++){
@@ -359,7 +359,7 @@ sap.ui.define([
           }
         },
        
-        onLiveChange: function(oEvent) {
+        onPenalityOperFieldIdLiveChange: function(oEvent) {
             var oInput = oEvent.getSource();
             let newValue = oEvent.getParameter("newValue");
        
@@ -376,7 +376,7 @@ sap.ui.define([
           },
   
   
-          onAdditionalFunct: function (oEvent) {
+          onPenalityOperAdditionalFunct: function (oEvent) {
             var oView = this.getView();
        
             // Store the reference to the input field
